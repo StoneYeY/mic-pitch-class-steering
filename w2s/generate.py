@@ -35,6 +35,7 @@ class RunResult:
     peak_vram_gb: float
     log: list[dict] = field(default_factory=list)      # one entry per sampler step
     trajectory: np.ndarray | None = None               # (N, 64, T) float16, post-update latents
+    final_latent: np.ndarray | None = None             # (64, T) float16, latent decoded to audio
     target: np.ndarray | None = None                   # (12, T_latent) float32
     n_audible: int = 0
     meta: dict = field(default_factory=dict)
@@ -119,6 +120,8 @@ class W2SGenerator:
                     print(f"  step {step_idx:2d} R={R:.3f} lam={lam:.3f} loss={float(loss):.4f}")
             if traj is not None:
                 traj[step_idx] = latents.detach()[0].to(torch.float16).cpu()
+            if step_idx == steps - 1:
+                state["final"] = latents.detach()[0].to(torch.float16).cpu().numpy()
             log.append(rec)
 
         if dev.type == "cuda":
@@ -136,7 +139,7 @@ class W2SGenerator:
         peak = torch.cuda.max_memory_allocated(dev) / 2**30 if dev.type == "cuda" else 0.0
         return RunResult(audio=audio, sr=self.sr, n_updates=state["n_used"], runtime_s=runtime,
                          peak_vram_gb=peak, log=log, trajectory=traj.numpy() if traj is not None else None,
-                         target=target[0].T.cpu().numpy(), n_audible=n_aud,
+                         final_latent=state.get("final"), target=target[0].T.cpu().numpy(), n_audible=n_aud,
                          meta={"prompt": prompt, "seed": seed, "melody": melody.name if melody else None,
                                "schedule": schedule.to_dict() if schedule else None, "steps": steps,
                                "cfg": cfg, "audio_length": audio_length, "loss_region": loss_region,
