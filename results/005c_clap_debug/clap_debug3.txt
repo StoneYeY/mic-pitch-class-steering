@@ -1,0 +1,16 @@
+transformers 5.7.0
+Loading weights:   0%|          | 0/555 [00:00<?, ?it/s]Loading weights: 100%|██████████| 555/555 [00:00<00:00, 83964.75it/s]
+get_audio_features sig: (input_features: torch.Tensor, is_longer: torch.Tensor | None = None, attention_mask: torch.Tensor | None = None, **kwargs: typing_extensions.Unpack[transformers.utils.generic.TransformersKwargs]) -> tuple | transformers.modeling_outputs.BaseModelOutputWithPooling
+type: BaseModelOutputWithPooling
+attributes: ['last_hidden_state', 'pooler_output']
+  last_hidden_state: (1, 1024, 2, 32)
+  pooler_output: (1, 512)
+  .pooler_output: (1, 512)
+  .last_hidden_state: (1, 1024, 2, 32)
+chosen audio tensor shape: (1, 512)
+  cos(tone, 'a bright piano melody') = 0.0088
+  cos(tone, 'a barking dog') = 0.0078
+  cos(tone, 'a solo violin note') = 0.0098
+  cos(tone, 'white noise static') = 0.0079
+  cos(noise,'white noise static') = 0.0080
+DONE
