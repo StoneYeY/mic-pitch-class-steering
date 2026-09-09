@@ -30,3 +30,6 @@ Retrying in 1s [Retry 1/5].
   75 runs 324s last rapg_cal_dc_K5 coh=0.000 clap=nan
   100 runs 432s last uniform_K5 coh=0.510 clap=nan
   125 runs 541s last late_K5 coh=0.056 clap=nan
+  150 runs 649s last rapg_cal_dc_K5 coh=0.096 clap=nan
+  175 runs 757s last uniform_K10 coh=0.461 clap=nan
+  200 runs 865s last late_K10 coh=0.209 clap=nan
