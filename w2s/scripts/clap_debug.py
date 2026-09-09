@@ -1,57 +1,68 @@
-"""Job 005: surface the CLAP failure and find a call signature that works under transformers 5.7."""
-import traceback
+"""Job 005 (v2): find the correct way to get projected CLAP embeddings under transformers 5.7,
+and verify the space by checking that a matching prompt scores higher than a mismatched one."""
+import inspect
 import numpy as np
 import torch
-
-print("torch", torch.__version__)
 import transformers
-print("transformers", transformers.__version__)
-
-sr = 48000
-y = (0.1 * np.random.randn(sr * 5)).astype(np.float32)
-
 from transformers import ClapModel, ClapProcessor
-model = ClapModel.from_pretrained("laion/larger_clap_music").eval()
+
+print("transformers", transformers.__version__)
+sr = 48000
+rng = np.random.default_rng(0)
+# a crude 440 Hz tone vs noise, just to see relative CLAP scores
+t = np.arange(sr * 5) / sr
+tone = (0.2 * np.sin(2 * np.pi * 440 * t)).astype(np.float32)
+noise = (0.05 * rng.standard_normal(sr * 5)).astype(np.float32)
+
+model = ClapModel.from_pretrained("laion/larger_clap_music").eval().to("cuda")
 proc = ClapProcessor.from_pretrained("laion/larger_clap_music")
-dev = "cuda" if torch.cuda.is_available() else "cpu"
-model = model.to(dev)
-print("loaded; processor class:", type(proc).__name__)
 
-def try_variant(name, fn):
-    try:
-        out = fn()
-        print(f"[OK] {name}: shape={tuple(out.shape)} finite={bool(np.isfinite(out.detach().cpu().numpy()).all())}")
-    except Exception as e:
-        print(f"[FAIL] {name}: {type(e).__name__}: {e}")
-        traceback.print_exc()
+print("get_audio_features sig:", str(inspect.signature(model.get_audio_features)))
 
-def v_audio_kw():
-    inp = proc(audios=[y], sampling_rate=sr, return_tensors="pt", padding=True)
-    print("   audios= keys:", list(inp.keys()), {k: tuple(v.shape) for k, v in inp.items()})
-    with torch.no_grad():
-        return model.get_audio_features(**{k: v.to(dev) for k, v in inp.items()})
-
-def v_audio_singular():
+def audio_emb(y):
     inp = proc(audio=[y], sampling_rate=sr, return_tensors="pt", padding=True)
-    print("   audio= keys:", list(inp.keys()), {k: tuple(v.shape) for k, v in inp.items()})
+    inp = {k: v.to("cuda") for k, v in inp.items()}
     with torch.no_grad():
-        return model.get_audio_features(**{k: v.to(dev) for k, v in inp.items()})
+        out = model.get_audio_features(**inp)
+    return out
 
-def v_feature_extractor():
-    from transformers import AutoFeatureExtractor
-    fe = AutoFeatureExtractor.from_pretrained("laion/larger_clap_music")
-    inp = fe([y], sampling_rate=sr, return_tensors="pt")
-    print("   FE keys:", list(inp.keys()), {k: tuple(v.shape) for k, v in inp.items()})
+def text_emb(s):
+    inp = proc(text=[s], return_tensors="pt", padding=True)
+    inp = {k: v.to("cuda") for k, v in inp.items()}
     with torch.no_grad():
-        return model.get_audio_features(**{k: v.to(dev) for k, v in inp.items()})
+        out = model.get_text_features(**inp)
+    return out
 
-def v_text():
-    inp = proc(text=["a piano piece"], return_tensors="pt", padding=True)
-    with torch.no_grad():
-        return model.get_text_features(**{k: v.to(dev) for k, v in inp.items()})
+ao = audio_emb(tone)
+print("type:", type(ao).__name__)
+if hasattr(ao, "keys"):
+    print("attributes:", [k for k in ao.keys()])
+    for k in ao.keys():
+        v = ao[k]
+        if hasattr(v, "shape"):
+            print(f"  {k}: {tuple(v.shape)}")
+for attr in ("pooler_output", "audio_embeds", "last_hidden_state"):
+    v = getattr(ao, attr, None)
+    if v is not None and hasattr(v, "shape"):
+        print(f"  .{attr}: {tuple(v.shape)}")
 
-try_variant("audios= (plural)", v_audio_kw)
-try_variant("audio= (singular)", v_audio_singular)
-try_variant("AutoFeatureExtractor", v_feature_extractor)
-try_variant("text", v_text)
+def as_tensor(o):
+    if torch.is_tensor(o):
+        return o
+    for attr in ("audio_embeds", "text_embeds", "pooler_output"):
+        v = getattr(o, attr, None)
+        if v is not None:
+            return v
+    return o[0] if isinstance(o, (tuple, list)) else o
+
+at = as_tensor(ao)
+print("chosen audio tensor shape:", tuple(at.shape))
+# verify shared space: tone should match "a sine tone / instrument" better than "a barking dog"
+a = torch.nn.functional.normalize(as_tensor(audio_emb(tone)), dim=-1)
+for prompt in ["a bright piano melody", "a barking dog", "a solo violin note", "white noise static"]:
+    tt = torch.nn.functional.normalize(as_tensor(text_emb(prompt)), dim=-1)
+    print(f"  cos(tone, '{prompt}') = {float((a*tt).sum()):.4f}")
+an = torch.nn.functional.normalize(as_tensor(audio_emb(noise)), dim=-1)
+tn = torch.nn.functional.normalize(as_tensor(text_emb('white noise static')), dim=-1)
+print(f"  cos(noise,'white noise static') = {float((an*tn).sum()):.4f}")
 print("DONE")
