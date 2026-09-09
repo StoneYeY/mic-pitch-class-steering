@@ -25,7 +25,7 @@ def logmel(y: np.ndarray, sr: int, n_mels: int = 64, hop: int = 1024) -> np.ndar
 
 
 class ClipEvaluator:
-    def __init__(self, use_clap: bool = True, device: str | None = None, clap_model: str = "laion/larger_clap_music"):
+    def __init__(self, use_clap: bool = True, device: str | None = None, clap_model: str = "laion/clap-htsat-unfused"):
         self.clap = None
         if use_clap:
             try:

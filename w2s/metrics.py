@@ -101,9 +101,9 @@ def chroma_cosine(y: np.ndarray, sr: int, target: np.ndarray, hop: int = LATENT_
 
 # --------------------------------------------------------------------------- CLAP
 class ClapScorer:
-    """LAION-CLAP via transformers.  Default checkpoint: laion/larger_clap_music (48 kHz)."""
+    """LAION-CLAP via transformers.  Default checkpoint: laion/clap-htsat-unfused (48 kHz)."""
 
-    def __init__(self, model_id: str = "laion/larger_clap_music", device: str | None = None):
+    def __init__(self, model_id: str = "laion/clap-htsat-unfused", device: str | None = None):
         import torch
         from transformers import ClapModel, ClapProcessor
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
