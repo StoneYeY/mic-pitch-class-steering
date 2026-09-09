@@ -1,0 +1,15 @@
+MARKER clap_check v1  md5(self)= db6fe521
+Loading weights:   0%|          | 0/555 [00:00<?, ?it/s]Loading weights: 100%|██████████| 555/555 [00:00<00:00, 83578.87it/s]
+clips: ['base-p00-s0.wav', 'base-p01-s0.wav', 'base-p02-s0.wav', 'base-p03-s0.wav']
+audio-audio cosine matrix (distinct piano clips, expect 0.3-0.8):
+  +1.000 +0.999 +0.997 +0.999
+  +0.999 +1.000 +0.997 +0.999
+  +0.997 +0.997 +1.000 +0.999
+  +0.999 +0.999 +0.999 +1.000
+audio[0] (piano) vs texts:
+  +0.0073  a gentle solo piano piece
+  +0.0074  aggressive heavy metal guitar
+  +0.0073  a barking dog
+  +0.0067  white noise hiss
+text-text cosine piano-vs-metal: 0.9991182088851929
+DONE
