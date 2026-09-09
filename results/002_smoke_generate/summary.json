@@ -1,0 +1,38 @@
+{
+  "sao": {
+    "runtime_s": 3.72,
+    "peak_vram_gb": 5.47,
+    "n_updates": 0,
+    "coherence_mlsp": 0.18518518518518517,
+    "voiced_cov": 0.7848837209302325,
+    "coherence_w2s": 0.25,
+    "chroma_cos": 0.3001851737499237,
+    "R_first": 0.2804466485977173,
+    "R_mid": 0.285235732793808,
+    "R_last": 0.4575231373310089
+  },
+  "mlsp_fixed": {
+    "runtime_s": 3.23,
+    "peak_vram_gb": 5.48,
+    "n_updates": 15,
+    "coherence_mlsp": 0.5224913494809689,
+    "voiced_cov": 0.8401162790697675,
+    "coherence_w2s": 0.38271604938271603,
+    "chroma_cos": 0.5649954080581665,
+    "R_first": 0.2804466485977173,
+    "R_mid": 0.2887466847896576,
+    "R_last": 0.5322829484939575
+  },
+  "mlsp_legacy": {
+    "runtime_s": 3.17,
+    "peak_vram_gb": 5.48,
+    "n_updates": 15,
+    "coherence_mlsp": 0.3115264797507788,
+    "voiced_cov": 0.9331395348837209,
+    "coherence_w2s": 0.4423076923076923,
+    "chroma_cos": 0.8203330636024475,
+    "R_first": 0.2804466485977173,
+    "R_mid": 0.29168981313705444,
+    "R_last": 0.7504811882972717
+  }
+}

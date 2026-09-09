@@ -1,0 +1,133 @@
+# job=002_smoke_generate exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-08T21:46:38-04:00
+# (last 4000 lines; full log: runner/logs/002_smoke_generate.full.log on stone-ye-PC)
+torch 2.11.0+cu128 diffusers 0.38.0 transformers 5.7.0
+cuda True NVIDIA GeForce RTX 5080
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][A
+Loading weights:  75%|███████▍  | 74/99 [00:00<00:00, 727.87it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 669.75it/s]
+Loading pipeline components...:  17%|█▋        | 1/6 [00:00<00:00,  5.10it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading pipeline components...:  50%|█████     | 3/6 [00:00<00:00,  4.79it/s]Loading pipeline components...:  83%|████████▎ | 5/6 [00:02<00:00,  1.47it/s]Loading pipeline components...: 100%|██████████| 6/6 [00:02<00:00,  2.08it/s]
+loaded pipeline+probe in 4.0s; probe params=125,196
+sr=44100 hop=2048 fps=21.533 T=1024 audible_frames=108
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+
+[sao] {"runtime_s": 3.72, "peak_vram_gb": 5.47, "n_updates": 0, "coherence_mlsp": 0.18518518518518517, "voiced_cov": 0.7848837209302325, "coherence_w2s": 0.25, "chroma_cos": 0.3001851737499237, "R_first": 0.2804466485977173, "R_mid": 0.285235732793808, "R_last": 0.4575231373310089}
+  R_t: 0.28 0.29 0.32 0.33 0.32 0.32 0.31 0.32 0.29 0.30 0.29 0.28 0.31 0.30 0.29 0.30 0.29 0.28 0.31 0.30 0.28 0.29 0.29 0.30 0.28 0.29 0.28 0.30 0.30 0.31 0.32 0.33 0.32 0.32 0.33 0.34 0.36 0.36 0.38 0.40 0.43 0.43 0.43 0.43 0.45 0.45 0.45 0.45 0.45 0.46
+  sigma: 496.30 478.21 460.78 443.99 427.80 412.21 397.18 382.71 368.76 355.32
+  step  f1   posrec  bce   R_ent  R_mar  agree
+     0 0.020 0.013 0.451 0.281 0.147 0.935
+     5 0.054 0.039 0.447 0.318 0.151 0.925
+    10 0.023 0.013 0.439 0.281 0.128 0.952
+    15 0.041 0.026 0.475 0.291 0.134 0.945
+    20 0.000 0.000 0.434 0.287 0.139 0.945
+    25 0.078 0.053 0.428 0.274 0.137 0.939
+    30 0.082 0.053 0.433 0.324 0.138 0.947
+    35 0.145 0.105 0.383 0.344 0.173 0.955
+    40 0.086 0.066 0.398 0.430 0.188 0.962
+    45 0.128 0.092 0.367 0.451 0.166 0.982
+    49 0.092 0.066 0.337 0.460 0.188 1.000
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+  step 20 R=0.280 lam=0.050 loss=0.3047
+  step 22 R=0.296 lam=0.050 loss=0.2655
+  step 24 R=0.278 lam=0.050 loss=0.2576
+  step 26 R=0.290 lam=0.050 loss=0.2242
+  step 28 R=0.306 lam=0.050 loss=0.2104
+  step 30 R=0.330 lam=0.050 loss=0.2321
+  step 32 R=0.326 lam=0.050 loss=0.2198
+  step 34 R=0.358 lam=0.050 loss=0.1840
+  step 36 R=0.381 lam=0.050 loss=0.1577
+  step 38 R=0.413 lam=0.050 loss=0.1501
+  step 40 R=0.444 lam=0.050 loss=0.1548
+  step 42 R=0.452 lam=0.050 loss=0.1381
+  step 44 R=0.485 lam=0.050 loss=0.1350
+  step 46 R=0.504 lam=0.050 loss=0.1268
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+  step 48 R=0.518 lam=0.050 loss=0.1124
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+
+[mlsp_fixed] {"runtime_s": 3.23, "peak_vram_gb": 5.48, "n_updates": 15, "coherence_mlsp": 0.5224913494809689, "voiced_cov": 0.8401162790697675, "coherence_w2s": 0.38271604938271603, "chroma_cos": 0.5649954080581665, "R_first": 0.2804466485977173, "R_mid": 0.2887466847896576, "R_last": 0.5322829484939575}
+  R_t: 0.28 0.29 0.32 0.33 0.32 0.32 0.31 0.32 0.29 0.30 0.29 0.28 0.31 0.30 0.29 0.30 0.29 0.28 0.31 0.30 0.28 0.29 0.30 0.31 0.28 0.29 0.29 0.32 0.31 0.32 0.33 0.34 0.33 0.34 0.36 0.37 0.38 0.40 0.41 0.44 0.44 0.46 0.45 0.47 0.49 0.50 0.50 0.52 0.52 0.53
+  sigma: 429.75 201.58 94.56 44.35 20.81 9.76 4.58 2.15 1.01 0.47
+  step  f1   posrec  bce   R_ent  R_mar  agree
+     0 0.062 0.040 0.400 0.282 0.149 0.933
+     5 0.085 0.061 0.429 0.325 0.175 0.920
+    10 0.017 0.010 0.426 0.275 0.133 0.939
+    15 0.016 0.010 0.451 0.295 0.137 0.932
+    20 0.079 0.051 0.394 0.274 0.141 0.942
+    25 0.047 0.030 0.389 0.282 0.155 0.944
+    30 0.123 0.081 0.332 0.341 0.169 0.955
+    35 0.257 0.182 0.320 0.382 0.232 0.966
+    40 0.314 0.242 0.332 0.469 0.292 0.979
+    45 0.352 0.283 0.321 0.504 0.309 0.987
+    49 0.364 0.283 0.304 0.545 0.335 1.000
+  step 20 R=0.280 lam=0.050 loss=0.3447
+  step 22 R=0.294 lam=0.050 loss=0.2930
+  step 24 R=0.270 lam=0.050 loss=0.2597
+  step 26 R=0.294 lam=0.050 loss=0.2454
+  step 28 R=0.315 lam=0.050 loss=0.2343
+  step 30 R=0.342 lam=0.050 loss=0.2322
+  step 32 R=0.346 lam=0.050 loss=0.2340
+  step 34 R=0.407 lam=0.050 loss=0.2153
+  step 36 R=0.457 lam=0.050 loss=0.2016
+  step 38 R=0.524 lam=0.050 loss=0.1870
+  step 40 R=0.591 lam=0.050 loss=0.1635
+  step 42 R=0.628 lam=0.050 loss=0.1456
+  step 44 R=0.677 lam=0.050 loss=0.1169
+  step 46 R=0.694 lam=0.050 loss=0.0893
+  step 48 R=0.719 lam=0.050 loss=0.0674
+
+[mlsp_legacy] {"runtime_s": 3.17, "peak_vram_gb": 5.48, "n_updates": 15, "coherence_mlsp": 0.3115264797507788, "voiced_cov": 0.9331395348837209, "coherence_w2s": 0.4423076923076923, "chroma_cos": 0.8203330636024475, "R_first": 0.2804466485977173, "R_mid": 0.29168981313705444, "R_last": 0.7504811882972717}
+  R_t: 0.28 0.29 0.32 0.33 0.32 0.32 0.31 0.32 0.29 0.30 0.29 0.28 0.31 0.30 0.29 0.30 0.29 0.28 0.31 0.30 0.28 0.29 0.29 0.28 0.27 0.29 0.29 0.33 0.32 0.32 0.34 0.35 0.35 0.39 0.41 0.42 0.46 0.50 0.52 0.55 0.59 0.60 0.63 0.66 0.68 0.69 0.69 0.71 0.72 0.75
+  sigma: 429.75 201.58 94.56 44.35 20.81 9.76 4.58 2.15 1.01 0.47
+
+SUMMARY {
+ "sao": {
+  "runtime_s": 3.72,
+  "peak_vram_gb": 5.47,
+  "n_updates": 0,
+  "coherence_mlsp": 0.18518518518518517,
+  "voiced_cov": 0.7848837209302325,
+  "coherence_w2s": 0.25,
+  "chroma_cos": 0.3001851737499237,
+  "R_first": 0.2804466485977173,
+  "R_mid": 0.285235732793808,
+  "R_last": 0.4575231373310089
+ },
+ "mlsp_fixed": {
+  "runtime_s": 3.23,
+  "peak_vram_gb": 5.48,
+  "n_updates": 15,
+  "coherence_mlsp": 0.5224913494809689,
+  "voiced_cov": 0.8401162790697675,
+  "coherence_w2s": 0.38271604938271603,
+  "chroma_cos": 0.5649954080581665,
+  "R_first": 0.2804466485977173,
+  "R_mid": 0.2887466847896576,
+  "R_last": 0.5322829484939575
+ },
+ "mlsp_legacy": {
+  "runtime_s": 3.17,
+  "peak_vram_gb": 5.48,
+  "n_updates": 15,
+  "coherence_mlsp": 0.3115264797507788,
+  "voiced_cov": 0.9331395348837209,
+  "coherence_w2s": 0.4423076923076923,
+  "chroma_cos": 0.8203330636024475,
+  "R_first": 0.2804466485977173,
+  "R_mid": 0.29168981313705444,
+  "R_last": 0.7504811882972717
+ }
+}
