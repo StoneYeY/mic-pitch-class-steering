@@ -114,7 +114,7 @@ class W2SGenerator:
                 with torch.no_grad():
                     latents.sub_(update.to(latents.dtype))
                 state["n_used"] += 1
-                rec.update(guided=1, lam=float(lam), loss=float(loss),
+                rec.update(guided=1, lam=float(lam), loss=float(loss.detach()),
                            upd_rms=float(update[..., region].pow(2).mean().sqrt()))
                 if verbose:
                     print(f"  step {step_idx:2d} R={R:.3f} lam={lam:.3f} loss={float(loss):.4f}")
