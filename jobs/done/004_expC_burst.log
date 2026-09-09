@@ -1,3 +1,8 @@
+# job=004_expC_burst exit=0 duration_s=2754 host=stone-ye-PC finished=2026-09-08T22:38:31-04:00
+# (last 4000 lines; full log: runner/logs/004_expC_burst.full.log on stone-ye-PC)
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading pipeline components...:  33%|███▎      | 2/6 [00:00<00:00, 13.34it/s]Loading pipeline components...:  67%|██████▋   | 4/6 [00:00<00:00, 10.02it/s]
 Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 3128.83it/s]
 Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00, 11.40it/s]Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00, 11.30it/s]
 Loading weights:   0%|          | 0/555 [00:00<?, ?it/s]Loading weights: 100%|██████████| 555/555 [00:00<00:00, 27449.63it/s]
@@ -78,3 +83,19 @@
   570 new runs, 2585s  last: pos=22 R=0.29 coh=0.035 clap=nan
   580 new runs, 2630s  last: pos=14 R=0.29 coh=0.168 clap=nan
   590 new runs, 2675s  last: pos=6 R=0.29 coh=0.154 clap=nan
+  600 new runs, 2719s  last: pos=46 R=0.46 coh=0.229 clap=nan
+    position   R_at  d_coherence_mlsp  d_coherence_mlsp_lo  d_coherence_mlsp_hi  d_clap  logmel_l1  d_bce0
+0          2  0.307             0.004               -0.010                0.015     NaN      0.143  -0.018
+1          6  0.301             0.004               -0.009                0.015     NaN      0.250  -0.020
+2         10  0.292             0.005               -0.010                0.020     NaN      0.337  -0.030
+3         14  0.282             0.009               -0.014                0.033     NaN      0.435  -0.045
+4         18  0.296             0.052                0.021                0.084     NaN      0.571  -0.065
+5         22  0.294             0.085                0.050                0.122     NaN      0.658  -0.082
+6         26  0.292             0.104                0.072                0.137     NaN      0.532  -0.109
+7         30  0.321             0.076                0.051                0.100     NaN      0.439  -0.111
+8         34  0.330             0.051                0.034                0.071     NaN      0.266  -0.093
+9         38  0.389             0.026                0.016                0.038     NaN      0.197  -0.098
+10        42  0.464             0.031                0.018                0.045     NaN      0.192  -0.114
+11        46  0.484             0.027                0.014                0.042     NaN      0.211  -0.138
+{'argmax_dcoh_pos': 26, 'argmin_dclap_pos': 2, 'corr_R_dcoh': -0.15897019749850708, 'corr_dcoh_dclap': nan, 'corr_dcoh_dbce0': -0.5803956912714099}
+done in 2719s
