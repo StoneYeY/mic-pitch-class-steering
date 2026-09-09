@@ -1,3 +1,5 @@
+# job=007_clap_check2 exit=0 duration_s=513 host=stone-ye-PC finished=2026-09-09T06:11:19-04:00
+# (last 4000 lines; full log: runner/logs/007_clap_check2.full.log on stone-ye-PC)
 Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 26921.70it/s]
 [transformers laion/clap-htsat-unfused] audio-audio offdiag mean = 0.651 (want <0.9); text piano-vs-metal = -0.096 (want <0.9)
    audio[0] vs texts: +0.479 -0.089 -0.096
