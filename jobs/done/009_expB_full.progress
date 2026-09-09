@@ -1,7 +1,3 @@
-  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
-  20 runs (88s, 4.4s/run)  last: test-p00-ascending-s1 topk_dc_const coh=0.656 clap=0.324 upd=15
-  40 runs (176s, 4.4s/run)  last: test-p00-descending-s0 topk_dc_const coh=0.527 clap=0.464 upd=15
-  60 runs (263s, 4.4s/run)  last: test-p00-descending-s2 topk_dc_const coh=0.498 clap=0.464 upd=15
   80 runs (351s, 4.4s/run)  last: test-p00-alternating-s1 topk_dc_const coh=0.854 clap=0.368 upd=15
   100 runs (439s, 4.4s/run)  last: test-p00-pedal-s0 topk_dc_const coh=0.923 clap=0.264 upd=15
   120 runs (526s, 4.4s/run)  last: test-p00-pedal-s2 topk_dc_const coh=1.000 clap=0.375 upd=15
@@ -78,3 +74,7 @@
   1540 runs (6735s, 4.4s/run)  last: test-p10-descending-s0 topk_dc_const coh=0.403 clap=0.245 upd=15
   1560 runs (6822s, 4.4s/run)  last: test-p10-descending-s2 topk_dc_const coh=0.570 clap=0.320 upd=15
   1580 runs (6909s, 4.4s/run)  last: test-p10-alternating-s1 topk_dc_const coh=0.420 clap=0.296 upd=15
+  1600 runs (6996s, 4.4s/run)  last: test-p10-pedal-s0 topk_dc_const coh=0.216 clap=0.255 upd=15
+  1620 runs (7083s, 4.4s/run)  last: test-p10-pedal-s2 topk_dc_const coh=0.863 clap=0.305 upd=15
+  1640 runs (7170s, 4.4s/run)  last: test-p10-zigzag-s1 topk_dc_const coh=0.190 clap=0.286 upd=15
+  1660 runs (7257s, 4.4s/run)  last: test-p11-ascending-s0 topk_dc_const coh=0.467 clap=0.315 upd=15
