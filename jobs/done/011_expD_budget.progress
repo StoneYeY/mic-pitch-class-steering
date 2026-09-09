@@ -25,3 +25,6 @@ Retrying in 1s [Retry 1/5].
   warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
 /home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
   warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+  25 runs 108s last uniform_K5 coh=0.353 clap=nan
+  50 runs 216s last late_K5 coh=0.198 clap=nan
+  75 runs 324s last rapg_cal_dc_K5 coh=0.000 clap=nan
