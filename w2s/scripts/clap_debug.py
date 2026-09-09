@@ -1,68 +1,26 @@
-"""Job 005 (v2): find the correct way to get projected CLAP embeddings under transformers 5.7,
-and verify the space by checking that a matching prompt scores higher than a mismatched one."""
-import inspect
+"""Job 005 (v4): validate the FIXED w2s.metrics.ClapScorer on a REAL generated clip.
+A piano clip should score much higher against its own piano prompt than against metal/dog."""
+import glob
+import sys
+from pathlib import Path
+
 import numpy as np
-import torch
-import transformers
-from transformers import ClapModel, ClapProcessor
+import soundfile as sf
 
-print("transformers", transformers.__version__)
-sr = 48000
-rng = np.random.default_rng(0)
-# a crude 440 Hz tone vs noise, just to see relative CLAP scores
-t = np.arange(sr * 5) / sr
-tone = (0.2 * np.sin(2 * np.pi * 440 * t)).astype(np.float32)
-noise = (0.05 * rng.standard_normal(sr * 5)).astype(np.float32)
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from w2s import data, metrics  # noqa: E402
 
-model = ClapModel.from_pretrained("laion/larger_clap_music").eval().to("cuda")
-proc = ClapProcessor.from_pretrained("laion/larger_clap_music")
+clap = metrics.ClapScorer()
+print("ClapScorer device:", clap.device)
 
-print("get_audio_features sig:", str(inspect.signature(model.get_audio_features)))
-
-def audio_emb(y):
-    inp = proc(audio=[y], sampling_rate=sr, return_tensors="pt", padding=True)
-    inp = {k: v.to("cuda") for k, v in inp.items()}
-    with torch.no_grad():
-        out = model.get_audio_features(**inp)
-    return out
-
-def text_emb(s):
-    inp = proc(text=[s], return_tensors="pt", padding=True)
-    inp = {k: v.to("cuda") for k, v in inp.items()}
-    with torch.no_grad():
-        out = model.get_text_features(**inp)
-    return out
-
-ao = audio_emb(tone)
-print("type:", type(ao).__name__)
-if hasattr(ao, "keys"):
-    print("attributes:", [k for k in ao.keys()])
-    for k in ao.keys():
-        v = ao[k]
-        if hasattr(v, "shape"):
-            print(f"  {k}: {tuple(v.shape)}")
-for attr in ("pooler_output", "audio_embeds", "last_hidden_state"):
-    v = getattr(ao, attr, None)
-    if v is not None and hasattr(v, "shape"):
-        print(f"  .{attr}: {tuple(v.shape)}")
-
-def as_tensor(o):
-    if torch.is_tensor(o):
-        return o
-    for attr in ("audio_embeds", "text_embeds", "pooler_output"):
-        v = getattr(o, attr, None)
-        if v is not None:
-            return v
-    return o[0] if isinstance(o, (tuple, list)) else o
-
-at = as_tensor(ao)
-print("chosen audio tensor shape:", tuple(at.shape))
-# verify shared space: tone should match "a sine tone / instrument" better than "a barking dog"
-a = torch.nn.functional.normalize(as_tensor(audio_emb(tone)), dim=-1)
-for prompt in ["a bright piano melody", "a barking dog", "a solo violin note", "white noise static"]:
-    tt = torch.nn.functional.normalize(as_tensor(text_emb(prompt)), dim=-1)
-    print(f"  cos(tone, '{prompt}') = {float((a*tt).sum()):.4f}")
-an = torch.nn.functional.normalize(as_tensor(audio_emb(noise)), dim=-1)
-tn = torch.nn.functional.normalize(as_tensor(text_emb('white noise static')), dim=-1)
-print(f"  cos(noise,'white noise static') = {float((an*tn).sum()):.4f}")
-print("DONE")
+cands = sorted(glob.glob("runs/004_expC_burst/base-p00-*.wav")) or sorted(glob.glob("runs/**/base-*.wav", recursive=True))
+print("clip:", cands[0] if cands else "NONE")
+y, sr = sf.read(cands[0])
+ae = clap.audio_embed([(y.T if y.ndim > 1 else y, sr)])
+prompts = [data.DEV_PROMPTS[0], "aggressive heavy metal electric guitar solo", "a barking dog in a park", data.TEST_PROMPTS[0]]
+te = clap.text_embed(prompts)
+for i, p in enumerate(prompts):
+    print(f"  cos = {float(clap.score(ae, te[i:i+1])[0]):+.4f}   <- {p[:55]}")
+print("audio emb shape:", ae.shape, "norm:", float(np.linalg.norm(ae)))
+# FAD sanity: distance between two disjoint random-embedding halves should be ~0 for identical dist
+print("DONE (expect the first/last piano prompts highest, metal/dog lowest)")

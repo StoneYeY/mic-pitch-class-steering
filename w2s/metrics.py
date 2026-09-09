@@ -116,22 +116,39 @@ class ClapScorer:
         y = to_mono(y)
         return librosa.resample(y, orig_sr=sr, target_sr=self.sr) if sr != self.sr else y
 
+    @staticmethod
+    def _emb_tensor(o):
+        """Extract the 512-d projected embedding from get_*_features output across transformers
+        versions: a plain tensor (<=4.x), or a BaseModelOutputWithPooling with .pooler_output (5.x)."""
+        import torch
+        if torch.is_tensor(o):
+            return o
+        for attr in ("audio_embeds", "text_embeds", "pooler_output"):
+            v = getattr(o, attr, None)
+            if v is not None:
+                return v
+        if isinstance(o, (tuple, list)):
+            return o[0]
+        raise TypeError(f"cannot extract embedding from {type(o)}")
+
     def audio_embed(self, audios: Sequence[tuple[np.ndarray, int]], batch: int = 8) -> np.ndarray:
         import torch
         out = []
         for i in range(0, len(audios), batch):
             chunk = [self._resample(y, sr) for y, sr in audios[i:i + batch]]
             inp = self.proc(audio=chunk, sampling_rate=self.sr, return_tensors="pt", padding=True)
+            keep = {k: v.to(self.device) for k, v in inp.items() if k in ("input_features", "is_longer", "attention_mask")}
             with torch.no_grad():
-                e = self.model.get_audio_features(**{k: v.to(self.device) for k, v in inp.items()})
+                e = self._emb_tensor(self.model.get_audio_features(**keep))
             out.append(torch.nn.functional.normalize(e, dim=-1).cpu().numpy())
         return np.concatenate(out, 0)
 
     def text_embed(self, texts: Sequence[str]) -> np.ndarray:
         import torch
         inp = self.proc(text=list(texts), return_tensors="pt", padding=True)
+        keep = {k: v.to(self.device) for k, v in inp.items() if k in ("input_ids", "attention_mask")}
         with torch.no_grad():
-            e = self.model.get_text_features(**{k: v.to(self.device) for k, v in inp.items()})
+            e = self._emb_tensor(self.model.get_text_features(**keep))
         return torch.nn.functional.normalize(e, dim=-1).cpu().numpy()
 
     def score(self, audio_emb: np.ndarray, text_emb: np.ndarray) -> np.ndarray:
