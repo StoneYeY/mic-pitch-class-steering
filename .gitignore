@@ -18,3 +18,13 @@ __pycache__/
 
 # Tooling
 .claude/
+
+# --- ICASSP sprint (w2s) ---
+runs/
+runner/logs/
+runner/STOP
+runner/status.json.lock
+*.wav
+*.npz
+.DS_Store
+.idea/
