@@ -35,7 +35,8 @@ def aggregate(res_dir: Path) -> pd.DataFrame:
     for col in [c for c in tab.columns if c.startswith("p_")]:
         tab[col + "_holm"] = metrics.holm(tab[col].values)
     if (res_dir / "fad.csv").exists():
-        tab = tab.merge(pd.read_csv(res_dir / "fad.csv"), on="method", how="left")
+        fad = pd.read_csv(res_dir / "fad.csv").drop(columns=["n"], errors="ignore")
+        tab = tab.merge(fad, on="method", how="left")
     tab.to_csv(res_dir / "table.csv", index=False)
     show = ["method", "n", "coherence_mlsp", "chroma_cos", "clap", "n_updates", "runtime_s"]
     show += [c for c in ("fad_clap_maestro", "p_coherence_mlsp_vs_mlsp_holm", "p_clap_vs_sao_holm") if c in tab.columns]

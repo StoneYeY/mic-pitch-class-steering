@@ -1,15 +1,17 @@
+\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{lccccc}
 \toprule
-Method & Coh.\ $\uparrow$ & Chroma $\uparrow$ & CLAP $\uparrow$ & FAD $\downarrow$ & \#upd.\\
+Method & Coh.\ $\uparrow$ & Chroma $\uparrow$ & CLAP $\uparrow$ & FAD $\downarrow$ & \#u.\\
 \midrule
-SAO (unguided) & -- & -- & -- & -- & 0\\
-Early (0--14) & -- & -- & -- & -- & 15\\
-Mid (18--32) & -- & -- & -- & -- & 15\\
-Late (35--49) & -- & -- & -- & -- & 15\\
-Uniform & -- & -- & -- & -- & 15\\
-MLSP-fixed & -- & -- & -- & -- & 15\\
-RAPG-cal ($F_1$) & -- & -- & -- & -- & 15\\
-RAPG-cal ($\Delta C$) & -- & -- & -- & -- & 15\\
-RAPG-online & -- & -- & -- & -- & $\le$15\\
+SAO (unguided) & 0.126$^\dagger$ & 0.22 & 0.307 & 0.82 & 0\\
+Early (0--14) & 0.166$^\dagger$ & 0.28 & 0.312 & 0.81 & 15\\
+Mid (18--32) & 0.424$^\dagger$ & 0.54 & 0.317 & 0.77 & 15\\
+Late (35--49) & 0.315$^\dagger$ & 0.46 & 0.311 & 0.81 & 15\\
+Uniform & 0.283$^\dagger$ & 0.41 & 0.314 & 0.79 & 15\\
+MLSP-fixed & 0.363 & 0.48 & 0.316 & 0.79 & 15\\
+RAPG-cal ($F_1$) & 0.310$^\dagger$ & 0.46 & 0.310 & 0.81 & 15\\
+RAPG-cal ($\Delta C$) & 0.445$^\dagger$ & 0.56 & 0.324 & 0.75 & 15\\
+RAPG-online & 0.351 & 0.45 & 0.314 & 0.77 & 15.0\\
+Top-$K$($\Delta C$), const.\ $\lambda$ & 0.434$^\dagger$ & 0.55 & 0.321 & 0.76 & 15\\
 \bottomrule
 \end{tabular}
