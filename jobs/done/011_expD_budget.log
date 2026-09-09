@@ -1,3 +1,5 @@
+# job=011_expD_budget exit=0 duration_s=3478 host=stone-ye-PC finished=2026-09-09T12:08:31-04:00
+# (last 4000 lines; full log: runner/logs/011_expD_budget.full.log on stone-ye-PC)
 Couldn't connect to the Hub: [Errno 101] Network is unreachable.
 Will try to load from local cache.
 Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
@@ -47,3 +49,19 @@ Retrying in 1s [Retry 1/5].
   500 runs 2167s last late_K25 coh=0.234 clap=nan
   525 runs 2275s last rapg_cal_dc_K25 coh=0.154 clap=nan
   550 runs 2384s last uniform_K25 coh=0.913 clap=nan
+  575 runs 2492s last late_K25 coh=0.485 clap=nan
+  600 runs 2600s last rapg_cal_dc_K25 coh=0.117 clap=nan
+         method   K    coh  coh_sd  clap  chroma   n
+0          late   5  0.166   0.129   NaN   0.323  50
+1          late  10  0.238   0.153   NaN   0.409  50
+2          late  15  0.365   0.200   NaN   0.505  50
+3          late  25  0.569   0.229   NaN   0.683  50
+4   rapg_cal_dc   5  0.180   0.145   NaN   0.328  50
+5   rapg_cal_dc  10  0.233   0.170   NaN   0.397  50
+6   rapg_cal_dc  15  0.279   0.176   NaN   0.441  50
+7   rapg_cal_dc  25  0.357   0.210   NaN   0.515  50
+8       uniform   5  0.162   0.126   NaN   0.322  50
+9       uniform  10  0.241   0.185   NaN   0.401  50
+10      uniform  15  0.300   0.189   NaN   0.467  50
+11      uniform  25  0.401   0.214   NaN   0.567  50
+done 600 new runs in 2600s
