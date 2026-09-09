@@ -41,3 +41,10 @@
   170 new runs, 776s  last: pos=6 R=0.31 coh=0.315 clap=nan
   180 new runs, 819s  last: pos=46 R=0.60 coh=0.354 clap=nan
   190 new runs, 864s  last: pos=38 R=0.42 coh=0.238 clap=nan
+  200 new runs, 909s  last: pos=30 R=0.32 coh=0.145 clap=nan
+  210 new runs, 954s  last: pos=22 R=0.30 coh=0.014 clap=nan
+  220 new runs, 999s  last: pos=14 R=0.29 coh=0.243 clap=nan
+  230 new runs, 1044s  last: pos=6 R=0.29 coh=0.198 clap=nan
+  240 new runs, 1088s  last: pos=46 R=0.58 coh=0.204 clap=nan
+  250 new runs, 1136s  last: pos=38 R=0.32 coh=0.138 clap=nan
+  260 new runs, 1184s  last: pos=30 R=0.33 coh=0.162 clap=nan
