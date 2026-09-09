@@ -1,0 +1,22 @@
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 26921.70it/s]
+[transformers laion/clap-htsat-unfused] audio-audio offdiag mean = 0.651 (want <0.9); text piano-vs-metal = -0.096 (want <0.9)
+   audio[0] vs texts: +0.479 -0.089 -0.096
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/functional.py:505: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4381.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights:  72%|███████▏  | 142/197 [00:00<00:00, 1419.33it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 1776.30it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: roberta-base
+Key                       | Status     | 
+--------------------------+------------+-
+lm_head.layer_norm.bias   | UNEXPECTED | 
+lm_head.bias              | UNEXPECTED | 
+lm_head.dense.weight      | UNEXPECTED | 
+lm_head.layer_norm.weight | UNEXPECTED | 
+lm_head.dense.bias        | UNEXPECTED | 
+pooler.dense.bias         | MISSING    | 
+pooler.dense.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Load our best checkpoint in the paper.
+Downloading laion_clap weight files...
