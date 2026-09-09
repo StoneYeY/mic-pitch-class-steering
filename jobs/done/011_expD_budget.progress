@@ -1,0 +1,7 @@
+Couldn't connect to the Hub: [Errno 101] Network is unreachable.
+Will try to load from local cache.
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 4861.96it/s]
+Loading pipeline components...:  67%|██████▋   | 4/6 [00:00<00:00, 35.20it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00,  6.54it/s]
