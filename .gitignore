@@ -1,0 +1,20 @@
+# Large datasets (download separately — see README)
+maestro-*/
+data/
+musicprefs/
+outputs/
+
+# Large notebooks
+MuseControlLite_ITC_(1).ipynb
+
+# Review / internal materials
+rebuttal_mlsp2026.txt
+MIC_Code_Review_Report.pdf
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Tooling
+.claude/

@@ -1,0 +1,15 @@
+using build_target, melodic_coherence, analyze, MELODIES from mic_eval_adapter.py
+no trials dropped by the voiced-fraction rule
+
+condition          n              true          shuffled   ratio   p (one-sided)
+baseline          27     0.112 ± 0.104     0.081 ± 0.009    1.38            0.14
+combined          27     0.276 ± 0.118     0.066 ± 0.011    4.19         1.4e-07
+itc               27     0.122 ± 0.103     0.080 ± 0.009    1.53           0.089
+probe_0.03        27     0.236 ± 0.104     0.069 ± 0.009    3.39         1.9e-07
+probe_0.05        27     0.274 ± 0.084     0.066 ± 0.008    4.15         7.5e-09
+probe_0.1         27     0.266 ± 0.071     0.067 ± 0.006    4.00         7.5e-09
+probe_0.2         27     0.273 ± 0.064     0.066 ± 0.006    4.12         7.5e-09
+
+SANITY CHECK  probe_0.05: computed 0.274, paper reports 0.274  ->  MATCH
+
+per-trial results written to shuffled_results.csv
