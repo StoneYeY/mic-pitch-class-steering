@@ -1,7 +1,3 @@
-  MLSP-fixed ....................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.  K=15
-RAPG-cal(F1) ...................................###############  K=15
-RAPG-cal(dC) ...................###############................  K=15
-     RAPG-on online: R_t >= 0.310, cap 15
 TopK(dC)-const ...................###############................  K=15
 Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
 Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 5058.80it/s]
@@ -78,3 +74,7 @@ split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp',
   980 runs (4291s, 4.4s/run)  last: test-p06-alternating-s1 topk_dc_const coh=0.539 clap=0.370 upd=15
   1000 runs (4379s, 4.4s/run)  last: test-p06-pedal-s0 topk_dc_const coh=0.944 clap=0.295 upd=15
   1020 runs (4466s, 4.4s/run)  last: test-p06-pedal-s2 topk_dc_const coh=1.000 clap=0.276 upd=15
+  1040 runs (4553s, 4.4s/run)  last: test-p06-zigzag-s1 topk_dc_const coh=0.389 clap=0.372 upd=15
+  1060 runs (4641s, 4.4s/run)  last: test-p07-ascending-s0 topk_dc_const coh=0.635 clap=0.412 upd=15
+  1080 runs (4729s, 4.4s/run)  last: test-p07-ascending-s2 topk_dc_const coh=0.332 clap=0.362 upd=15
+  1100 runs (4815s, 4.4s/run)  last: test-p07-descending-s1 topk_dc_const coh=0.215 clap=0.255 upd=15
