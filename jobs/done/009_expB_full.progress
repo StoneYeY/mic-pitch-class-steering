@@ -1,6 +1,3 @@
-         Mid ..................###############.................  K=15
-        Late ...................................###############  K=15
-     Uniform #...#..#..#...#...#..#..#...#...#..#..#...#...#..#  K=15
   MLSP-fixed ....................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.  K=15
 RAPG-cal(F1) ...................................###############  K=15
 RAPG-cal(dC) ...................###############................  K=15
@@ -78,3 +75,6 @@ split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp',
   920 runs (4029s, 4.4s/run)  last: test-p06-ascending-s1 topk_dc_const coh=0.405 clap=0.379 upd=15
   940 runs (4117s, 4.4s/run)  last: test-p06-descending-s0 topk_dc_const coh=0.234 clap=0.410 upd=15
   960 runs (4204s, 4.4s/run)  last: test-p06-descending-s2 topk_dc_const coh=0.101 clap=0.311 upd=15
+  980 runs (4291s, 4.4s/run)  last: test-p06-alternating-s1 topk_dc_const coh=0.539 clap=0.370 upd=15
+  1000 runs (4379s, 4.4s/run)  last: test-p06-pedal-s0 topk_dc_const coh=0.944 clap=0.295 upd=15
+  1020 runs (4466s, 4.4s/run)  last: test-p06-pedal-s2 topk_dc_const coh=1.000 clap=0.276 upd=15
