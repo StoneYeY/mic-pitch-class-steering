@@ -1,0 +1,232 @@
+# job=001_diagnose_mlsp_outputs exit=0 duration_s=181 host=stone-ye-PC finished=2026-09-08T21:46:05-04:00
+# (last 4000 lines; full log: runner/logs/001_diagnose_mlsp_outputs.full.log on stone-ye-PC)
+audio dir: /home/stoneyey/Desktop/MIC/outputs/generated_audio  (189 wavs)
+prompt1_alternating_baseline.wav                        coh_true=0.000 coh_first=0.000 best_const=0.355(pc9) frac_F=0.000
+prompt1_alternating_combined.wav                        coh_true=0.435 coh_first=0.995 best_const=0.995(pc5) frac_F=0.997
+prompt1_alternating_itc.wav                             coh_true=0.021 coh_first=0.000 best_const=0.314(pc9) frac_F=0.000
+prompt1_alternating_probe_high.wav                      coh_true=0.329 coh_first=0.961 best_const=0.961(pc5) frac_F=0.974
+prompt1_alternating_probe_low.wav                       coh_true=0.418 coh_first=0.950 best_const=0.950(pc5) frac_F=0.967
+prompt1_alternating_probe_mid.wav                       coh_true=0.369 coh_first=0.934 best_const=0.934(pc5) frac_F=0.955
+prompt1_alternating_probe_strong.wav                    coh_true=0.325 coh_first=0.941 best_const=0.941(pc5) frac_F=0.960
+prompt1_ascending_baseline.wav                          coh_true=0.000 coh_first=0.000 best_const=0.399(pc9) frac_F=0.000
+prompt1_ascending_combined.wav                          coh_true=0.270 coh_first=0.976 best_const=0.976(pc5) frac_F=0.981
+prompt1_ascending_itc.wav                               coh_true=0.025 coh_first=0.000 best_const=0.356(pc9) frac_F=0.000
+prompt1_ascending_probe_high.wav                        coh_true=0.258 coh_first=0.940 best_const=0.940(pc5) frac_F=0.951
+prompt1_ascending_probe_low.wav                         coh_true=0.335 coh_first=1.000 best_const=1.000(pc5) frac_F=1.000
+prompt1_ascending_probe_mid.wav                         coh_true=0.268 coh_first=0.961 best_const=0.961(pc5) frac_F=0.966
+prompt1_ascending_probe_strong.wav                      coh_true=0.262 coh_first=0.946 best_const=0.946(pc5) frac_F=0.957
+prompt1_descending_baseline.wav                         coh_true=0.069 coh_first=0.000 best_const=0.399(pc9) frac_F=0.000
+prompt1_descending_combined.wav                         coh_true=0.274 coh_first=0.947 best_const=0.947(pc5) frac_F=0.957
+prompt1_descending_itc.wav                              coh_true=0.132 coh_first=0.000 best_const=0.368(pc9) frac_F=0.000
+prompt1_descending_probe_high.wav                       coh_true=0.259 coh_first=0.946 best_const=0.946(pc5) frac_F=0.957
+prompt1_descending_probe_low.wav                        coh_true=0.318 coh_first=1.000 best_const=1.000(pc5) frac_F=1.000
+prompt1_descending_probe_mid.wav                        coh_true=0.271 coh_first=0.961 best_const=0.961(pc5) frac_F=0.969
+prompt1_descending_probe_strong.wav                     coh_true=0.262 coh_first=0.946 best_const=0.946(pc5) frac_F=0.957
+prompt2_alternating_baseline.wav                        coh_true=0.340 coh_first=0.007 best_const=0.875(pc0) frac_F=0.006
+prompt2_alternating_combined.wav                        coh_true=0.506 coh_first=0.711 best_const=0.711(pc5) frac_F=0.814
+prompt2_alternating_itc.wav                             coh_true=0.209 coh_first=0.000 best_const=0.541(pc0) frac_F=0.000
+prompt2_alternating_probe_high.wav                      coh_true=0.328 coh_first=0.657 best_const=0.657(pc5) frac_F=0.758
+prompt2_alternating_probe_low.wav                       coh_true=0.253 coh_first=0.318 best_const=0.318(pc5) frac_F=0.510
+prompt2_alternating_probe_mid.wav                       coh_true=0.387 coh_first=0.592 best_const=0.592(pc5) frac_F=0.728
+prompt2_alternating_probe_strong.wav                    coh_true=0.307 coh_first=0.653 best_const=0.653(pc5) frac_F=0.766
+prompt2_ascending_baseline.wav                          coh_true=0.228 coh_first=0.006 best_const=0.754(pc0) frac_F=0.006
+prompt2_ascending_combined.wav                          coh_true=0.432 coh_first=0.628 best_const=0.628(pc5) frac_F=0.729
+prompt2_ascending_itc.wav                               coh_true=0.215 coh_first=0.000 best_const=0.541(pc0) frac_F=0.000
+prompt2_ascending_probe_high.wav                        coh_true=0.369 coh_first=0.551 best_const=0.551(pc5) frac_F=0.652
+prompt2_ascending_probe_low.wav                         coh_true=0.335 coh_first=0.467 best_const=0.467(pc5) frac_F=0.571
+prompt2_ascending_probe_mid.wav                         coh_true=0.400 coh_first=0.467 best_const=0.467(pc5) frac_F=0.562
+prompt2_ascending_probe_strong.wav                      coh_true=0.389 coh_first=0.580 best_const=0.580(pc5) frac_F=0.674
+prompt2_descending_baseline.wav                         coh_true=0.251 coh_first=0.006 best_const=0.754(pc0) frac_F=0.006
+prompt2_descending_combined.wav                         coh_true=0.303 coh_first=0.678 best_const=0.678(pc5) frac_F=0.769
+prompt2_descending_itc.wav                              coh_true=0.273 coh_first=0.000 best_const=0.674(pc0) frac_F=0.000
+prompt2_descending_probe_high.wav                       coh_true=0.226 coh_first=0.568 best_const=0.568(pc5) frac_F=0.681
+prompt2_descending_probe_low.wav                        coh_true=0.230 coh_first=0.474 best_const=0.474(pc5) frac_F=0.570
+prompt2_descending_probe_mid.wav                        coh_true=0.269 coh_first=0.487 best_const=0.487(pc5) frac_F=0.602
+prompt2_descending_probe_strong.wav                     coh_true=0.230 coh_first=0.518 best_const=0.518(pc5) frac_F=0.646
+prompt3_alternating_baseline.wav                        coh_true=0.198 coh_first=0.000 best_const=0.654(pc3) frac_F=0.000
+prompt3_alternating_combined.wav                        coh_true=0.252 coh_first=0.550 best_const=0.550(pc5) frac_F=0.565
+prompt3_alternating_itc.wav                             coh_true=0.151 coh_first=0.000 best_const=0.774(pc3) frac_F=0.000
+prompt3_alternating_probe_high.wav                      coh_true=0.260 coh_first=0.692 best_const=0.692(pc5) frac_F=0.781
+prompt3_alternating_probe_low.wav                       coh_true=0.216 coh_first=0.220 best_const=0.487(pc3) frac_F=0.146
+prompt3_alternating_probe_mid.wav                       coh_true=0.175 coh_first=0.557 best_const=0.557(pc5) frac_F=0.610
+prompt3_alternating_probe_strong.wav                    coh_true=0.299 coh_first=0.708 best_const=0.708(pc5) frac_F=0.796
+prompt3_ascending_baseline.wav                          coh_true=0.154 coh_first=0.000 best_const=0.564(pc3) frac_F=0.000
+prompt3_ascending_combined.wav                          coh_true=0.159 coh_first=0.263 best_const=0.437(pc3) frac_F=0.261
+prompt3_ascending_itc.wav                               coh_true=0.109 coh_first=0.000 best_const=0.663(pc3) frac_F=0.000
+prompt3_ascending_probe_high.wav                        coh_true=0.228 coh_first=0.714 best_const=0.714(pc5) frac_F=0.773
+prompt3_ascending_probe_low.wav                         coh_true=0.129 coh_first=0.180 best_const=0.475(pc3) frac_F=0.140
+prompt3_ascending_probe_mid.wav                         coh_true=0.253 coh_first=0.365 best_const=0.400(pc3) frac_F=0.291
+prompt3_ascending_probe_strong.wav                      coh_true=0.258 coh_first=0.729 best_const=0.729(pc5) frac_F=0.788
+prompt3_descending_baseline.wav                         coh_true=0.255 coh_first=0.000 best_const=0.564(pc3) frac_F=0.000
+prompt3_descending_combined.wav                         coh_true=0.098 coh_first=0.225 best_const=0.327(pc3) frac_F=0.172
+prompt3_descending_itc.wav                              coh_true=0.260 coh_first=0.000 best_const=0.669(pc3) frac_F=0.000
+prompt3_descending_probe_high.wav                       coh_true=0.242 coh_first=0.616 best_const=0.616(pc5) frac_F=0.670
+prompt3_descending_probe_low.wav                        coh_true=0.097 coh_first=0.173 best_const=0.484(pc3) frac_F=0.133
+prompt3_descending_probe_mid.wav                        coh_true=0.134 coh_first=0.301 best_const=0.390(pc3) frac_F=0.223
+prompt3_descending_probe_strong.wav                     coh_true=0.254 coh_first=0.746 best_const=0.746(pc5) frac_F=0.797
+prompt4_alternating_baseline.wav                        coh_true=0.098 coh_first=0.406 best_const=0.406(pc5) frac_F=0.496
+prompt4_alternating_combined.wav                        coh_true=0.472 coh_first=0.790 best_const=0.790(pc5) frac_F=0.849
+prompt4_alternating_itc.wav                             coh_true=0.241 coh_first=0.476 best_const=0.476(pc5) frac_F=0.613
+prompt4_alternating_probe_high.wav                      coh_true=0.402 coh_first=0.740 best_const=0.740(pc5) frac_F=0.810
+prompt4_alternating_probe_low.wav                       coh_true=0.376 coh_first=0.734 best_const=0.734(pc5) frac_F=0.809
+prompt4_alternating_probe_mid.wav                       coh_true=0.471 coh_first=0.837 best_const=0.837(pc5) frac_F=0.882
+prompt4_alternating_probe_strong.wav                    coh_true=0.429 coh_first=0.788 best_const=0.788(pc5) frac_F=0.837
+prompt4_ascending_baseline.wav                          coh_true=0.192 coh_first=0.462 best_const=0.462(pc5) frac_F=0.496
+prompt4_ascending_combined.wav                          coh_true=0.304 coh_first=0.770 best_const=0.770(pc5) frac_F=0.807
+prompt4_ascending_itc.wav                               coh_true=0.349 coh_first=0.562 best_const=0.562(pc5) frac_F=0.615
+prompt4_ascending_probe_high.wav                        coh_true=0.282 coh_first=0.869 best_const=0.869(pc5) frac_F=0.889
+prompt4_ascending_probe_low.wav                         coh_true=0.296 coh_first=0.711 best_const=0.711(pc5) frac_F=0.764
+prompt4_ascending_probe_mid.wav                         coh_true=0.317 coh_first=0.805 best_const=0.805(pc5) frac_F=0.837
+prompt4_ascending_probe_strong.wav                      coh_true=0.229 coh_first=0.908 best_const=0.908(pc5) frac_F=0.923
+prompt4_descending_baseline.wav                         coh_true=0.267 coh_first=0.462 best_const=0.462(pc5) frac_F=0.496
+prompt4_descending_combined.wav                         coh_true=0.285 coh_first=0.854 best_const=0.854(pc5) frac_F=0.882
+prompt4_descending_itc.wav                              coh_true=0.271 coh_first=0.636 best_const=0.636(pc5) frac_F=0.688
+prompt4_descending_probe_high.wav                       coh_true=0.235 coh_first=0.854 best_const=0.854(pc5) frac_F=0.878
+prompt4_descending_probe_low.wav                        coh_true=0.244 coh_first=0.702 best_const=0.702(pc5) frac_F=0.758
+prompt4_descending_probe_mid.wav                        coh_true=0.254 coh_first=0.764 best_const=0.764(pc5) frac_F=0.806
+prompt4_descending_probe_strong.wav                     coh_true=0.271 coh_first=0.977 best_const=0.977(pc5) frac_F=0.979
+prompt5_alternating_baseline.wav                        coh_true=0.000 coh_first=0.067 best_const=0.346(pc3) frac_F=0.187
+prompt5_alternating_combined.wav                        coh_true=0.305 coh_first=0.910 best_const=0.910(pc5) frac_F=0.868
+prompt5_alternating_itc.wav                             coh_true=0.000 coh_first=0.092 best_const=0.354(pc3) frac_F=0.064
+prompt5_alternating_probe_high.wav                      coh_true=0.304 coh_first=0.706 best_const=0.706(pc5) frac_F=0.506
+prompt5_alternating_probe_low.wav                       coh_true=0.128 coh_first=0.184 best_const=0.440(pc1) frac_F=0.126
+prompt5_alternating_probe_mid.wav                       coh_true=0.252 coh_first=0.497 best_const=0.497(pc5) frac_F=0.358
+prompt5_alternating_probe_strong.wav                    coh_true=0.315 coh_first=0.754 best_const=0.754(pc5) frac_F=0.550
+prompt5_ascending_baseline.wav                          coh_true=0.128 coh_first=0.111 best_const=0.313(pc3) frac_F=0.187
+prompt5_ascending_combined.wav                          coh_true=0.264 coh_first=0.659 best_const=0.659(pc5) frac_F=0.615
+prompt5_ascending_itc.wav                               coh_true=0.035 coh_first=0.080 best_const=0.389(pc3) frac_F=0.064
+prompt5_ascending_probe_high.wav                        coh_true=0.181 coh_first=0.383 best_const=0.617(pc1) frac_F=0.296
+prompt5_ascending_probe_low.wav                         coh_true=0.248 coh_first=0.152 best_const=0.821(pc1) frac_F=0.118
+prompt5_ascending_probe_mid.wav                         coh_true=0.241 coh_first=0.161 best_const=0.836(pc1) frac_F=0.127
+prompt5_ascending_probe_strong.wav                      coh_true=0.235 coh_first=0.723 best_const=0.723(pc5) frac_F=0.639
+prompt5_descending_baseline.wav                         coh_true=0.054 coh_first=0.111 best_const=0.313(pc3) frac_F=0.187
+prompt5_descending_combined.wav                         coh_true=0.105 coh_first=0.326 best_const=0.338(pc1) frac_F=0.257
+prompt5_descending_itc.wav                              coh_true=0.059 coh_first=0.130 best_const=0.398(pc4) frac_F=0.203
+prompt5_descending_probe_high.wav                       coh_true=0.241 coh_first=0.164 best_const=0.833(pc1) frac_F=0.129
+prompt5_descending_probe_low.wav                        coh_true=0.102 coh_first=0.332 best_const=0.400(pc1) frac_F=0.262
+prompt5_descending_probe_mid.wav                        coh_true=0.237 coh_first=0.142 best_const=0.843(pc1) frac_F=0.112
+prompt5_descending_probe_strong.wav                     coh_true=0.276 coh_first=0.419 best_const=0.575(pc1) frac_F=0.327
+prompt6_alternating_baseline.wav                        coh_true=0.000 coh_first=0.000 best_const=1.000(pc3) frac_F=0.000
+prompt6_alternating_combined.wav                        coh_true=0.153 coh_first=0.422 best_const=0.422(pc5) frac_F=0.503
+prompt6_alternating_itc.wav                             coh_true=0.000 coh_first=0.000 best_const=1.000(pc3) frac_F=0.000
+prompt6_alternating_probe_high.wav                      coh_true=0.223 coh_first=0.470 best_const=0.470(pc5) frac_F=0.512
+prompt6_alternating_probe_low.wav                       coh_true=0.071 coh_first=0.131 best_const=0.537(pc3) frac_F=0.158
+prompt6_alternating_probe_mid.wav                       coh_true=0.211 coh_first=0.386 best_const=0.386(pc5) frac_F=0.363
+prompt6_alternating_probe_strong.wav                    coh_true=0.260 coh_first=0.531 best_const=0.531(pc5) frac_F=0.580
+prompt6_ascending_baseline.wav                          coh_true=0.099 coh_first=0.000 best_const=1.000(pc3) frac_F=0.000
+prompt6_ascending_combined.wav                          coh_true=0.005 coh_first=0.162 best_const=0.660(pc3) frac_F=0.161
+prompt6_ascending_itc.wav                               coh_true=0.118 coh_first=0.000 best_const=1.000(pc3) frac_F=0.000
+prompt6_ascending_probe_high.wav                        coh_true=0.094 coh_first=0.365 best_const=0.365(pc5) frac_F=0.369
+prompt6_ascending_probe_low.wav                         coh_true=0.071 coh_first=0.013 best_const=0.912(pc3) frac_F=0.010
+prompt6_ascending_probe_mid.wav                         coh_true=0.101 coh_first=0.220 best_const=0.418(pc4) frac_F=0.243
+prompt6_ascending_probe_strong.wav                      coh_true=0.118 coh_first=0.438 best_const=0.438(pc5) frac_F=0.445
+prompt6_descending_baseline.wav                         coh_true=0.137 coh_first=0.000 best_const=1.000(pc3) frac_F=0.000
+prompt6_descending_combined.wav                         coh_true=0.128 coh_first=0.248 best_const=0.400(pc4) frac_F=0.292
+prompt6_descending_itc.wav                              coh_true=0.141 coh_first=0.000 best_const=1.000(pc3) frac_F=0.000
+prompt6_descending_probe_high.wav                       coh_true=0.094 coh_first=0.365 best_const=0.365(pc5) frac_F=0.372
+prompt6_descending_probe_low.wav                        coh_true=0.056 coh_first=0.000 best_const=0.931(pc3) frac_F=0.000
+prompt6_descending_probe_mid.wav                        coh_true=0.103 coh_first=0.233 best_const=0.407(pc4) frac_F=0.250
+prompt6_descending_probe_strong.wav                     coh_true=0.109 coh_first=0.421 best_const=0.421(pc5) frac_F=0.425
+prompt7_alternating_baseline.wav                        coh_true=0.027 coh_first=0.122 best_const=0.486(pc11) frac_F=0.085
+prompt7_alternating_combined.wav                        coh_true=0.394 coh_first=0.617 best_const=0.617(pc5) frac_F=0.742
+prompt7_alternating_itc.wav                             coh_true=0.000 coh_first=0.000 best_const=0.454(pc6) frac_F=0.000
+prompt7_alternating_probe_high.wav                      coh_true=0.291 coh_first=0.745 best_const=0.745(pc5) frac_F=0.815
+prompt7_alternating_probe_low.wav                       coh_true=0.293 coh_first=0.562 best_const=0.562(pc5) frac_F=0.710
+prompt7_alternating_probe_mid.wav                       coh_true=0.319 coh_first=0.725 best_const=0.725(pc5) frac_F=0.792
+prompt7_alternating_probe_strong.wav                    coh_true=0.299 coh_first=0.755 best_const=0.755(pc5) frac_F=0.820
+prompt7_ascending_baseline.wav                          coh_true=0.009 coh_first=0.106 best_const=0.528(pc11) frac_F=0.085
+prompt7_ascending_combined.wav                          coh_true=0.339 coh_first=0.699 best_const=0.699(pc5) frac_F=0.755
+prompt7_ascending_itc.wav                               coh_true=0.000 coh_first=0.000 best_const=0.432(pc11) frac_F=0.000
+prompt7_ascending_probe_high.wav                        coh_true=0.271 coh_first=0.770 best_const=0.770(pc5) frac_F=0.810
+prompt7_ascending_probe_low.wav                         coh_true=0.221 coh_first=0.595 best_const=0.595(pc5) frac_F=0.687
+prompt7_ascending_probe_mid.wav                         coh_true=0.281 coh_first=0.763 best_const=0.763(pc5) frac_F=0.802
+prompt7_ascending_probe_strong.wav                      coh_true=0.242 coh_first=0.805 best_const=0.805(pc5) frac_F=0.841
+prompt7_descending_baseline.wav                         coh_true=0.009 coh_first=0.106 best_const=0.528(pc11) frac_F=0.085
+prompt7_descending_combined.wav                         coh_true=0.277 coh_first=0.742 best_const=0.742(pc5) frac_F=0.798
+prompt7_descending_itc.wav                              coh_true=0.000 coh_first=0.000 best_const=0.978(pc11) frac_F=0.000
+prompt7_descending_probe_high.wav                       coh_true=0.263 coh_first=0.766 best_const=0.766(pc5) frac_F=0.804
+prompt7_descending_probe_low.wav                        coh_true=0.219 coh_first=0.589 best_const=0.589(pc5) frac_F=0.682
+prompt7_descending_probe_mid.wav                        coh_true=0.284 coh_first=0.703 best_const=0.703(pc5) frac_F=0.676
+prompt7_descending_probe_strong.wav                     coh_true=0.231 coh_first=0.783 best_const=0.783(pc5) frac_F=0.813
+prompt8_alternating_baseline.wav                        coh_true=0.028 coh_first=0.000 best_const=0.757(pc3) frac_F=0.000
+prompt8_alternating_combined.wav                        coh_true=0.287 coh_first=0.678 best_const=0.678(pc5) frac_F=0.745
+prompt8_alternating_itc.wav                             coh_true=0.135 coh_first=0.000 best_const=0.476(pc3) frac_F=0.000
+prompt8_alternating_probe_high.wav                      coh_true=0.318 coh_first=0.697 best_const=0.697(pc5) frac_F=0.785
+prompt8_alternating_probe_low.wav                       coh_true=0.274 coh_first=0.681 best_const=0.681(pc5) frac_F=0.771
+prompt8_alternating_probe_mid.wav                       coh_true=0.305 coh_first=0.691 best_const=0.691(pc5) frac_F=0.779
+prompt8_alternating_probe_strong.wav                    coh_true=0.318 coh_first=0.697 best_const=0.697(pc5) frac_F=0.774
+prompt8_ascending_baseline.wav                          coh_true=0.049 coh_first=0.000 best_const=0.679(pc3) frac_F=0.000
+prompt8_ascending_combined.wav                          coh_true=0.157 coh_first=0.693 best_const=0.693(pc5) frac_F=0.749
+prompt8_ascending_itc.wav                               coh_true=0.053 coh_first=0.000 best_const=0.434(pc3) frac_F=0.000
+prompt8_ascending_probe_high.wav                        coh_true=0.263 coh_first=0.734 best_const=0.734(pc5) frac_F=0.781
+prompt8_ascending_probe_low.wav                         coh_true=0.184 coh_first=0.681 best_const=0.681(pc5) frac_F=0.736
+prompt8_ascending_probe_mid.wav                         coh_true=0.266 coh_first=0.740 best_const=0.740(pc5) frac_F=0.793
+prompt8_ascending_probe_strong.wav                      coh_true=0.262 coh_first=0.735 best_const=0.735(pc5) frac_F=0.782
+prompt8_descending_baseline.wav                         coh_true=0.255 coh_first=0.000 best_const=0.679(pc3) frac_F=0.000
+prompt8_descending_combined.wav                         coh_true=0.269 coh_first=0.727 best_const=0.727(pc5) frac_F=0.741
+prompt8_descending_itc.wav                              coh_true=0.243 coh_first=0.000 best_const=0.630(pc3) frac_F=0.000
+prompt8_descending_probe_high.wav                       coh_true=0.264 coh_first=0.739 best_const=0.739(pc5) frac_F=0.753
+prompt8_descending_probe_low.wav                        coh_true=0.171 coh_first=0.671 best_const=0.671(pc5) frac_F=0.706
+prompt8_descending_probe_mid.wav                        coh_true=0.265 coh_first=0.738 best_const=0.738(pc5) frac_F=0.755
+prompt8_descending_probe_strong.wav                     coh_true=0.260 coh_first=0.733 best_const=0.733(pc5) frac_F=0.748
+prompt9_alternating_baseline.wav                        coh_true=0.172 coh_first=0.000 best_const=0.337(pc9) frac_F=0.000
+prompt9_alternating_combined.wav                        coh_true=0.392 coh_first=1.000 best_const=1.000(pc5) frac_F=1.000
+prompt9_alternating_itc.wav                             coh_true=0.152 coh_first=0.000 best_const=0.321(pc7) frac_F=0.000
+prompt9_alternating_probe_high.wav                      coh_true=0.406 coh_first=1.000 best_const=1.000(pc5) frac_F=1.000
+prompt9_alternating_probe_low.wav                       coh_true=0.368 coh_first=0.781 best_const=0.781(pc5) frac_F=0.850
+prompt9_alternating_probe_mid.wav                       coh_true=0.390 coh_first=0.939 best_const=0.939(pc5) frac_F=0.958
+prompt9_alternating_probe_strong.wav                    coh_true=0.332 coh_first=0.980 best_const=0.980(pc5) frac_F=0.986
+prompt9_ascending_baseline.wav                          coh_true=0.000 coh_first=0.000 best_const=0.401(pc9) frac_F=0.000
+prompt9_ascending_combined.wav                          coh_true=0.285 coh_first=0.968 best_const=0.968(pc5) frac_F=0.975
+prompt9_ascending_itc.wav                               coh_true=0.000 coh_first=0.000 best_const=0.273(pc7) frac_F=0.000
+prompt9_ascending_probe_high.wav                        coh_true=0.279 coh_first=0.867 best_const=0.867(pc5) frac_F=0.892
+prompt9_ascending_probe_low.wav                         coh_true=0.307 coh_first=0.820 best_const=0.820(pc5) frac_F=0.855
+prompt9_ascending_probe_mid.wav                         coh_true=0.284 coh_first=0.965 best_const=0.965(pc5) frac_F=0.971
+prompt9_ascending_probe_strong.wav                      coh_true=0.295 coh_first=0.921 best_const=0.921(pc5) frac_F=0.936
+prompt9_descending_baseline.wav                         coh_true=0.000 coh_first=0.000 best_const=0.401(pc9) frac_F=0.000
+prompt9_descending_combined.wav                         coh_true=0.301 coh_first=1.000 best_const=1.000(pc5) frac_F=1.000
+prompt9_descending_itc.wav                              coh_true=0.105 coh_first=0.007 best_const=0.248(pc8) frac_F=0.007
+prompt9_descending_probe_high.wav                       coh_true=0.282 coh_first=0.873 best_const=0.873(pc5) frac_F=0.897
+prompt9_descending_probe_low.wav                        coh_true=0.404 coh_first=0.814 best_const=0.814(pc5) frac_F=0.850
+prompt9_descending_probe_mid.wav                        coh_true=0.292 coh_first=1.000 best_const=1.000(pc5) frac_F=1.000
+prompt9_descending_probe_strong.wav                     coh_true=0.293 coh_first=0.914 best_const=0.914(pc5) frac_F=0.931
+
+=== per method (mean over clips) ===
+method           n  coh_true  coh_first  best_const  frac_F
+baseline        27     0.112      0.073       0.571   0.086
+combined        27     0.276      0.676       0.710   0.703
+itc             27     0.122      0.073       0.554   0.083
+probe_high      27     0.266      0.694       0.728   0.722
+probe_low       27     0.236      0.516       0.668   0.552
+probe_mid       27     0.274      0.627       0.697   0.645
+probe_strong    27     0.273      0.743       0.748   0.766
+
+=== per method x melody: coh_true / coh_first / frac_F ===
+baseline       alternating  0.096 / 0.067 / 0.086
+baseline       ascending    0.095 / 0.076 / 0.086
+baseline       descending   0.144 / 0.076 / 0.086
+combined       alternating  0.355 / 0.741 / 0.787
+combined       ascending    0.246 / 0.647 / 0.670
+combined       descending   0.227 / 0.639 / 0.652
+itc            alternating  0.101 / 0.063 / 0.075
+itc            ascending    0.100 / 0.071 / 0.075
+itc            descending   0.165 / 0.086 / 0.100
+probe_high     alternating  0.318 / 0.741 / 0.771
+probe_high     ascending    0.247 / 0.688 / 0.713
+probe_high     descending   0.234 / 0.655 / 0.682
+probe_low      alternating  0.266 / 0.507 / 0.561
+probe_low      ascending    0.236 / 0.513 / 0.542
+probe_low      descending   0.204 / 0.528 / 0.551
+probe_mid      alternating  0.320 / 0.684 / 0.714
+probe_mid      ascending    0.268 / 0.605 / 0.621
+probe_mid      descending   0.234 / 0.592 / 0.599
+probe_strong   alternating  0.320 / 0.756 / 0.785
+probe_strong   ascending    0.254 / 0.754 / 0.776
+probe_strong   descending   0.243 / 0.717 / 0.736
+
+=== per-slot accuracy (probe_mid vs baseline): does the audio follow the melody in time? ===
+baseline     slot_acc = [0.089, 0.188, 0.067, 0.061, 0.07, 0.092, 0.156, 0.139]
+probe_mid    slot_acc = [0.884, 0.0, 0.049, 0.148, 0.088, 0.089, 0.316, 0.727]
+
+Interpretation: if probe_* clips have coh_first ~ coh_true and frac_F >> baseline, guidance mostly
+pushed the whole clip toward F (the first note), consistent with the target time-axis bug.
