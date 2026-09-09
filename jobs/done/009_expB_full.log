@@ -1,0 +1,173 @@
+# job=009_expB_full exit=1 duration_s=9871 host=stone-ye-PC finished=2026-09-09T09:14:20-04:00
+# (last 4000 lines; full log: runner/logs/009_expB_full.full.log on stone-ye-PC)
+         SAO ..................................................  K=0
+       Early ###############...................................  K=15
+         Mid ..................###############.................  K=15
+        Late ...................................###############  K=15
+     Uniform #...#..#..#...#...#..#..#...#...#..#..#...#...#..#  K=15
+  MLSP-fixed ....................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.  K=15
+RAPG-cal(F1) ...................................###############  K=15
+RAPG-cal(dC) ...................###############................  K=15
+     RAPG-on online: R_t >= 0.310, cap 15
+TopK(dC)-const ...................###############................  K=15
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 5058.80it/s]
+Loading pipeline components...:  33%|███▎      | 2/6 [00:00<00:00, 19.62it/s]Loading pipeline components...:  83%|████████▎ | 5/6 [00:00<00:00, 11.07it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00, 10.87it/s]
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 25148.27it/s]
+[evalclip] CLAP loaded: laion/clap-htsat-unfused on cuda:0
+split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp', 'rapg_cal_f1', 'rapg_cal_dc', 'rapg_on', 'topk_dc_const'] -> 2250 runs (0 done)
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+  20 runs (88s, 4.4s/run)  last: test-p00-ascending-s1 topk_dc_const coh=0.656 clap=0.324 upd=15
+  40 runs (176s, 4.4s/run)  last: test-p00-descending-s0 topk_dc_const coh=0.527 clap=0.464 upd=15
+  60 runs (263s, 4.4s/run)  last: test-p00-descending-s2 topk_dc_const coh=0.498 clap=0.464 upd=15
+  80 runs (351s, 4.4s/run)  last: test-p00-alternating-s1 topk_dc_const coh=0.854 clap=0.368 upd=15
+  100 runs (439s, 4.4s/run)  last: test-p00-pedal-s0 topk_dc_const coh=0.923 clap=0.264 upd=15
+  120 runs (526s, 4.4s/run)  last: test-p00-pedal-s2 topk_dc_const coh=1.000 clap=0.375 upd=15
+  140 runs (614s, 4.4s/run)  last: test-p00-zigzag-s1 topk_dc_const coh=0.525 clap=0.364 upd=15
+  160 runs (702s, 4.4s/run)  last: test-p01-ascending-s0 topk_dc_const coh=0.443 clap=0.431 upd=15
+  180 runs (790s, 4.4s/run)  last: test-p01-ascending-s2 topk_dc_const coh=0.776 clap=0.370 upd=15
+  200 runs (878s, 4.4s/run)  last: test-p01-descending-s1 topk_dc_const coh=0.452 clap=0.410 upd=15
+  220 runs (965s, 4.4s/run)  last: test-p01-alternating-s0 topk_dc_const coh=0.356 clap=0.488 upd=15
+  240 runs (1053s, 4.4s/run)  last: test-p01-alternating-s2 topk_dc_const coh=0.270 clap=0.231 upd=15
+  260 runs (1140s, 4.4s/run)  last: test-p01-pedal-s1 topk_dc_const coh=0.839 clap=0.488 upd=15
+  280 runs (1228s, 4.4s/run)  last: test-p01-zigzag-s0 topk_dc_const coh=0.184 clap=0.504 upd=15
+  300 runs (1315s, 4.4s/run)  last: test-p01-zigzag-s2 topk_dc_const coh=0.682 clap=0.379 upd=15
+  320 runs (1403s, 4.4s/run)  last: test-p02-ascending-s1 topk_dc_const coh=0.402 clap=0.244 upd=15
+  340 runs (1490s, 4.4s/run)  last: test-p02-descending-s0 topk_dc_const coh=0.917 clap=0.188 upd=15
+  360 runs (1578s, 4.4s/run)  last: test-p02-descending-s2 topk_dc_const coh=0.568 clap=0.230 upd=15
+  380 runs (1666s, 4.4s/run)  last: test-p02-alternating-s1 topk_dc_const coh=0.486 clap=0.213 upd=15
+  400 runs (1753s, 4.4s/run)  last: test-p02-pedal-s0 topk_dc_const coh=0.926 clap=0.125 upd=15
+  420 runs (1841s, 4.4s/run)  last: test-p02-pedal-s2 topk_dc_const coh=0.997 clap=0.182 upd=15
+  440 runs (1929s, 4.4s/run)  last: test-p02-zigzag-s1 topk_dc_const coh=0.485 clap=0.181 upd=15
+  460 runs (2016s, 4.4s/run)  last: test-p03-ascending-s0 topk_dc_const coh=0.261 clap=0.606 upd=15
+  480 runs (2104s, 4.4s/run)  last: test-p03-ascending-s2 topk_dc_const coh=0.701 clap=0.636 upd=15
+  500 runs (2192s, 4.4s/run)  last: test-p03-descending-s1 topk_dc_const coh=0.025 clap=0.506 upd=15
+  520 runs (2279s, 4.4s/run)  last: test-p03-alternating-s0 topk_dc_const coh=0.286 clap=0.492 upd=15
+  540 runs (2367s, 4.4s/run)  last: test-p03-alternating-s2 topk_dc_const coh=0.201 clap=0.525 upd=15
+  560 runs (2454s, 4.4s/run)  last: test-p03-pedal-s1 topk_dc_const coh=0.670 clap=0.505 upd=15
+  580 runs (2542s, 4.4s/run)  last: test-p03-zigzag-s0 topk_dc_const coh=0.287 clap=0.521 upd=15
+  600 runs (2630s, 4.4s/run)  last: test-p03-zigzag-s2 topk_dc_const coh=0.648 clap=0.619 upd=15
+  620 runs (2717s, 4.4s/run)  last: test-p04-ascending-s1 topk_dc_const coh=0.065 clap=0.466 upd=15
+  640 runs (2804s, 4.4s/run)  last: test-p04-descending-s0 topk_dc_const coh=0.141 clap=0.379 upd=15
+  660 runs (2892s, 4.4s/run)  last: test-p04-descending-s2 topk_dc_const coh=0.264 clap=0.227 upd=15
+  680 runs (2979s, 4.4s/run)  last: test-p04-alternating-s1 topk_dc_const coh=0.286 clap=0.430 upd=15
+  700 runs (3067s, 4.4s/run)  last: test-p04-pedal-s0 topk_dc_const coh=0.766 clap=0.392 upd=15
+  720 runs (3154s, 4.4s/run)  last: test-p04-pedal-s2 topk_dc_const coh=0.997 clap=0.368 upd=15
+  740 runs (3242s, 4.4s/run)  last: test-p04-zigzag-s1 topk_dc_const coh=0.177 clap=0.432 upd=15
+  760 runs (3329s, 4.4s/run)  last: test-p05-ascending-s0 topk_dc_const coh=0.469 clap=0.431 upd=15
+  780 runs (3416s, 4.4s/run)  last: test-p05-ascending-s2 topk_dc_const coh=0.000 clap=0.290 upd=15
+  800 runs (3504s, 4.4s/run)  last: test-p05-descending-s1 topk_dc_const coh=0.134 clap=0.348 upd=15
+  820 runs (3591s, 4.4s/run)  last: test-p05-alternating-s0 topk_dc_const coh=0.248 clap=0.284 upd=15
+  840 runs (3679s, 4.4s/run)  last: test-p05-alternating-s2 topk_dc_const coh=0.000 clap=0.274 upd=15
+  860 runs (3767s, 4.4s/run)  last: test-p05-pedal-s1 topk_dc_const coh=0.562 clap=0.353 upd=15
+  880 runs (3854s, 4.4s/run)  last: test-p05-zigzag-s0 topk_dc_const coh=0.322 clap=0.355 upd=15
+  900 runs (3942s, 4.4s/run)  last: test-p05-zigzag-s2 topk_dc_const coh=0.000 clap=0.374 upd=15
+  920 runs (4029s, 4.4s/run)  last: test-p06-ascending-s1 topk_dc_const coh=0.405 clap=0.379 upd=15
+  940 runs (4117s, 4.4s/run)  last: test-p06-descending-s0 topk_dc_const coh=0.234 clap=0.410 upd=15
+  960 runs (4204s, 4.4s/run)  last: test-p06-descending-s2 topk_dc_const coh=0.101 clap=0.311 upd=15
+  980 runs (4291s, 4.4s/run)  last: test-p06-alternating-s1 topk_dc_const coh=0.539 clap=0.370 upd=15
+  1000 runs (4379s, 4.4s/run)  last: test-p06-pedal-s0 topk_dc_const coh=0.944 clap=0.295 upd=15
+  1020 runs (4466s, 4.4s/run)  last: test-p06-pedal-s2 topk_dc_const coh=1.000 clap=0.276 upd=15
+  1040 runs (4553s, 4.4s/run)  last: test-p06-zigzag-s1 topk_dc_const coh=0.389 clap=0.372 upd=15
+  1060 runs (4641s, 4.4s/run)  last: test-p07-ascending-s0 topk_dc_const coh=0.635 clap=0.412 upd=15
+  1080 runs (4729s, 4.4s/run)  last: test-p07-ascending-s2 topk_dc_const coh=0.332 clap=0.362 upd=15
+  1100 runs (4815s, 4.4s/run)  last: test-p07-descending-s1 topk_dc_const coh=0.215 clap=0.255 upd=15
+  1120 runs (4902s, 4.4s/run)  last: test-p07-alternating-s0 topk_dc_const coh=0.374 clap=0.307 upd=15
+  1140 runs (4989s, 4.4s/run)  last: test-p07-alternating-s2 topk_dc_const coh=0.121 clap=0.268 upd=15
+  1160 runs (5076s, 4.4s/run)  last: test-p07-pedal-s1 topk_dc_const coh=0.925 clap=0.234 upd=15
+  1180 runs (5163s, 4.4s/run)  last: test-p07-zigzag-s0 topk_dc_const coh=0.536 clap=0.321 upd=15
+  1200 runs (5250s, 4.4s/run)  last: test-p07-zigzag-s2 topk_dc_const coh=0.354 clap=0.355 upd=15
+  1220 runs (5338s, 4.4s/run)  last: test-p08-ascending-s1 topk_dc_const coh=0.610 clap=0.378 upd=15
+  1240 runs (5425s, 4.4s/run)  last: test-p08-descending-s0 topk_dc_const coh=0.339 clap=0.346 upd=15
+  1260 runs (5512s, 4.4s/run)  last: test-p08-descending-s2 topk_dc_const coh=0.411 clap=0.264 upd=15
+  1280 runs (5599s, 4.4s/run)  last: test-p08-alternating-s1 topk_dc_const coh=0.345 clap=0.249 upd=15
+  1300 runs (5686s, 4.4s/run)  last: test-p08-pedal-s0 topk_dc_const coh=0.924 clap=0.174 upd=15
+  1320 runs (5773s, 4.4s/run)  last: test-p08-pedal-s2 topk_dc_const coh=0.804 clap=0.324 upd=15
+  1340 runs (5860s, 4.4s/run)  last: test-p08-zigzag-s1 topk_dc_const coh=0.738 clap=0.315 upd=15
+  1360 runs (5947s, 4.4s/run)  last: test-p09-ascending-s0 topk_dc_const coh=0.248 clap=0.310 upd=15
+  1380 runs (6035s, 4.4s/run)  last: test-p09-ascending-s2 topk_dc_const coh=0.126 clap=0.263 upd=15
+  1400 runs (6122s, 4.4s/run)  last: test-p09-descending-s1 topk_dc_const coh=0.196 clap=0.424 upd=15
+  1420 runs (6211s, 4.4s/run)  last: test-p09-alternating-s0 topk_dc_const coh=0.099 clap=0.194 upd=15
+  1440 runs (6298s, 4.4s/run)  last: test-p09-alternating-s2 topk_dc_const coh=0.322 clap=0.266 upd=15
+  1460 runs (6385s, 4.4s/run)  last: test-p09-pedal-s1 topk_dc_const coh=0.145 clap=0.376 upd=15
+  1480 runs (6472s, 4.4s/run)  last: test-p09-zigzag-s0 topk_dc_const coh=0.259 clap=0.381 upd=15
+  1500 runs (6560s, 4.4s/run)  last: test-p09-zigzag-s2 topk_dc_const coh=0.268 clap=0.275 upd=15
+  1520 runs (6647s, 4.4s/run)  last: test-p10-ascending-s1 topk_dc_const coh=0.337 clap=0.277 upd=15
+  1540 runs (6735s, 4.4s/run)  last: test-p10-descending-s0 topk_dc_const coh=0.403 clap=0.245 upd=15
+  1560 runs (6822s, 4.4s/run)  last: test-p10-descending-s2 topk_dc_const coh=0.570 clap=0.320 upd=15
+  1580 runs (6909s, 4.4s/run)  last: test-p10-alternating-s1 topk_dc_const coh=0.420 clap=0.296 upd=15
+  1600 runs (6996s, 4.4s/run)  last: test-p10-pedal-s0 topk_dc_const coh=0.216 clap=0.255 upd=15
+  1620 runs (7083s, 4.4s/run)  last: test-p10-pedal-s2 topk_dc_const coh=0.863 clap=0.305 upd=15
+  1640 runs (7170s, 4.4s/run)  last: test-p10-zigzag-s1 topk_dc_const coh=0.190 clap=0.286 upd=15
+  1660 runs (7257s, 4.4s/run)  last: test-p11-ascending-s0 topk_dc_const coh=0.467 clap=0.315 upd=15
+  1680 runs (7344s, 4.4s/run)  last: test-p11-ascending-s2 topk_dc_const coh=0.128 clap=0.106 upd=15
+  1700 runs (7432s, 4.4s/run)  last: test-p11-descending-s1 topk_dc_const coh=0.186 clap=0.302 upd=15
+  1720 runs (7520s, 4.4s/run)  last: test-p11-alternating-s0 topk_dc_const coh=0.092 clap=0.228 upd=15
+  1740 runs (7607s, 4.4s/run)  last: test-p11-alternating-s2 topk_dc_const coh=0.361 clap=0.150 upd=15
+  1760 runs (7695s, 4.4s/run)  last: test-p11-pedal-s1 topk_dc_const coh=0.123 clap=0.312 upd=15
+  1780 runs (7783s, 4.4s/run)  last: test-p11-zigzag-s0 topk_dc_const coh=0.366 clap=0.306 upd=15
+  1800 runs (7870s, 4.4s/run)  last: test-p11-zigzag-s2 topk_dc_const coh=0.257 clap=0.234 upd=15
+  1820 runs (7958s, 4.4s/run)  last: test-p12-ascending-s1 topk_dc_const coh=0.908 clap=0.226 upd=15
+  1840 runs (8045s, 4.4s/run)  last: test-p12-descending-s0 topk_dc_const coh=0.539 clap=0.147 upd=15
+  1860 runs (8133s, 4.4s/run)  last: test-p12-descending-s2 topk_dc_const coh=0.641 clap=0.137 upd=15
+  1880 runs (8220s, 4.4s/run)  last: test-p12-alternating-s1 topk_dc_const coh=0.424 clap=0.185 upd=15
+  1900 runs (8308s, 4.4s/run)  last: test-p12-pedal-s0 topk_dc_const coh=0.204 clap=0.137 upd=15
+  1920 runs (8394s, 4.4s/run)  last: test-p12-pedal-s2 topk_dc_const coh=0.851 clap=0.228 upd=15
+  1940 runs (8482s, 4.4s/run)  last: test-p12-zigzag-s1 topk_dc_const coh=0.403 clap=0.189 upd=15
+  1960 runs (8569s, 4.4s/run)  last: test-p13-ascending-s0 topk_dc_const coh=0.209 clap=0.321 upd=15
+  1980 runs (8656s, 4.4s/run)  last: test-p13-ascending-s2 topk_dc_const coh=0.422 clap=0.358 upd=15
+  2000 runs (8743s, 4.4s/run)  last: test-p13-descending-s1 topk_dc_const coh=0.504 clap=0.511 upd=15
+  2020 runs (8830s, 4.4s/run)  last: test-p13-alternating-s0 topk_dc_const coh=0.229 clap=0.228 upd=15
+  2040 runs (8918s, 4.4s/run)  last: test-p13-alternating-s2 topk_dc_const coh=0.024 clap=0.391 upd=15
+  2060 runs (9005s, 4.4s/run)  last: test-p13-pedal-s1 topk_dc_const coh=0.383 clap=0.443 upd=15
+  2080 runs (9092s, 4.4s/run)  last: test-p13-zigzag-s0 topk_dc_const coh=0.383 clap=0.270 upd=15
+  2100 runs (9179s, 4.4s/run)  last: test-p13-zigzag-s2 topk_dc_const coh=0.533 clap=0.358 upd=15
+  2120 runs (9266s, 4.4s/run)  last: test-p14-ascending-s1 topk_dc_const coh=0.082 clap=0.279 upd=15
+  2140 runs (9353s, 4.4s/run)  last: test-p14-descending-s0 topk_dc_const coh=0.125 clap=0.188 upd=15
+  2160 runs (9441s, 4.4s/run)  last: test-p14-descending-s2 topk_dc_const coh=0.128 clap=0.129 upd=15
+  2180 runs (9528s, 4.4s/run)  last: test-p14-alternating-s1 topk_dc_const coh=0.427 clap=0.127 upd=15
+  2200 runs (9615s, 4.4s/run)  last: test-p14-pedal-s0 topk_dc_const coh=0.500 clap=0.190 upd=15
+  2220 runs (9702s, 4.4s/run)  last: test-p14-pedal-s2 topk_dc_const coh=0.500 clap=0.141 upd=15
+  2240 runs (9790s, 4.4s/run)  last: test-p14-zigzag-s1 topk_dc_const coh=0.251 clap=0.271 upd=15
+          method    n  fad_clap_maestro  fad_clap_sao
+0            sao  225             0.819         0.000
+1          early  225             0.814         0.035
+2            mid  225             0.767         0.079
+3           late  225             0.815         0.094
+4        uniform  225             0.790         0.056
+5           mlsp  225             0.795         0.066
+6    rapg_cal_f1  225             0.815         0.090
+7    rapg_cal_dc  225             0.754         0.085
+8        rapg_on  225             0.766         0.057
+9  topk_dc_const  225             0.758         0.082
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/expB_windows.py", line 171, in <module>
+    main()
+  File "/home/stoneyey/w2s/w2s/scripts/expB_windows.py", line 166, in main
+    aggregate(RES)
+  File "/home/stoneyey/w2s/w2s/scripts/aggregate_expB.py", line 42, in aggregate
+    print(tab[show].round(3).to_string())
+  File "/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/pandas/core/frame.py", line 4119, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+  File "/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 6212, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 6264, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['n'] not in index"
