@@ -1,6 +1,3 @@
-[evalclip] CLAP loaded: laion/clap-htsat-unfused on cuda:0
-split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp', 'rapg_cal_f1', 'rapg_cal_dc', 'rapg_on', 'topk_dc_const'] -> 2250 runs (0 done)
-/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
   warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
 /home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
   warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
@@ -78,3 +75,6 @@ split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp',
   1200 runs (5250s, 4.4s/run)  last: test-p07-zigzag-s2 topk_dc_const coh=0.354 clap=0.355 upd=15
   1220 runs (5338s, 4.4s/run)  last: test-p08-ascending-s1 topk_dc_const coh=0.610 clap=0.378 upd=15
   1240 runs (5425s, 4.4s/run)  last: test-p08-descending-s0 topk_dc_const coh=0.339 clap=0.346 upd=15
+  1260 runs (5512s, 4.4s/run)  last: test-p08-descending-s2 topk_dc_const coh=0.411 clap=0.264 upd=15
+  1280 runs (5599s, 4.4s/run)  last: test-p08-alternating-s1 topk_dc_const coh=0.345 clap=0.249 upd=15
+  1300 runs (5686s, 4.4s/run)  last: test-p08-pedal-s0 topk_dc_const coh=0.924 clap=0.174 upd=15
