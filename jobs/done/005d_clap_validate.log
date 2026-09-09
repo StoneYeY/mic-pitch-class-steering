@@ -1,0 +1,11 @@
+# job=005d_clap_validate exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-09T05:53:09-04:00
+# (last 4000 lines; full log: runner/logs/005d_clap_validate.full.log on stone-ye-PC)
+Loading weights:   0%|          | 0/555 [00:00<?, ?it/s]Loading weights: 100%|██████████| 555/555 [00:00<00:00, 78598.06it/s]
+ClapScorer device: cuda
+clip: runs/004_expC_burst/base-p00-s0.wav
+  cos = +0.0081   <- A gentle solo piano lullaby, slow and tender
+  cos = +0.0070   <- aggressive heavy metal electric guitar solo
+  cos = +0.0075   <- a barking dog in a park
+  cos = +0.0074   <- Fast-paced Western Classical music with lively violin h
+audio emb shape: (1, 512) norm: 0.9999999403953552
+DONE (expect the first/last piano prompts highest, metal/dog lowest)
