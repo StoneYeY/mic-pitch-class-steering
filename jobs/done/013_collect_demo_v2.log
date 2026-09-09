@@ -1,0 +1,9 @@
+# job=013_collect_demo_v2 exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-09T12:17:45-04:00
+# (last 4000 lines; full log: runner/logs/013_collect_demo_v2.full.log on stone-ye-PC)
+test-p00-ascending-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p02-alternating-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p04-pedal-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p06-zigzag-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p10-descending-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p12-ascending-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+wrote 6 items, 23 demo wavs

@@ -1,0 +1,75 @@
+{
+ "conditions": {
+  "sao": "SAO (unguided)",
+  "mlsp": "MLSP-fixed",
+  "rapg_cal_dc": "RAPG-cal(dC)"
+ },
+ "items": [
+  {
+   "prompt_id": 0,
+   "prompt": "Fast-paced Western Classical music with lively violin harmony, electric cello, piano and string accompaniments that are colourful, well-layered, dense, rich, full, pleasant, cheerful, merry and elegant.",
+   "melody": "ascending",
+   "target": "audio/target_ascending.demo.wav",
+   "clips": {
+    "sao": "audio/test-p00-ascending-s0__sao.demo.wav",
+    "mlsp": "audio/test-p00-ascending-s0__mlsp.demo.wav",
+    "rapg_cal_dc": "audio/test-p00-ascending-s0__rapg_cal_dc.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 2,
+   "prompt": "Classical music piece with a gentle piano tune and a theremin playing the main melody, creating a unique and heart-touching atmosphere suitable for an animation movie/TV series.",
+   "melody": "alternating",
+   "target": "audio/target_alternating.demo.wav",
+   "clips": {
+    "sao": "audio/test-p02-alternating-s0__sao.demo.wav",
+    "mlsp": "audio/test-p02-alternating-s0__mlsp.demo.wav",
+    "rapg_cal_dc": "audio/test-p02-alternating-s0__rapg_cal_dc.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 4,
+   "prompt": "A slow and captivating piano piece that evokes sombre and reflective emotions with simple yet effective motifs.",
+   "melody": "pedal",
+   "target": "audio/target_pedal.demo.wav",
+   "clips": {
+    "sao": "audio/test-p04-pedal-s0__sao.demo.wav",
+    "mlsp": "audio/test-p04-pedal-s0__mlsp.demo.wav",
+    "rapg_cal_dc": "audio/test-p04-pedal-s0__rapg_cal_dc.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 6,
+   "prompt": "A piano arpeggio melody with reverb and environmental sounds, suitable for amateur video intros or outros.",
+   "melody": "zigzag",
+   "target": "audio/target_zigzag.demo.wav",
+   "clips": {
+    "sao": "audio/test-p06-zigzag-s0__sao.demo.wav",
+    "mlsp": "audio/test-p06-zigzag-s0__mlsp.demo.wav",
+    "rapg_cal_dc": "audio/test-p06-zigzag-s0__rapg_cal_dc.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 10,
+   "prompt": "Cozy jazz piano in a small club, late night",
+   "melody": "descending",
+   "target": "audio/target_descending.demo.wav",
+   "clips": {
+    "sao": "audio/test-p10-descending-s0__sao.demo.wav",
+    "mlsp": "audio/test-p10-descending-s0__mlsp.demo.wav",
+    "rapg_cal_dc": "audio/test-p10-descending-s0__rapg_cal_dc.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 12,
+   "prompt": "Melancholic piano ballad, rainy day mood",
+   "melody": "ascending",
+   "target": "audio/target_ascending.demo.wav",
+   "clips": {
+    "sao": "audio/test-p12-ascending-s0__sao.demo.wav",
+    "mlsp": "audio/test-p12-ascending-s0__mlsp.demo.wav",
+    "rapg_cal_dc": "audio/test-p12-ascending-s0__rapg_cal_dc.demo.wav"
+   }
+  }
+ ]
+}
