@@ -1,3 +1,5 @@
+# job=008_expB_pilot exit=1 duration_s=697 host=stone-ye-PC finished=2026-09-09T06:26:23-04:00
+# (last 4000 lines; full log: runner/logs/008_expB_pilot.full.log on stone-ye-PC)
          SAO ..................................................  K=0
        Early ###############...................................  K=15
          Mid ..................###############.................  K=15
@@ -38,3 +40,30 @@ split=test trials=15 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp', 
   80 runs (352s, 4.4s/run)  last: test-p01-alternating-s0 topk_dc_const coh=0.356 clap=0.488 upd=15
   100 runs (442s, 4.4s/run)  last: test-p01-zigzag-s0 topk_dc_const coh=0.184 clap=0.504 upd=15
   120 runs (530s, 4.4s/run)  last: test-p02-descending-s0 topk_dc_const coh=0.917 clap=0.187 upd=15
+  140 runs (618s, 4.4s/run)  last: test-p02-pedal-s0 topk_dc_const coh=0.926 clap=0.125 upd=15
+reference embeddings: (600, 512) from 600 clips
+          method   n  fad_clap_maestro  fad_clap_sao
+0            sao  15             1.081         0.000
+1          early  15             1.009         0.062
+2            mid  15             0.995         0.312
+3           late  15             1.017         0.157
+4        uniform  15             1.024         0.151
+5           mlsp  15             1.018         0.209
+6    rapg_cal_f1  15             1.012         0.154
+7    rapg_cal_dc  15             0.989         0.320
+8        rapg_on  15             0.997         0.152
+9  topk_dc_const  15             0.985         0.317
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/expB_windows.py", line 171, in <module>
+    main()
+  File "/home/stoneyey/w2s/w2s/scripts/expB_windows.py", line 166, in main
+    aggregate(RES)
+  File "/home/stoneyey/w2s/w2s/scripts/aggregate_expB.py", line 42, in aggregate
+    print(tab[show].round(3).to_string())
+  File "/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/pandas/core/frame.py", line 4119, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+  File "/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 6212, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 6264, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['n'] not in index"
