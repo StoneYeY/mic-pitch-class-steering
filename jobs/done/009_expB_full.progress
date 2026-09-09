@@ -1,5 +1,3 @@
-         SAO ..................................................  K=0
-       Early ###############...................................  K=15
          Mid ..................###############.................  K=15
         Late ...................................###############  K=15
      Uniform #...#..#..#...#...#..#..#...#...#..#..#...#...#..#  K=15
@@ -76,3 +74,7 @@ split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp',
   840 runs (3679s, 4.4s/run)  last: test-p05-alternating-s2 topk_dc_const coh=0.000 clap=0.274 upd=15
   860 runs (3767s, 4.4s/run)  last: test-p05-pedal-s1 topk_dc_const coh=0.562 clap=0.353 upd=15
   880 runs (3854s, 4.4s/run)  last: test-p05-zigzag-s0 topk_dc_const coh=0.322 clap=0.355 upd=15
+  900 runs (3942s, 4.4s/run)  last: test-p05-zigzag-s2 topk_dc_const coh=0.000 clap=0.374 upd=15
+  920 runs (4029s, 4.4s/run)  last: test-p06-ascending-s1 topk_dc_const coh=0.405 clap=0.379 upd=15
+  940 runs (4117s, 4.4s/run)  last: test-p06-descending-s0 topk_dc_const coh=0.234 clap=0.410 upd=15
+  960 runs (4204s, 4.4s/run)  last: test-p06-descending-s2 topk_dc_const coh=0.101 clap=0.311 upd=15
