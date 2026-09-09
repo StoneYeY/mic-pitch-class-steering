@@ -24,3 +24,6 @@
   warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
   25 runs 109s last uniform_K5 coh=0.050 clap=0.310
   50 runs 219s last topk_dc_K5 coh=0.077 clap=0.346
+  75 runs 329s last uniform_K5 coh=0.014 clap=0.200
+  100 runs 438s last topk_dc_K5 coh=0.128 clap=0.321
+  125 runs 547s last uniform_K10 coh=0.158 clap=0.285
