@@ -1,0 +1,163 @@
+# job=003_expA_trajectories exit=0 duration_s=211 host=stone-ye-PC finished=2026-09-08T21:52:34-04:00
+# (last 4000 lines; full log: runner/logs/003_expA_trajectories.full.log on stone-ye-PC)
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading pipeline components...:  33%|███▎      | 2/6 [00:00<00:00, 10.31it/s]
+Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 5185.46it/s]
+Loading pipeline components...:  67%|██████▋   | 4/6 [00:00<00:00,  5.20it/s]Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00,  8.30it/s]
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+dev-p00-s0: generated in 3.4s (vram 5.5 GB)
+dev-p00-s0: voiced 76/108  f1(raw) first/mid/last = 0.02/0.08/0.09  [4s]
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+dev-p00-s1: generated in 3.1s (vram 5.5 GB)
+dev-p00-s1: voiced 80/108  f1(raw) first/mid/last = 0.00/0.00/0.18  [8s]
+dev-p00-s2: generated in 3.2s (vram 5.5 GB)
+dev-p00-s2: voiced 93/108  f1(raw) first/mid/last = 0.03/0.09/0.21  [12s]
+dev-p00-s3: generated in 3.2s (vram 5.5 GB)
+dev-p00-s3: voiced 95/108  f1(raw) first/mid/last = 0.02/0.09/0.13  [16s]
+dev-p00-s4: generated in 3.2s (vram 5.5 GB)
+dev-p00-s4: voiced 81/108  f1(raw) first/mid/last = 0.00/0.09/0.56  [19s]
+dev-p00-s5: generated in 3.2s (vram 5.5 GB)
+dev-p00-s5: voiced 100/108  f1(raw) first/mid/last = 0.03/0.06/0.56  [23s]
+dev-p00-s6: generated in 3.2s (vram 5.5 GB)
+dev-p00-s6: voiced 106/108  f1(raw) first/mid/last = 0.00/0.06/0.63  [27s]
+dev-p00-s7: generated in 3.2s (vram 5.5 GB)
+dev-p00-s7: voiced 97/108  f1(raw) first/mid/last = 0.00/0.16/0.60  [31s]
+dev-p00-s8: generated in 3.2s (vram 5.5 GB)
+dev-p00-s8: voiced 88/108  f1(raw) first/mid/last = 0.02/0.08/0.22  [35s]
+dev-p00-s9: generated in 3.2s (vram 5.5 GB)
+dev-p00-s9: voiced 94/108  f1(raw) first/mid/last = 0.00/0.05/0.51  [38s]
+dev-p01-s0: generated in 3.2s (vram 5.5 GB)
+dev-p01-s0: voiced 94/108  f1(raw) first/mid/last = 0.03/0.00/0.20  [42s]
+dev-p01-s1: generated in 3.2s (vram 5.5 GB)
+dev-p01-s1: voiced 85/108  f1(raw) first/mid/last = 0.00/0.03/0.49  [46s]
+dev-p01-s2: generated in 3.2s (vram 5.5 GB)
+dev-p01-s2: voiced 84/108  f1(raw) first/mid/last = 0.02/0.11/0.34  [50s]
+dev-p01-s3: generated in 3.2s (vram 5.5 GB)
+dev-p01-s3: voiced 66/108  f1(raw) first/mid/last = 0.02/0.18/0.00  [53s]
+dev-p01-s4: generated in 3.2s (vram 5.5 GB)
+dev-p01-s4: voiced 75/108  f1(raw) first/mid/last = 0.10/0.00/0.24  [57s]
+dev-p01-s5: generated in 3.2s (vram 5.5 GB)
+dev-p01-s5: voiced 97/108  f1(raw) first/mid/last = 0.02/0.07/0.50  [61s]
+dev-p01-s6: generated in 3.2s (vram 5.5 GB)
+dev-p01-s6: voiced 75/108  f1(raw) first/mid/last = 0.04/0.12/0.67  [65s]
+dev-p01-s7: generated in 3.2s (vram 5.5 GB)
+dev-p01-s7: voiced 94/108  f1(raw) first/mid/last = 0.09/0.08/0.43  [68s]
+dev-p01-s8: generated in 3.2s (vram 5.5 GB)
+dev-p01-s8: voiced 106/108  f1(raw) first/mid/last = 0.07/0.01/0.47  [72s]
+dev-p01-s9: generated in 3.2s (vram 5.5 GB)
+dev-p01-s9: voiced 88/108  f1(raw) first/mid/last = 0.00/0.05/0.26  [76s]
+dev-p02-s0: generated in 3.2s (vram 5.5 GB)
+dev-p02-s0: voiced 94/108  f1(raw) first/mid/last = 0.03/0.05/0.00  [80s]
+dev-p02-s1: generated in 3.2s (vram 5.5 GB)
+dev-p02-s1: voiced 95/108  f1(raw) first/mid/last = 0.05/0.02/0.00  [83s]
+dev-p02-s2: generated in 3.2s (vram 5.5 GB)
+dev-p02-s2: voiced 88/108  f1(raw) first/mid/last = 0.07/0.07/0.34  [87s]
+dev-p02-s3: generated in 3.2s (vram 5.5 GB)
+dev-p02-s3: voiced 96/108  f1(raw) first/mid/last = 0.02/0.15/0.04  [91s]
+dev-p02-s4: generated in 3.2s (vram 5.5 GB)
+dev-p02-s4: voiced 64/108  f1(raw) first/mid/last = 0.03/0.04/0.00  [95s]
+dev-p02-s5: generated in 3.2s (vram 5.5 GB)
+dev-p02-s5: voiced 98/108  f1(raw) first/mid/last = 0.05/0.10/0.25  [98s]
+dev-p02-s6: generated in 3.2s (vram 5.5 GB)
+dev-p02-s6: voiced 74/108  f1(raw) first/mid/last = 0.04/0.06/0.03  [102s]
+dev-p02-s7: generated in 3.2s (vram 5.5 GB)
+dev-p02-s7: voiced 100/108  f1(raw) first/mid/last = 0.03/0.16/0.08  [106s]
+dev-p02-s8: generated in 3.2s (vram 5.5 GB)
+dev-p02-s8: voiced 96/108  f1(raw) first/mid/last = 0.02/0.07/0.09  [110s]
+dev-p02-s9: generated in 3.2s (vram 5.5 GB)
+dev-p02-s9: voiced 71/108  f1(raw) first/mid/last = 0.16/0.15/0.13  [114s]
+dev-p03-s0: generated in 3.2s (vram 5.5 GB)
+dev-p03-s0: voiced 93/108  f1(raw) first/mid/last = 0.05/0.08/0.06  [117s]
+dev-p03-s1: generated in 3.2s (vram 5.5 GB)
+dev-p03-s1: voiced 75/108  f1(raw) first/mid/last = 0.00/0.04/0.18  [121s]
+dev-p03-s2: generated in 3.3s (vram 5.5 GB)
+dev-p03-s2: voiced 73/108  f1(raw) first/mid/last = 0.04/0.02/0.08  [125s]
+dev-p03-s3: generated in 3.2s (vram 5.5 GB)
+dev-p03-s3: voiced 48/108  f1(raw) first/mid/last = 0.09/0.11/0.00  [129s]
+dev-p03-s4: generated in 3.2s (vram 5.5 GB)
+dev-p03-s4: voiced 54/108  f1(raw) first/mid/last = 0.03/0.00/0.14  [133s]
+dev-p03-s5: generated in 3.2s (vram 5.5 GB)
+dev-p03-s5: voiced 90/108  f1(raw) first/mid/last = 0.05/0.05/0.49  [136s]
+dev-p03-s6: generated in 3.2s (vram 5.5 GB)
+dev-p03-s6: voiced 70/108  f1(raw) first/mid/last = 0.04/0.18/0.20  [140s]
+dev-p03-s7: generated in 3.2s (vram 5.5 GB)
+dev-p03-s7: voiced 54/108  f1(raw) first/mid/last = 0.00/0.00/0.00  [144s]
+dev-p03-s8: generated in 3.2s (vram 5.5 GB)
+dev-p03-s8: voiced 98/108  f1(raw) first/mid/last = 0.01/0.01/0.32  [148s]
+dev-p03-s9: generated in 3.2s (vram 5.5 GB)
+dev-p03-s9: voiced 94/108  f1(raw) first/mid/last = 0.02/0.04/0.29  [151s]
+dev-p04-s0: generated in 3.2s (vram 5.5 GB)
+dev-p04-s0: voiced 71/108  f1(raw) first/mid/last = 0.04/0.02/0.36  [155s]
+dev-p04-s1: generated in 3.2s (vram 5.5 GB)
+dev-p04-s1: voiced 92/108  f1(raw) first/mid/last = 0.02/0.05/0.16  [159s]
+dev-p04-s2: generated in 3.2s (vram 5.5 GB)
+dev-p04-s2: voiced 67/108  f1(raw) first/mid/last = 0.02/0.14/0.41  [163s]
+dev-p04-s3: generated in 3.2s (vram 5.5 GB)
+dev-p04-s3: voiced 101/108  f1(raw) first/mid/last = 0.02/0.10/0.07  [166s]
+dev-p04-s4: generated in 3.2s (vram 5.5 GB)
+dev-p04-s4: voiced 107/108  f1(raw) first/mid/last = 0.03/0.01/0.03  [170s]
+dev-p04-s5: generated in 3.2s (vram 5.5 GB)
+dev-p04-s5: voiced 102/108  f1(raw) first/mid/last = 0.03/0.04/0.45  [174s]
+dev-p04-s6: generated in 3.2s (vram 5.5 GB)
+dev-p04-s6: voiced 98/108  f1(raw) first/mid/last = 0.10/0.09/0.49  [178s]
+dev-p04-s7: generated in 3.2s (vram 5.5 GB)
+dev-p04-s7: voiced 94/108  f1(raw) first/mid/last = 0.00/0.00/0.14  [182s]
+dev-p04-s8: generated in 3.2s (vram 5.5 GB)
+dev-p04-s8: voiced 104/108  f1(raw) first/mid/last = 0.15/0.00/0.95  [185s]
+dev-p04-s9: generated in 3.2s (vram 5.5 GB)
+dev-p04-s9: voiced 102/108  f1(raw) first/mid/last = 0.02/0.04/0.13  [189s]
+{
+ "raw": {
+  "corr(R_entropy,f1)": 0.9591487129229173,
+  "corr(R_margin,f1)": 0.968287703772146,
+  "corr(R_maxprob,f1)": 0.9659164392102989,
+  "argmax_f1_step": 46,
+  "f1_first_mid_last": [
+   0.03506103582553063,
+   0.06604293416501145,
+   0.2634977458346436
+  ]
+ },
+ "rmsnorm": {
+  "corr(R_entropy,f1)": 0.9527592476600371,
+  "corr(R_margin,f1)": 0.9547556938420698,
+  "corr(R_maxprob,f1)": 0.9121296452362158,
+  "argmax_f1_step": 46,
+  "f1_first_mid_last": [
+   0.040124791868803904,
+   0.0768905491203457,
+   0.2653730957332374
+  ]
+ },
+ "gauss_proxy": {
+  "corr(R_entropy,f1)": 0.9586661490077029,
+  "corr(R_margin,f1)": 0.965124254526666,
+  "corr(R_maxprob,f1)": 0.9530776634745419,
+  "argmax_f1_step": 47,
+  "f1_first_mid_last": [
+   0.03016159818265218,
+   0.07686910979626098,
+   0.2634977458346436
+  ]
+ },
+ "per_run_corr_Rentropy_f1": {
+  "mean": 0.6734004994082157,
+  "median": 0.8462516051023831
+ }
+}
+done in 189s
