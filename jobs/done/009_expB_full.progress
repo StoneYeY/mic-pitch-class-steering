@@ -1,7 +1,3 @@
-  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
-/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
-  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
-/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
   warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
 /home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
   warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
@@ -78,3 +74,7 @@
   1260 runs (5512s, 4.4s/run)  last: test-p08-descending-s2 topk_dc_const coh=0.411 clap=0.264 upd=15
   1280 runs (5599s, 4.4s/run)  last: test-p08-alternating-s1 topk_dc_const coh=0.345 clap=0.249 upd=15
   1300 runs (5686s, 4.4s/run)  last: test-p08-pedal-s0 topk_dc_const coh=0.924 clap=0.174 upd=15
+  1320 runs (5773s, 4.4s/run)  last: test-p08-pedal-s2 topk_dc_const coh=0.804 clap=0.324 upd=15
+  1340 runs (5860s, 4.4s/run)  last: test-p08-zigzag-s1 topk_dc_const coh=0.738 clap=0.315 upd=15
+  1360 runs (5947s, 4.4s/run)  last: test-p09-ascending-s0 topk_dc_const coh=0.248 clap=0.310 upd=15
+  1380 runs (6035s, 4.4s/run)  last: test-p09-ascending-s2 topk_dc_const coh=0.126 clap=0.263 upd=15
