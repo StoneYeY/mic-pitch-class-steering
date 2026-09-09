@@ -1,0 +1,33 @@
+# job=005_clap_debug exit=0 duration_s=31 host=stone-ye-PC finished=2026-09-09T05:46:17-04:00
+# (last 4000 lines; full log: runner/logs/005_clap_debug.full.log on stone-ye-PC)
+torch 2.11.0+cu128
+transformers 5.7.0
+Loading weights:   0%|          | 0/555 [00:00<?, ?it/s]Loading weights: 100%|██████████| 555/555 [00:00<00:00, 83202.47it/s]
+loaded; processor class: ClapProcessor
+[FAIL] audios= (plural): ValueError: You passed keyword argument `audios` which is deprecated. Please use `audio` instead.
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/clap_debug.py", line 22, in try_variant
+    out = fn()
+  File "/home/stoneyey/w2s/w2s/scripts/clap_debug.py", line 29, in v_audio_kw
+    inp = proc(audios=[y], sampling_rate=sr, return_tensors="pt", padding=True)
+  File "/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/transformers/processing_utils.py", line 667, in __call__
+    raise ValueError("You passed keyword argument `audios` which is deprecated. Please use `audio` instead.")
+ValueError: You passed keyword argument `audios` which is deprecated. Please use `audio` instead.
+   audio= keys: ['input_features', 'is_longer'] {'input_features': (1, 1, 1001, 64), 'is_longer': (1, 1)}
+[FAIL] audio= (singular): AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'shape'
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/clap_debug.py", line 23, in try_variant
+    print(f"[OK] {name}: shape={tuple(out.shape)} finite={bool(np.isfinite(out.detach().cpu().numpy()).all())}")
+AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'shape'
+   FE keys: ['input_features', 'is_longer'] {'input_features': (1, 1, 1001, 64), 'is_longer': (1, 1)}
+[FAIL] AutoFeatureExtractor: AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'shape'
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/clap_debug.py", line 23, in try_variant
+    print(f"[OK] {name}: shape={tuple(out.shape)} finite={bool(np.isfinite(out.detach().cpu().numpy()).all())}")
+AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'shape'
+[FAIL] text: AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'shape'
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/clap_debug.py", line 23, in try_variant
+    print(f"[OK] {name}: shape={tuple(out.shape)} finite={bool(np.isfinite(out.detach().cpu().numpy()).all())}")
+AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'shape'
+DONE
