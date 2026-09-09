@@ -1,7 +1,3 @@
-  200 runs (878s, 4.4s/run)  last: test-p01-descending-s1 topk_dc_const coh=0.452 clap=0.410 upd=15
-  220 runs (965s, 4.4s/run)  last: test-p01-alternating-s0 topk_dc_const coh=0.356 clap=0.488 upd=15
-  240 runs (1053s, 4.4s/run)  last: test-p01-alternating-s2 topk_dc_const coh=0.270 clap=0.231 upd=15
-  260 runs (1140s, 4.4s/run)  last: test-p01-pedal-s1 topk_dc_const coh=0.839 clap=0.488 upd=15
   280 runs (1228s, 4.4s/run)  last: test-p01-zigzag-s0 topk_dc_const coh=0.184 clap=0.504 upd=15
   300 runs (1315s, 4.4s/run)  last: test-p01-zigzag-s2 topk_dc_const coh=0.682 clap=0.379 upd=15
   320 runs (1403s, 4.4s/run)  last: test-p02-ascending-s1 topk_dc_const coh=0.402 clap=0.244 upd=15
@@ -78,3 +74,7 @@
   1740 runs (7607s, 4.4s/run)  last: test-p11-alternating-s2 topk_dc_const coh=0.361 clap=0.150 upd=15
   1760 runs (7695s, 4.4s/run)  last: test-p11-pedal-s1 topk_dc_const coh=0.123 clap=0.312 upd=15
   1780 runs (7783s, 4.4s/run)  last: test-p11-zigzag-s0 topk_dc_const coh=0.366 clap=0.306 upd=15
+  1800 runs (7870s, 4.4s/run)  last: test-p11-zigzag-s2 topk_dc_const coh=0.257 clap=0.234 upd=15
+  1820 runs (7958s, 4.4s/run)  last: test-p12-ascending-s1 topk_dc_const coh=0.908 clap=0.226 upd=15
+  1840 runs (8045s, 4.4s/run)  last: test-p12-descending-s0 topk_dc_const coh=0.539 clap=0.147 upd=15
+  1860 runs (8133s, 4.4s/run)  last: test-p12-descending-s2 topk_dc_const coh=0.641 clap=0.137 upd=15
