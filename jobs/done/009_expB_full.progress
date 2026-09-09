@@ -59,3 +59,6 @@ split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp',
   500 runs (2192s, 4.4s/run)  last: test-p03-descending-s1 topk_dc_const coh=0.025 clap=0.506 upd=15
   520 runs (2279s, 4.4s/run)  last: test-p03-alternating-s0 topk_dc_const coh=0.286 clap=0.492 upd=15
   540 runs (2367s, 4.4s/run)  last: test-p03-alternating-s2 topk_dc_const coh=0.201 clap=0.525 upd=15
+  560 runs (2454s, 4.4s/run)  last: test-p03-pedal-s1 topk_dc_const coh=0.670 clap=0.505 upd=15
+  580 runs (2542s, 4.4s/run)  last: test-p03-zigzag-s0 topk_dc_const coh=0.287 clap=0.521 upd=15
+  600 runs (2630s, 4.4s/run)  last: test-p03-zigzag-s2 topk_dc_const coh=0.648 clap=0.619 upd=15
