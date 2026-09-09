@@ -32,3 +32,6 @@
   200 runs 876s last topk_dc_K10 coh=0.259 clap=0.361
   225 runs 986s last uniform_K15 coh=0.200 clap=0.232
   250 runs 1096s last topk_dc_K15 coh=0.274 clap=0.468
+  275 runs 1206s last uniform_K15 coh=0.438 clap=0.342
+  300 runs 1316s last topk_dc_K15 coh=0.259 clap=0.380
+  325 runs 1426s last uniform_K25 coh=0.235 clap=0.236
