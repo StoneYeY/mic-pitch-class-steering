@@ -28,3 +28,6 @@ runner/status.json.lock
 *.npz
 .DS_Store
 .idea/
+
+# demo clips for the listening page (re-included despite *.wav)
+!*.demo.wav

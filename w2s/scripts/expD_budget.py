@@ -39,16 +39,12 @@ def main():
     csv = RES / "per_run.csv"
     rows = pd.read_csv(csv).to_dict("records") if csv.exists() else []
     done = {(r["method"], r["K"], r["trial"]) for r in rows}
-    print(f"{len(trials)} trials x {len(KS)} K x 3 methods")
+    print(f"{len(trials)} trials x {len(KS)} K x 2 methods (uniform vs TopK-dC, constant lambda)")
     t0 = time.time(); n = 0
     for K in KS:
-        methods = {
-            f"uniform_K{K}": S.make_schedule("uniform", STEPS, K, LAM),
-            f"late_K{K}": S.make_schedule("late", STEPS, K, LAM),
-        }
-        if prof_dc is not None:
-            r_bar = 1.0
-            methods[f"rapg_cal_dc_K{K}"] = S.make_schedule("rapg_cal", STEPS, K, LAM, profile=prof_dc, r_bar=r_bar)
+        methods = {f"uniform_K{K}": S.make_schedule("uniform", STEPS, K, LAM)}
+        if prof_dc is not None:   # concentrated at the steering sweet spot, CONSTANT lambda (no r_bar dependence)
+            methods[f"topk_dc_K{K}"] = S.make_schedule("fixed_adaptive", STEPS, K, LAM, profile=prof_dc, name=f"TopK-dC-K{K}")
         for tr in trials:
             mel = data.MELODIES[tr.melody]
             n_aud = int(np.ceil(5 * gen.fps))

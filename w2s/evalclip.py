@@ -28,11 +28,17 @@ class ClipEvaluator:
     def __init__(self, use_clap: bool = True, device: str | None = None, clap_model: str = "laion/clap-htsat-unfused"):
         self.clap = None
         if use_clap:
-            try:
-                self.clap = metrics.ClapScorer(clap_model, device=device)
-                print(f"[evalclip] CLAP loaded: {clap_model} on {self.clap.device}")
-            except Exception as e:  # noqa: BLE001
-                print(f"[evalclip] CLAP unavailable ({type(e).__name__}: {e}); clap scores will be NaN")
+            import time as _t
+            for attempt in range(4):
+                try:
+                    self.clap = metrics.ClapScorer(clap_model, device=device)
+                    print(f"[evalclip] CLAP loaded: {clap_model} on {self.clap.device}")
+                    break
+                except Exception as e:  # noqa: BLE001
+                    print(f"[evalclip] CLAP load attempt {attempt+1} failed ({type(e).__name__}: {str(e)[:120]})")
+                    _t.sleep(20)
+            if self.clap is None:
+                print("[evalclip] CLAP unavailable after retries; clap scores will be NaN")
         self._text_cache: dict[str, np.ndarray] = {}
 
     def text_emb(self, prompt: str) -> np.ndarray | None:

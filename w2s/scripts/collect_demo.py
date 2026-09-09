@@ -25,12 +25,15 @@ CONDS = {"sao": "SAO (unguided)", "mlsp": "MLSP-fixed", "rapg_cal_dc": "RAPG-cal
 
 
 def to_mp3(src: Path, dst: Path):
+    """Compact browser-safe copy: mono 22.05 kHz 16-bit WAV (no codec dependency)."""
     try:
-        subprocess.run(["ffmpeg", "-y", "-i", str(src), "-b:a", "96k", str(dst)],
-                       check=True, capture_output=True)
+        import librosa
+        y, s = sf.read(str(src)); y = y.mean(1) if y.ndim > 1 else y
+        y = librosa.resample(y.astype(np.float32), orig_sr=s, target_sr=22050)
+        sf.write(str(dst), y, 22050, subtype="PCM_16")
         return True
     except Exception as e:  # noqa: BLE001
-        print("ffmpeg failed:", e); return False
+        print("transcode failed:", e); return False
 
 
 def target_tone(mel: data.Melody, sr=44100) -> np.ndarray:
@@ -50,18 +53,18 @@ for pid, mel in PAIRS:
     m = data.MELODIES[mel]
     tone = target_tone(m)
     tref = OUT / "audio" / f"target_{mel}.wav"; sf.write(str(tref), tone, 44100)
-    to_mp3(tref, tref.with_suffix(".mp3")); tref.unlink(missing_ok=True)
+    to_mp3(tref, tref.with_suffix(".demo.wav")); tref.unlink(missing_ok=True)
     entry = dict(prompt_id=pid, prompt=data.TEST_PROMPTS[pid], melody=mel,
-                 target=f"audio/target_{mel}.mp3", clips={})
+                 target=f"audio/target_{mel}.demo.wav", clips={})
     tid = f"test-p{pid:02d}-{mel}-s0"
     for cond in CONDS:
         src = RUNSB / f"{tid}__{cond}.wav"
         if not src.exists():
             print("missing", src); continue
-        dst = OUT / "audio" / f"{tid}__{cond}.mp3"
+        dst = OUT / "audio" / f"{tid}__{cond}.demo.wav"
         if to_mp3(src, dst):
-            entry["clips"][cond] = f"audio/{tid}__{cond}.mp3"
+            entry["clips"][cond] = f"audio/{tid}__{cond}.demo.wav"
     man.append(entry)
     print(f"{tid}: {list(entry['clips'])}")
 json.dump({"conditions": CONDS, "items": man}, open(OUT / "manifest.json", "w"), indent=1)
-print(f"wrote {len(man)} items, {len(list((OUT/'audio').glob('*.mp3')))} mp3s")
+print(f"wrote {len(man)} items, {len(list((OUT/'audio').glob('*.demo.wav')))} demo wavs")
