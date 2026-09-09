@@ -1,0 +1,576 @@
+<title>When to Steer Listening Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #F4F6F2;
+    --surface: #FFFFFF;
+    --surface-2: #EBEFE9;
+    --ink: #171B22;
+    --ink-2: #4E5663;
+    --muted: #7A8290;
+    --rule: #D6DBD5;
+    --rule-2: #C2C9C1;
+    --accent: #0E7C86;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #D7ECEE;
+    --amber: #D9A21B;
+    --amber-soft: #F6E7BD;
+    --good: #2E7D4F;
+    --warn: #B4531D;
+    --wave: #9AA6B2;
+    --wave-played: #0E7C86;
+    --focus: #0E7C86;
+    --shadow: 0 1px 2px rgba(23,27,34,.06), 0 8px 24px -12px rgba(23,27,34,.18);
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #131619;
+      --surface: #1B1F24;
+      --surface-2: #232830;
+      --ink: #E8EAE6;
+      --ink-2: #B4BBC4;
+      --muted: #8A929D;
+      --rule: #2E343B;
+      --rule-2: #3C434C;
+      --accent: #3EC3CD;
+      --accent-ink: #0B1A1C;
+      --accent-soft: #163A3E;
+      --amber: #E9B949;
+      --amber-soft: #3E3418;
+      --good: #6CC391;
+      --warn: #E4925F;
+      --wave: #5A6470;
+      --wave-played: #3EC3CD;
+      --focus: #3EC3CD;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #131619;
+    --surface: #1B1F24;
+    --surface-2: #232830;
+    --ink: #E8EAE6;
+    --ink-2: #B4BBC4;
+    --muted: #8A929D;
+    --rule: #2E343B;
+    --rule-2: #3C434C;
+    --accent: #3EC3CD;
+    --accent-ink: #0B1A1C;
+    --accent-soft: #163A3E;
+    --amber: #E9B949;
+    --amber-soft: #3E3418;
+    --good: #6CC391;
+    --warn: #E4925F;
+    --wave: #5A6470;
+    --wave-played: #3EC3CD;
+    --focus: #3EC3CD;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  /* masthead */
+  .masthead { border-bottom: 1px solid var(--rule); background: var(--surface); }
+  .masthead .wrap { padding-top: 28px; padding-bottom: 0; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 10px;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700; font-variation-settings: "opsz" 96;
+    font-size: clamp(34px, 6vw, 52px); line-height: 1; letter-spacing: -.02em;
+    margin: 0 0 12px; text-wrap: balance;
+  }
+  .lede { max-width: 62ch; margin: 0 0 20px; color: var(--ink-2); font-size: 16px; }
+  .lede b { color: var(--ink); font-weight: 600; }
+  .topbar { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+  .tabs { display: flex; gap: 2px; }
+  .tab {
+    background: none; border: 0; border-bottom: 2px solid transparent; padding: 10px 2px 12px; margin-right: 18px;
+    color: var(--muted); font-weight: 500; cursor: pointer;
+  }
+  .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+  .tab:hover { color: var(--ink); }
+  .rater { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; font-size: 13px; color: var(--ink-2); }
+  .rater code { font-family: var(--mono); font-size: 12.5px; background: var(--surface-2); padding: 2px 6px; border-radius: 4px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--rule-2); color: var(--ink-2); }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+  .pill.ok .dot { background: var(--good); }
+  .pill.warn .dot { background: var(--warn); }
+
+  main .wrap { padding-top: 28px; padding-bottom: 48px; }
+
+  /* instructions */
+  .howto {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px 32px; align-items: start;
+    padding: 20px 22px; margin-bottom: 28px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+  }
+  .howto h2 { font-family: var(--display); font-size: 18px; font-weight: 700; margin: 0 0 8px; letter-spacing: -.01em; }
+  .howto p { margin: 0 0 8px; color: var(--ink-2); max-width: 46ch; }
+  .howto p:last-child { margin-bottom: 0; }
+  .howto label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .howto input[type="text"] {
+    font: inherit; color: var(--ink); background: var(--ground); border: 1px solid var(--rule-2); border-radius: 4px;
+    padding: 8px 10px; width: 100%; max-width: 280px;
+  }
+  .scale-legend { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; color: var(--ink-2); margin-top: 10px; }
+  .scale-legend b { font-family: var(--mono); font-weight: 500; color: var(--ink); }
+
+  /* stations */
+  .station {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; box-shadow: var(--shadow);
+    padding: 22px 22px 18px; margin-bottom: 22px;
+  }
+  .station-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+  .station-head h2 { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -.015em; margin: 0; }
+  .station-head h2 span { color: var(--muted); font-weight: 500; }
+  .mel-tag { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .prompt { margin: 0 0 16px; color: var(--ink-2); max-width: 70ch; }
+  .prompt::before { content: "\201C"; } .prompt::after { content: "\201D"; }
+
+  .target { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; padding: 12px 14px; background: var(--amber-soft); border-radius: 6px; margin-bottom: 16px; }
+  .target .lbl { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; margin-bottom: 4px; }
+  .roll { display: block; width: 100%; height: 56px; }
+
+  .play {
+    width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--accent); color: var(--accent-ink);
+    display: inline-grid; place-items: center; cursor: pointer; flex: none; transition: transform .12s ease;
+  }
+  .play:hover { transform: scale(1.06); }
+  .play svg { width: 16px; height: 16px; fill: currentColor; }
+  .play .ico-pause { display: none; }
+  .play[aria-pressed="true"] .ico-play { display: none; }
+  .play[aria-pressed="true"] .ico-pause { display: block; }
+
+  .clips { display: grid; gap: 10px; }
+  .clip {
+    display: grid; grid-template-columns: 34px 40px 1fr; grid-template-areas: "letter play wave" "letter play rate";
+    gap: 6px 14px; align-items: center; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--ground);
+  }
+  .clip .letter { grid-area: letter; font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--ink); text-align: center; }
+  .clip .play { grid-area: play; }
+  .clip .wavebox { grid-area: wave; position: relative; height: 44px; }
+  .clip canvas { display: block; width: 100%; height: 44px; cursor: pointer; }
+  .clip .time { position: absolute; right: 4px; bottom: 2px; font-family: var(--mono); font-size: 11px; color: var(--muted); pointer-events: none; }
+  .clip .rate { grid-area: rate; display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; }
+  .scale { display: flex; align-items: center; gap: 8px; }
+  .scale .q { font-size: 13px; color: var(--ink-2); min-width: 92px; }
+  .seg { display: inline-flex; border: 1px solid var(--rule-2); border-radius: 4px; overflow: hidden; }
+  .seg button {
+    border: 0; background: var(--surface); width: 34px; height: 28px; cursor: pointer; font-family: var(--mono); font-size: 13px;
+    border-right: 1px solid var(--rule-2); color: var(--ink-2);
+  }
+  .seg button:last-child { border-right: 0; }
+  .seg button:hover { background: var(--surface-2); }
+  .seg button[aria-checked="true"] { background: var(--accent); color: var(--accent-ink); }
+
+  .clip.labeled { grid-template-columns: 40px 1fr; grid-template-areas: "play meta" "play wave"; }
+  .clip.labeled .meta { grid-area: meta; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+  .clip.labeled .cond { font-weight: 600; }
+  .clip.labeled .nums { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .clip.labeled .nums b { color: var(--ink); font-weight: 500; }
+  .sched { display: block; width: 100%; max-width: 420px; height: 26px; }
+
+  .best { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .best .q { font-weight: 500; }
+  .best .seg button { width: 44px; font-family: var(--display); font-weight: 700; font-size: 15px; }
+  .status { margin-left: auto; font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+  .status.ok { color: var(--good); }
+  .status.warn { color: var(--warn); }
+
+  .done { padding: 20px 22px; border: 1px solid var(--rule); border-radius: 6px; background: var(--accent-soft); margin-bottom: 22px; }
+  .done h2 { font-family: var(--display); font-size: 20px; margin: 0 0 6px; }
+  .done p { margin: 0; color: var(--ink-2); }
+
+  /* tally */
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+  th { font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td.num, th.num { text-align: right; font-family: var(--mono); font-size: 13px; }
+  .tablebox { overflow-x: auto; }
+
+  footer { border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; }
+  footer .wrap { padding: 20px; }
+  footer p { margin: 0 0 6px; max-width: 80ch; }
+  footer code { font-family: var(--mono); font-size: 12px; }
+
+  @media (max-width: 640px) {
+    .howto { grid-template-columns: 1fr; }
+    .clip { grid-template-columns: 26px 40px 1fr; }
+    .scale .q { min-width: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .play { transition: none; } .play:hover { transform: none; } }
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Stable Audio Open 1.0 &middot; pitch-class probe guidance &middot; ICASSP 2027 submission</p>
+    <h1>When to Steer</h1>
+    <p class="lede">Six five-second generations, three versions each. Every version was made from the <b>same prompt, seed and target melody</b>; only the diffusion steps at which the pitch-class probe was allowed to steer differ. Rate how closely each version follows the target melody, and how it sounds.</p>
+    <div class="topbar">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-mode="blind" aria-selected="true">Blind test</button>
+        <button class="tab" role="tab" data-mode="labeled" aria-selected="false">Labeled demo</button>
+        <button class="tab" role="tab" data-mode="tally" aria-selected="false" hidden>Tally</button>
+      </div>
+      <div class="rater">
+        <span>Rater <code id="rater-id">&hellip;</code></span>
+        <span id="progress">0 / 6 saved</span>
+        <span class="pill" id="store-pill"><span class="dot"></span><span id="store-text">Connecting to the shared store</span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="howto" id="howto">
+      <div>
+        <h2>How to rate</h2>
+        <p>Use headphones. Play the <b>target melody</b> first: it is a plain tone sequence, eight notes at 120 BPM. Then play versions A, B and C.</p>
+        <p><b>Follows melody</b> asks whether the music's melody moves through the same notes, in the same order and at roughly the same time as the target. <b>Sound quality</b> asks whether the clip sounds like clean, plausible music regardless of the melody.</p>
+        <p>Finally pick the version that follows the target best. Ratings save automatically once all three versions of an item are rated.</p>
+      </div>
+      <div>
+        <label for="rater-name">Your name or initials (optional)</label>
+        <input type="text" id="rater-name" maxlength="40" placeholder="e.g. YY" autocomplete="off">
+        <div class="scale-legend">
+          <b>1</b><span>not at all / poor</span>
+          <b>3</b><span>partly / acceptable</span>
+          <b>5</b><span>exactly / excellent</span>
+        </div>
+      </div>
+    </section>
+    <section class="done" id="done" hidden>
+      <h2>All six items saved. Thank you.</h2>
+      <p>You can revise any rating; changes are saved again automatically. The <b>Labeled demo</b> tab now reveals which version was which.</p>
+    </section>
+    <div id="stations"></div>
+    <section id="tally" hidden></section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Clips are excerpts of 5-second generations from Stable Audio Open 1.0 (50 EDM-DPM-solver steps, classifier-free guidance 4.0), downsampled to 22.05 kHz mono for the page. Prompts are held-out test captions; melodies are eight-note sequences at 120 BPM.</p>
+    <p>The three versions are: unguided sampling; MLSP-fixed guidance on every second step from 20 to 48; and RAPG-cal(&Delta;C), guidance on the 15 steps where a single steering burst changes melodic coherence most (steps 19&ndash;33), with the strength scaled by the probe's reliability. All guided versions use the same budget of 15 probe updates. Companion page for <i>When to Steer: Reliability-Adaptive Probe Guidance for Controllable Music Diffusion</i>.</p>
+  </div>
+</footer>
+
+<script>const DATA = __DATA__;</script>
+<script>
+(() => {
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+  const CONDS = Object.keys(DATA.conditions);           // sao, mlsp, rapg_cal_dc
+  const LETTERS = ["A", "B", "C"];
+  const PERMS = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+  const NOTE_NAMES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+  const ICON_PLAY = '<svg viewBox="0 0 16 16" class="ico-play" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+  const ICON_PAUSE = '<svg viewBox="0 0 16 16" class="ico-pause" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>';
+
+  // ---------- local state ----------
+  const state = { mode: "blind", rater: null, name: "", answers: {}, db: null, dbReady: false };
+  const loadLocal = () => { try { return JSON.parse(localStorage.getItem("w2s.listen") || "{}"); } catch (e) { return {}; } };
+  const saveLocal = () => { try { localStorage.setItem("w2s.listen", JSON.stringify({ rater: state.rater, name: state.name, answers: state.answers })); } catch (e) {} };
+  const local = loadLocal();
+  state.rater = local.rater || Array.from(crypto.getRandomValues(new Uint8Array(4))).map(b => b.toString(16).padStart(2, "0")).join("");
+  state.name = local.name || "";
+  state.answers = local.answers || {};
+  saveLocal();
+
+  const hash = (s) => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
+  const mappingFor = (item) => { const p = PERMS[hash(state.rater + "|" + item.id) % 6]; const m = {}; LETTERS.forEach((L, i) => m[L] = CONDS[p[i]]); return m; };
+  const answerFor = (item) => (state.answers[item.id] ||= { mapping: mappingFor(item), melody: {}, quality: {}, best: null, saved: null, ts: null });
+  const complete = (a) => LETTERS.every(L => a.melody[L] && a.quality[L]) && !!a.best;
+
+  // ---------- audio ----------
+  const AC = window.AudioContext || window.webkitAudioContext;
+  let actx = null;
+  const players = new Map();
+  let current = null;
+  const cssVar = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+  function b64ToBuf(b64) { const bin = atob(b64); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; }
+
+  function drawWave(p) {
+    const c = p.canvas; if (!c) return;
+    const dpr = window.devicePixelRatio || 1;
+    const W = c.clientWidth, H = c.clientHeight; if (!W) return;
+    if (c.width !== W * dpr || c.height !== H * dpr) { c.width = W * dpr; c.height = H * dpr; }
+    const g = c.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const frac = p.audio.duration ? p.audio.currentTime / p.audio.duration : 0;
+    const peaks = p.peaks || new Float32Array(120).fill(0.02);
+    const n = peaks.length, bw = W / n, mid = H / 2;
+    for (let i = 0; i < n; i++) {
+      const h = Math.max(1.5, peaks[i] * (H - 6));
+      g.fillStyle = (i / n) < frac ? cssVar("--wave-played") : cssVar("--wave");
+      g.fillRect(i * bw + bw * 0.2, mid - h / 2, Math.max(1, bw * 0.6), h);
+    }
+    if (p.timeEl) p.timeEl.textContent = (p.audio.duration ? p.audio.currentTime.toFixed(1) + " / " + p.audio.duration.toFixed(1) : "") + " s";
+  }
+
+  async function decodePeaks(p) {
+    try {
+      actx ||= new AC();
+      const buf = await actx.decodeAudioData(b64ToBuf(p.b64));
+      const ch = buf.getChannelData(0), n = 120, step = Math.floor(ch.length / n), peaks = new Float32Array(n);
+      let mx = 0;
+      for (let i = 0; i < n; i++) { let m = 0; for (let j = i * step, e = j + step; j < e; j++) { const v = Math.abs(ch[j]); if (v > m) m = v; } peaks[i] = m; if (m > mx) mx = m; }
+      for (let i = 0; i < n; i++) peaks[i] = mx ? peaks[i] / mx : 0;
+      p.peaks = peaks; drawWave(p);
+    } catch (e) { /* keep the flat placeholder */ }
+  }
+
+  function makePlayer(key, b64, btn, canvas, timeEl) {
+    const audio = new Audio("data:audio/mpeg;base64," + b64);
+    audio.preload = "auto";
+    const p = { key, b64, audio, btn, canvas, timeEl, peaks: null, raf: 0 };
+    const tick = () => { drawWave(p); if (!audio.paused) p.raf = requestAnimationFrame(tick); };
+    audio.addEventListener("play", () => { btn.setAttribute("aria-pressed", "true"); cancelAnimationFrame(p.raf); tick(); });
+    audio.addEventListener("pause", () => { btn.setAttribute("aria-pressed", "false"); cancelAnimationFrame(p.raf); drawWave(p); });
+    audio.addEventListener("ended", () => { audio.currentTime = 0; btn.setAttribute("aria-pressed", "false"); drawWave(p); });
+    audio.addEventListener("loadedmetadata", () => drawWave(p));
+    btn.addEventListener("click", () => toggle(p));
+    if (canvas) canvas.addEventListener("click", (ev) => { const r = canvas.getBoundingClientRect(); if (audio.duration) { audio.currentTime = audio.duration * (ev.clientX - r.left) / r.width; drawWave(p); } });
+    players.set(key, p);
+    return p;
+  }
+  function toggle(p) {
+    if (current && current !== p && !current.audio.paused) { current.audio.pause(); current.audio.currentTime = 0; }
+    current = p;
+    if (p.audio.paused) { if (actx && actx.state === "suspended") actx.resume(); p.audio.play().catch(() => {}); } else p.audio.pause();
+  }
+
+  // ---------- drawing helpers ----------
+  function rollSVG(item) {
+    // pitch on y (continuous), time on x; fixed block height so labels stay legible for any range
+    const notes = item.notes, beat = 60 / item.tempo, W = 720, H = 56, padL = 2, padR = 2, top = 3, bot = 3, bh = 14;
+    const lo = Math.min(...notes), hi = Math.max(...notes), span = Math.max(hi - lo, 1);
+    const xs = (W - padL - padR) / item.duration, yr = H - top - bot - bh;
+    let s = `<svg class="roll" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Target melody: ${notes.map(n => NOTE_NAMES[n % 12]).join(" ")}">`;
+    s += `<line x1="${padL}" y1="${H - bot}" x2="${W - padR}" y2="${H - bot}" style="stroke:var(--rule-2);stroke-width:1"/>`;
+    notes.forEach((n, i) => {
+      const x = padL + i * beat * xs, w = beat * xs - 2, y = top + (hi - n) / span * yr;
+      const pc = n % 12, hue = (pc * 30 + 190) % 360;
+      s += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${bh}" rx="2" fill="hsl(${hue} 48% 46%)"/>`;
+      s += `<text x="${(x + w / 2).toFixed(1)}" y="${(y + bh / 2 + 3.5).toFixed(1)}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#fff">${NOTE_NAMES[pc]}${Math.floor(n / 12) - 1}</text>`;
+    });
+    return s + "</svg>";
+  }
+  function schedSVG(cond) {
+    const steps = new Set(DATA.schedules[cond] || []), N = 50, W = 420, H = 26, cw = W / N;
+    let s = `<svg class="sched" viewBox="0 0 ${W} ${H}" role="img" aria-label="Guided diffusion steps">`;
+    for (let t = 0; t < N; t++) s += `<rect x="${(t * cw + 0.6).toFixed(1)}" y="2" width="${(cw - 1.2).toFixed(1)}" height="12" rx="1" style="fill:${steps.has(t) ? "var(--amber)" : "var(--rule-2)"}"/>`;
+    [0, 10, 20, 30, 40, 49].forEach(t => { s += `<text x="${(t * cw + cw / 2).toFixed(1)}" y="24" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" style="fill:var(--muted)">${t}</text>`; });
+    return s + "</svg>";
+  }
+  const seg = (name, vals, cls = "") => `<span class="seg ${cls}" role="radiogroup" data-q="${name}">` + vals.map(v => `<button type="button" role="radio" aria-checked="false" data-v="${v}">${v}</button>`).join("") + "</span>";
+
+  // ---------- render ----------
+  const stationsEl = $("#stations");
+  function render() {
+    stationsEl.innerHTML = "";
+    players.clear(); current = null;
+    const labeled = state.mode === "labeled";
+    DATA.items.forEach((item, idx) => {
+      const a = answerFor(item);
+      const sec = document.createElement("section"); sec.className = "station"; sec.dataset.item = item.id;
+      const melTag = `${item.melody} &middot; ${item.notes.length} notes &middot; ${item.tempo | 0} BPM`;
+      let clips = "";
+      LETTERS.forEach(L => {
+        const cond = a.mapping[L], c = item.clips[cond];
+        if (labeled) {
+          clips += `<div class="clip labeled" data-letter="${L}">
+            <button class="play" type="button" aria-pressed="false" aria-label="Play ${DATA.conditions[cond]}">${ICON_PLAY}${ICON_PAUSE}</button>
+            <div class="meta"><span class="cond">${DATA.conditions[cond]}</span>
+              <span class="nums">coherence <b>${c.coh.toFixed(2)}</b> &middot; chroma <b>${c.chroma.toFixed(2)}</b> &middot; CLAP <b>${c.clap.toFixed(2)}</b> &middot; ${c.n_updates} updates${DATA.adaptive[cond] ? ", reliability-scaled" : ""}</span>
+              ${schedSVG(cond)}</div>
+            <div class="wavebox"><canvas></canvas><span class="time"></span></div>
+          </div>`;
+        } else {
+          clips += `<div class="clip" data-letter="${L}">
+            <div class="letter">${L}</div>
+            <button class="play" type="button" aria-pressed="false" aria-label="Play version ${L}">${ICON_PLAY}${ICON_PAUSE}</button>
+            <div class="wavebox"><canvas></canvas><span class="time"></span></div>
+            <div class="rate">
+              <span class="scale"><span class="q">Follows melody</span>${seg("melody", [1,2,3,4,5])}</span>
+              <span class="scale"><span class="q">Sound quality</span>${seg("quality", [1,2,3,4,5])}</span>
+            </div>
+          </div>`;
+        }
+      });
+      sec.innerHTML = `
+        <div class="station-head"><h2>Item ${idx + 1} <span>of ${DATA.items.length}</span></h2><span class="mel-tag">${melTag}</span></div>
+        <p class="prompt">${item.prompt}</p>
+        <div class="target">
+          <button class="play" type="button" aria-pressed="false" aria-label="Play target melody">${ICON_PLAY}${ICON_PAUSE}</button>
+          <div><div class="lbl">Target melody</div>${rollSVG(item)}</div>
+        </div>
+        <div class="clips">${clips}</div>
+        ${labeled ? "" : `<div class="best"><span class="q">Which version follows the target melody best?</span>${seg("best", LETTERS, "best-seg")}<span class="status" data-status></span></div>`}`;
+      stationsEl.appendChild(sec);
+
+      // players
+      makePlayer(item.id + "|target", item.target, $(".target .play", sec), null, null);
+      $$(".clip", sec).forEach(el => {
+        const L = el.dataset.letter, cond = a.mapping[L];
+        const p = makePlayer(item.id + "|" + L, item.clips[cond].audio, $(".play", el), $("canvas", el), $(".time", el));
+        drawWave(p); decodePeaks(p);
+      });
+      if (labeled) return;
+
+      // rating widgets
+      const refresh = () => {
+        $$(".clip", sec).forEach(el => {
+          const L = el.dataset.letter;
+          $$(".seg", el).forEach(sg => { const q = sg.dataset.q, v = a[q][L]; $$("button", sg).forEach(b => b.setAttribute("aria-checked", String(+b.dataset.v === v))); });
+        });
+        $$(".best-seg button", sec).forEach(b => b.setAttribute("aria-checked", String(b.dataset.v === a.best)));
+        setStatus(sec, a);
+      };
+      $$(".clip .seg button", sec).forEach(b => b.addEventListener("click", () => {
+        const L = b.closest(".clip").dataset.letter, q = b.closest(".seg").dataset.q;
+        a[q][L] = +b.dataset.v; refresh(); scheduleSave(item, sec);
+      }));
+      $$(".best-seg button", sec).forEach(b => b.addEventListener("click", () => { a.best = b.dataset.v; refresh(); scheduleSave(item, sec); }));
+      refresh();
+    });
+    updateProgress();
+  }
+
+  function setStatus(sec, a, msg, cls) {
+    const el = $("[data-status]", sec); if (!el) return;
+    el.className = "status " + (cls || "");
+    if (msg) { el.textContent = msg; return; }
+    if (!complete(a)) { const n = LETTERS.filter(L => a.melody[L] && a.quality[L]).length; el.textContent = a.best || n ? `Rated ${n} of 3 versions` + (a.best ? "" : ", pick the best") : "Not rated yet"; return; }
+    if (a.saved === "shared") { el.textContent = "Saved " + new Date(a.ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); el.className = "status ok"; }
+    else if (a.saved === "local") { el.textContent = "Saved on this device only"; el.className = "status warn"; }
+    else el.textContent = "Saving…";
+  }
+  function updateProgress() {
+    const n = DATA.items.filter(it => { const a = state.answers[it.id]; return a && complete(a) && a.saved; }).length;
+    $("#progress").textContent = `${n} / ${DATA.items.length} saved`;
+    $("#done").hidden = !(state.mode === "blind" && n === DATA.items.length);
+  }
+
+  // ---------- saving ----------
+  const timers = new Map();
+  function scheduleSave(item, sec) {
+    const a = answerFor(item); saveLocal();
+    if (!complete(a)) { setStatus(sec, a); return; }
+    clearTimeout(timers.get(item.id));
+    timers.set(item.id, setTimeout(() => saveItem(item, sec), 500));
+  }
+  async function saveItem(item, sec) {
+    const a = answerFor(item); if (!complete(a)) return;
+    a.ts = Date.now(); a.saved = null; saveLocal(); if (sec) setStatus(sec, a);
+    const byCond = (q) => { const o = {}; LETTERS.forEach(L => o[a.mapping[L]] = a[q][L]); return o; };
+    const doc = { rater: state.rater, name: state.name, item: item.id, prompt_id: item.prompt_id, melody: item.melody,
+      mapping: a.mapping, mos_melody: byCond("melody"), mos_quality: byCond("quality"), best: a.mapping[a.best], best_letter: a.best,
+      ts: a.ts, ua: navigator.userAgent.slice(0, 80), v: 1 };
+    if (state.db) {
+      try {
+        await state.db.doc(`responses/${state.rater}__${item.id}`).set(doc);
+        const n = DATA.items.filter(it => state.answers[it.id] && complete(state.answers[it.id])).length;
+        await state.db.doc(`raters/${state.rater}`).set({ rater: state.rater, name: state.name, n_items: n, updated: Date.now() });
+        a.saved = "shared";
+      } catch (e) { a.saved = "local"; }
+    } else a.saved = "local";
+    saveLocal(); if (sec) setStatus(sec, a); updateProgress();
+  }
+  async function resyncLocal() {
+    for (const item of DATA.items) {
+      const a = state.answers[item.id];
+      if (a && complete(a) && a.saved !== "shared") await saveItem(item, $(`.station[data-item="${item.id}"]`));
+    }
+  }
+
+  // ---------- tally (owner view, #tally) ----------
+  async function renderTally() {
+    const el = $("#tally");
+    if (!state.db) { el.innerHTML = `<p>The shared store is not available on this copy of the page, so there is nothing to tally here.</p>`; return; }
+    el.innerHTML = `<p>Loading responses&hellip;</p>`;
+    let snap;
+    try { snap = await state.db.collection("responses").get(); } catch (e) { el.innerHTML = `<p>Could not read responses: ${e && e.message || e}</p>`; return; }
+    const docs = snap.docs.map(d => d.data()).filter(Boolean);
+    const raters = new Set(docs.map(d => d.rater));
+    const agg = {}; CONDS.forEach(c => agg[c] = { mel: [], qual: [], best: 0 });
+    docs.forEach(d => { CONDS.forEach(c => { if (d.mos_melody && d.mos_melody[c]) agg[c].mel.push(d.mos_melody[c]); if (d.mos_quality && d.mos_quality[c]) agg[c].qual.push(d.mos_quality[c]); }); if (d.best && agg[d.best]) agg[d.best].best++; });
+    const mean = (x) => x.length ? (x.reduce((s, v) => s + v, 0) / x.length) : NaN;
+    const sd = (x) => { const m = mean(x); return x.length > 1 ? Math.sqrt(x.reduce((s, v) => s + (v - m) ** 2, 0) / (x.length - 1)) : NaN; };
+    const f = (v) => isNaN(v) ? "–" : v.toFixed(2);
+    let rows = CONDS.map(c => `<tr><td>${DATA.conditions[c]}</td><td class="num">${f(mean(agg[c].mel))} &plusmn; ${f(sd(agg[c].mel))}</td><td class="num">${f(mean(agg[c].qual))} &plusmn; ${f(sd(agg[c].qual))}</td><td class="num">${docs.length ? (100 * agg[c].best / docs.length).toFixed(0) + "%" : "–"}</td><td class="num">${agg[c].mel.length}</td></tr>`).join("");
+    // per item
+    const perItem = DATA.items.map(it => { const ds = docs.filter(d => d.item === it.id); const cells = CONDS.map(c => f(mean(ds.map(d => d.mos_melody && d.mos_melody[c]).filter(Boolean)))).map(v => `<td class="num">${v}</td>`).join(""); return `<tr><td>${it.melody} (p${String(it.prompt_id).padStart(2, "0")})</td>${cells}<td class="num">${ds.length}</td></tr>`; }).join("");
+    el.innerHTML = `<h2 style="font-family:var(--display);font-size:22px;margin:0 0 4px">Tally</h2>
+      <p style="color:var(--ink-2);margin:0 0 14px">${docs.length} responses from ${raters.size} rater${raters.size === 1 ? "" : "s"}. Mean opinion score &plusmn; SD; preference = share of items where the version was picked as best.</p>
+      <div class="tablebox"><table><thead><tr><th>Version</th><th class="num">Follows melody</th><th class="num">Sound quality</th><th class="num">Preferred</th><th class="num">n</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <h3 style="font-family:var(--display);font-size:16px;margin:22px 0 6px">Melody score by item</h3>
+      <div class="tablebox"><table><thead><tr><th>Item</th>${CONDS.map(c => `<th class="num">${DATA.conditions[c]}</th>`).join("")}<th class="num">n</th></tr></thead><tbody>${perItem}</tbody></table></div>`;
+  }
+
+  // ---------- modes ----------
+  function setMode(m) {
+    state.mode = m;
+    $$(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.mode === m)));
+    $("#howto").hidden = m !== "blind";
+    $("#tally").hidden = m !== "tally";
+    stationsEl.hidden = m === "tally";
+    if (m === "tally") { $("#done").hidden = true; renderTally(); } else render();
+  }
+  $$(".tab").forEach(t => t.addEventListener("click", () => {
+    if (t.dataset.mode === "labeled" && state.mode === "blind") {
+      const n = DATA.items.filter(it => state.answers[it.id] && complete(state.answers[it.id])).length;
+      if (n < DATA.items.length && !confirmReveal()) return;
+    }
+    setMode(t.dataset.mode);
+  }));
+  let revealOK = false;
+  function confirmReveal() { if (revealOK) return true; const t = $('.tab[data-mode="labeled"]'); if (t.dataset.armed) { revealOK = true; t.textContent = "Labeled demo"; delete t.dataset.armed; return true; } t.dataset.armed = "1"; t.textContent = "Reveal labels? Click again"; setTimeout(() => { if (t.dataset.armed) { delete t.dataset.armed; t.textContent = "Labeled demo"; } }, 4000); return false; }
+
+  // ---------- header ----------
+  $("#rater-id").textContent = state.rater;
+  const nameEl = $("#rater-name"); nameEl.value = state.name;
+  nameEl.addEventListener("change", () => { state.name = nameEl.value.trim(); saveLocal(); if (state.db) state.db.doc(`raters/${state.rater}`).set({ rater: state.rater, name: state.name, updated: Date.now() }).catch(() => {}); });
+  function setStore(cls, text) { const p = $("#store-pill"); p.className = "pill " + cls; $("#store-text").textContent = text; }
+
+  const h = location.hash.replace("#", "");
+  if (h === "tally") $('.tab[data-mode="tally"]').hidden = false;
+  setMode(h === "demo" ? "labeled" : h === "tally" ? "tally" : "blind");
+  if (h === "demo") revealOK = true;
+
+  // shared store (claude.ai artifact runtime); the page works without it
+  (async () => {
+    let db = null;
+    try { if (window.claude && typeof claude.use === "function") db = await claude.use("db"); } catch (e) { db = null; }
+    state.db = db; state.dbReady = true;
+    if (db) { setStore("ok", "Ratings go to the shared store"); await resyncLocal(); if (state.mode === "tally") renderTally(); }
+    else setStore("warn", "Saving on this device only");
+    updateProgress();
+  })();
+
+  // redraw waveforms on theme / size changes
+  const redraw = () => players.forEach(p => drawWave(p));
+  window.addEventListener("resize", redraw);
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+  new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+})();
+</script>
