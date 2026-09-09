@@ -1,0 +1,235 @@
+# job=000_env_check exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-08T21:43:02-04:00
+# (last 4000 lines; full log: runner/logs/000_env_check.full.log on stone-ye-PC)
+### host
+stone-ye-PC
+Linux stone-ye-PC 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+2026-09-08T21:42:32-04:00
+
+### gpu
+Tue Sep  8 21:42:32 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5080        Off |   00000000:02:00.0 Off |                  N/A |
+|  0%   39C    P8              9W /  360W |      15MiB /  16303MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            2886      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+
+### disk
+/dev/nvme0n1p5  1.8T  933G  741G  56% /
+Filesystem      Size  Used Avail Use% Mounted on
+
+### cpu/mem
+24
+               total        used        free      shared  buff/cache   available
+Mem:              30           6           5           2          19          23
+
+### shell env
+PATH=/home/stoneyey/.nvm/versions/node/v20.20.0/bin:/home/stoneyey/.local/bin:/usr/local/cuda/bin:/home/stoneyey/anaconda3/envs/mic/bin:/home/stoneyey/anaconda3/condabin:/home/stoneyey/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+CONDA_PREFIX=/home/stoneyey/anaconda3/envs/mic
+VIRTUAL_ENV=
+
+### conda envs
+
+# conda environments:
+#
+base                   /home/stoneyey/anaconda3
+JazzT                  /home/stoneyey/anaconda3/envs/JazzT
+PDSA                   /home/stoneyey/anaconda3/envs/PDSA
+code2wav               /home/stoneyey/anaconda3/envs/code2wav
+jazz_env               /home/stoneyey/anaconda3/envs/jazz_env
+mic                  * /home/stoneyey/anaconda3/envs/mic
+stableaudio            /home/stoneyey/anaconda3/envs/stableaudio
+stablenew              /home/stoneyey/anaconda3/envs/stablenew
+vrag                   /home/stoneyey/anaconda3/envs/vrag
+
+
+### python
+/home/stoneyey/anaconda3/envs/mic/bin/python
+/home/stoneyey/anaconda3/envs/mic/bin/python3
+/usr/bin/python3
+/bin/python3
+Python 3.10.20
+Python 3.10.20
+
+### key packages (current python)
+torch                2.11.0+cu128
+torchaudio           2.11.0+cu128
+stable_audio_tools   MISSING (ModuleNotFoundError)
+diffusers            0.38.0
+transformers         5.7.0
+librosa              0.11.0
+soundfile            0.13.1
+numpy                2.2.6
+scipy                1.15.3
+pandas               2.3.3
+laion_clap           ?
+fadtk                MISSING (ModuleNotFoundError)
+einops               0.8.2
+pretty_midi          0.2.11
+matplotlib           3.10.9
+tqdm                 4.67.3
+huggingface_hub      1.13.0
+cuda: True 12.8 NVIDIA GeForce RTX 5080
+vram GB: 15.5
+
+### huggingface cache (SAO weights?)
+drwxrwxr-x  6 stoneyey stoneyey 4096 Jul 10 13:18 models--laion--larger_clap_music
+drwxrwxr-x  5 stoneyey stoneyey 4096 Jun  5 14:16 models--stabilityai--stable-audio-3-medium
+drwxrwxr-x  5 stoneyey stoneyey 4096 Jun  5 13:45 models--stabilityai--stable-audio-3-optimized
+drwxrwxr-x  5 stoneyey stoneyey 4096 May  1 11:47 models--stabilityai--stable-audio-open-1.0
+drwxrwxr-x  6 stoneyey stoneyey 4096 Nov  4  2025 models--t5-base
+
+### repo tree (depth 3, no runs/)
+.
+./adapter.ipynb
+./checkpoints
+./checkpoints/probe_best.pt
+./checkpoints/probe_epoch_020.pt
+./checkpoints/probe_epoch_040.pt
+./checkpoints/probe_final.pt
+./config.py
+./jobs
+./jobs/done
+./jobs/hold
+./jobs/hold/003_expA_trajectories.sh
+./jobs/hold/004_expC_burst.sh
+./jobs/queue
+./jobs/queue/000_env_check.sh
+./jobs/queue/001_diagnose_mlsp_outputs.sh
+./jobs/queue/002_smoke_generate.sh
+./paper
+./paper/fig_pareto.pdf
+./paper/fig_trajectory.pdf
+./paper/.gitignore
+./paper/IEEEbib.bst
+./paper/main.tex
+./paper/numbers.tex
+./paper/refs.bib
+./paper/spconf.sty
+./paper/table_main.tex
+./PITCH_CLASS_STEERING_FOR_DIFFUSION_BASED_MUSIC_GENERATION_VIA_LATENT_SPACE_PROBES.pdf
+./README.md
+./requirements.txt
+./results
+./results/000_env_check
+./run_all.sh
+./runner
+./runner/env.sh
+./runner/logs
+./runner/logs/000_env_check.full.log
+./runner/mac_git_sync.sh
+./runner/README.md
+./runner/runner.sh
+./runner/status.json
+./scripts
+./scripts/00_generate_onpolicy.py
+./scripts/01_prepare_data.py
+./scripts/02_train_probe.py
+./scripts/03_run_inference.py
+./scripts/04_evaluate.py
+./scripts/05_fad.py
+./scripts/_make_report.py
+./setup_guide.md
+./shuffled_target_run
+./shuffled_target_run/console_output.txt
+./shuffled_target_run/console_stderr.log
+./shuffled_target_run/EXPLANATION_FOR_PAPER_AGENT.md
+./shuffled_target_run/mic_eval_adapter.py
+./shuffled_target_run/SENDBACK.md
+./shuffled_target_run/shuffled_results.csv
+./shuffled_target_run/shuffled_target_sendback.zip
+./shuffled_target_run/trials.csv
+./src
+./src/data_prep.py
+./src/evaluate_probe.py
+./src/inference.py
+./src/__init__.py
+./src/probe.py
+./src/train_probe.py
+./src/utils.py
+./test_setup.py
+./w2s
+./w2s/data.py
+./w2s/evalclip.py
+./w2s/generate.py
+./w2s/__init__.py
+./w2s/metrics.py
+./w2s/mlsp_bridge.py
+./w2s/probe_eval.py
+./w2s/reliability.py
+./w2s/schedules.py
+./w2s/scripts
+./w2s/scripts/aggregate_expB.py
+./w2s/scripts/diagnose_mlsp_outputs.py
+./w2s/scripts/expA_trajectories.py
+./w2s/scripts/expB_windows.py
+./w2s/scripts/expC_burst.py
+./w2s/scripts/__init__.py
+./w2s/scripts/make_figures.py
+./w2s/scripts/smoke_generate.py
+
+### python files line counts
+     0 ./w2s/scripts/__init__.py
+    11 ./w2s/__init__.py
+    17 ./src/__init__.py
+    49 ./w2s/scripts/aggregate_expB.py
+    78 ./w2s/evalclip.py
+    82 ./w2s/reliability.py
+    87 ./w2s/scripts/smoke_generate.py
+    89 ./w2s/mlsp_bridge.py
+    90 ./w2s/probe_eval.py
+    96 ./shuffled_target_run/mic_eval_adapter.py
+    97 ./config.py
+   121 ./w2s/scripts/expA_trajectories.py
+   122 ./w2s/scripts/make_figures.py
+   127 ./scripts/01_prepare_data.py
+   132 ./w2s/data.py
+   136 ./w2s/scripts/diagnose_mlsp_outputs.py
+   147 ./w2s/scripts/expC_burst.py
+   153 ./w2s/generate.py
+   170 ./src/probe.py
+   171 ./w2s/scripts/expB_windows.py
+   192 ./src/utils.py
+   198 ./w2s/schedules.py
+   212 ./w2s/metrics.py
+   221 ./test_setup.py
+   232 ./scripts/02_train_probe.py
+   278 ./src/train_probe.py
+   290 ./scripts/00_generate_onpolicy.py
+   298 ./scripts/03_run_inference.py
+   313 ./src/data_prep.py
+   334 ./scripts/05_fad.py
+   337 ./scripts/04_evaluate.py
+   355 ./src/evaluate_probe.py
+   457 ./src/inference.py
+   699 ./scripts/_make_report.py
+  6391 total
+
+### checkpoints / models / data around here
+./checkpoints/probe_epoch_020.pt
+./checkpoints/probe_epoch_040.pt
+./checkpoints/probe_best.pt
+./checkpoints/probe_final.pt
+./runner/status.json
+
+### git
+ed99cc2 gpu: start 000_env_check
+c49e4e8 gpu: runner up on stone-ye-PC
+50d0121 gpu: runner up on stone-ye-PC
+f43eb11 mac: 09-08 21:32:19 paper/.gitignore paper/IEEEbib.bst paper/fig_pareto.pdf
+200534d mac: 09-08 21:27:33 w2s/generate.py w2s/scripts/__init__.py w2s/scripts/aggregate_expB.py
+
+DONE env check
