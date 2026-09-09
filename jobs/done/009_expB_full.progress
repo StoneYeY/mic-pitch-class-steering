@@ -1,7 +1,3 @@
-Loading pipeline components...:  33%|███▎      | 2/6 [00:00<00:00, 19.62it/s]Loading pipeline components...:  83%|████████▎ | 5/6 [00:00<00:00, 11.07it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
-  WeightNorm.apply(module, name, dim)
-Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00, 10.87it/s]
-Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 25148.27it/s]
 [evalclip] CLAP loaded: laion/clap-htsat-unfused on cuda:0
 split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp', 'rapg_cal_f1', 'rapg_cal_dc', 'rapg_on', 'topk_dc_const'] -> 2250 runs (0 done)
 /home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
@@ -78,3 +74,7 @@ split=test trials=225 methods=['sao', 'early', 'mid', 'late', 'uniform', 'mlsp',
   1120 runs (4902s, 4.4s/run)  last: test-p07-alternating-s0 topk_dc_const coh=0.374 clap=0.307 upd=15
   1140 runs (4989s, 4.4s/run)  last: test-p07-alternating-s2 topk_dc_const coh=0.121 clap=0.268 upd=15
   1160 runs (5076s, 4.4s/run)  last: test-p07-pedal-s1 topk_dc_const coh=0.925 clap=0.234 upd=15
+  1180 runs (5163s, 4.4s/run)  last: test-p07-zigzag-s0 topk_dc_const coh=0.536 clap=0.321 upd=15
+  1200 runs (5250s, 4.4s/run)  last: test-p07-zigzag-s2 topk_dc_const coh=0.354 clap=0.355 upd=15
+  1220 runs (5338s, 4.4s/run)  last: test-p08-ascending-s1 topk_dc_const coh=0.610 clap=0.378 upd=15
+  1240 runs (5425s, 4.4s/run)  last: test-p08-descending-s0 topk_dc_const coh=0.339 clap=0.346 upd=15
