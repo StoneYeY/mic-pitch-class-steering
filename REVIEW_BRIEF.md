@@ -152,3 +152,28 @@ cd paper && latexmk -pdf main.tex
   建议：…
 ```
 最后附一段总体判断：以 ICASSP 标准，这篇现在是 accept / borderline / reject，最能提高胜算的 3 个改动是什么。
+
+## 10. 评审回应（v2，2026-09-16）
+
+外部评审结论：Borderline / Weak Accept；主要意见与处理如下（全部已进 `paper/main.tex`，PDF `paper/When_to_Steer_ICASSP2027_final.pdf`）。
+
+| 评审意见 | 处理 |
+|---|---|
+| [MAJOR] 主贡献命名错位：收益主要来自 sensitivity-based placement，不是 reliability adaptation | 摘要、贡献列表、§4.3、§5 全部重写为 "decodability ≠ steerability → 按敏感度放置预算 → reliability 缩放是次要增益"；§4.3 明确写出"约 85% 的提升来自放置"。**题目未改**（保留 RAPG），作者可选改为 *Sensitivity-Calibrated Probe Guidance* |
+| [MAJOR] Exp C 用 λ=0.10，主实验用 λ=0.05 | **新跑 job 015**（`results/015_expC_lam05/`，同 12 位置 × 50 dev trial，λ=0.05）：峰仍在 position 26（s=0.54），ΔC 0.099 vs 0.104，两条曲线 Pearson 0.99，Top-15 窗从 19–33 变 18–32。§4.2 加一句 |
+| [MAJOR] "10 步 ≈ 25 步" 过强 | 改为 "recover 95% of the coherence of 25 uniform updates (0.38 vs 0.40)"；§4.4 与 §5 同步；加 "one seed, efficiency analysis" 限定 |
+| [MAJOR] dev/test 分离要写明 | §3 首句改为 "All … profiles, schedule choices and thresholds are calibrated exclusively on five development prompts; the evaluation prompts are held out and never used for schedule selection"；Table 1 caption 加 "schedules are calibrated on the disjoint development set" |
+| [MAJOR] ΔC 峰值稳定性 | 新脚本 `w2s/scripts/expC_stability.py` → `results/00*/stability.json`：5000 次 bootstrap 峰中位数 26、95% 区间 [22,30]、92% 在 26；逐 prompt {22,30,22,30,26}、逐旋律 {26,30,26,26,26}、留一法全 26；mid vs early 88% trial 胜、p=1.6e-8。§4.2 加两句 |
+| [MINOR] "F1 saturates at 88%" 歧义 | 改为 "reaches 95% of its maximum only at 88% of the trajectory"（贡献列表 + §4.1） |
+| [MINOR] observational vs interventional | §4.2 开头与贡献 2 加了这一区分 |
+| [MINOR] RAPG-online 定位 | 改写为 negative result：不优于 MLSP（0.351 vs 0.363, p=0.53），因为 R_t 跟随可解码性，与核心论点一致；§5 删除 "letting a reliability threshold place it online" |
+| [MINOR] voiced coverage | §4.3 加句：0.88 (RAPG) vs 0.86 (MLSP) vs 0.84 (SAO) |
+| [MINOR] FAD "lowest" / CLAP "slightly higher" | 改为 "comparable (0.75 vs 0.79)" / "preserved … no guided method differs significantly from MLSP-fixed" |
+| [MINOR] MLSP bug 披露措辞 | 改为中性："We correct a temporal-scaling mismatch in the public implementation of [8] …" |
+| [MINOR] Top-K(F1) = Late | §4.3 明确："Because F1(t) increases monotonically, the top-K steps of RAPG-cal(F1) are exactly the late window (35–49), so its comparison with Late isolates reliability-based strength adaptation" |
+| [MINOR] "determines everything" | 改为 "placement is the dominant factor" |
+| [NIT] 步索引语义 | §2.1 定义 "Step t denotes the latent returned by the t-th scheduler update, to which guidance is applied before the next denoising step"；Fig.1 caption 加 "Positions index the latent after the corresponding scheduler update" |
+| [NIT] 5 s / 4 s | §3 写 "eight-note target melodies … (4 s within each 5-s clip)" |
+| 听评 | 未做；§5 加 "perceptual validation of the CLAP and Fréchet-distance quality proxies … left to future work" |
+
+未改：题目；作者信息；`\copyrightnotice` 仍注释（camera-ready 再开）。
