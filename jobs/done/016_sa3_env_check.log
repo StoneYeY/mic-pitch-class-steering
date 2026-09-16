@@ -1,0 +1,80 @@
+# job=016_sa3_env_check exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-16T18:34:59-04:00
+# (last 4000 lines; full log: runner/logs/016_sa3_env_check.full.log on stone-ye-PC)
+### date
+2026-09-16T18:34:29-04:00
+
+### disk
+/dev/nvme0n1p5  1.8T  940G  734G  57% /
+
+### conda envs with stable-audio libraries
+--- env: mic
+--- env: stableaudio
+--- env: stablenew
+--- env: base
+
+### huggingface auth + gated access
+whoami: StoneYeY
+stabilityai/stable-audio-3-medium-base ACCESSIBLE gated= False files: [('.gitattributes', 0.0), ('LICENSE.md', 0.0), ('LICENSE_GEMMA.md', 0.0), ('NOTICE', 0.0), ('README.md', 0.0), ('Stable_Audio_3.0_Thumbnail_1x1.png', 0.0), ('model.safetensors', 9.22), ('model_config.json', 0.0), ('svd_bases.pt', 3.84), ('t5gemma-b-b-ul2/.gitattributes', 0.0), ('t5gemma-b-b-ul2/README.md', 0.0), ('t5gemma-b-b-ul2/config.json', 0.0)]
+stabilityai/stable-audio-3-small-music-base ACCESSIBLE gated= False files: [('.gitattributes', 0.0), ('LICENSE.md', 0.0), ('LICENSE_GEMMA.md', 0.0), ('NOTICE', 0.0), ('README.md', 0.0), ('Stable_Audio_3.0_Thumbnail_1x1.png', 0.0), ('model.safetensors', 2.27), ('model_config.json', 0.0), ('svd_bases.pt', 1.27), ('t5gemma-b-b-ul2/.gitattributes', 0.0), ('t5gemma-b-b-ul2/README.md', 0.0), ('t5gemma-b-b-ul2/config.json', 0.0)]
+stabilityai/stable-audio-3-medium ACCESSIBLE gated= auto files: [('.gitattributes', 0.0), ('LICENSE.md', 0.0), ('LICENSE_GEMMA.md', 0.0), ('NOTICE', 0.0), ('README.md', 0.0), ('Stable_Audio_3.0_Thumbnail_1x1.png', 0.0), ('model.safetensors', 9.22), ('model_config.json', 0.0), ('t5gemma-b-b-ul2/.gitattributes', 0.0), ('t5gemma-b-b-ul2/README.md', 0.0), ('t5gemma-b-b-ul2/config.json', 0.0), ('t5gemma-b-b-ul2/generation_config.json', 0.0)]
+stabilityai/stable-audio-3-small-music ACCESSIBLE gated= auto files: [('.gitattributes', 0.0), ('LICENSE.md', 0.0), ('LICENSE_GEMMA.md', 0.0), ('NOTICE', 0.0), ('README.md', 0.0), ('Stable_Audio_3.0_Thumbnail_1x1.png', 0.0), ('model.safetensors', 2.27), ('model_config.json', 0.0), ('t5gemma-b-b-ul2/.gitattributes', 0.0), ('t5gemma-b-b-ul2/README.md', 0.0), ('t5gemma-b-b-ul2/config.json', 0.0), ('t5gemma-b-b-ul2/generation_config.json', 0.0)]
+
+### cached SA3 snapshots + model_config.json
+/home/stoneyey/.cache/huggingface/hub/models--stabilityai--stable-audio-3-medium
+    model_config.json 0.0 GB
+    model.safetensors 9.22 GB
+    sample_rate 44100 audio_channels 2 model_type diffusion_cond_inpaint
+    pretransform: {"type": "autoencoder", "iterate_batch": false, "chunked": true}
+    latent_dim 256 downsampling_ratio 4096 io_channels 2
+    diffusion: {"type": "dit", "diffusion_objective": "rf_denoiser"} io_channels 256
+    conditioning: ['prompt', 'seconds_total']
+    sampler hints: {'sample_size': 16777216, 'min_input_length': None}
+/home/stoneyey/.cache/huggingface/hub/models--stabilityai--stable-audio-3-optimized
+    README.md 0.0 GB
+    tensorRT 0.0 
+    onnx 0.0 
+
+### MAESTRO / MIC data locations
+/home/stoneyey/Desktop/sa_latent_probe/data/maestro_v3_extract
+/home/stoneyey/Desktop/sa_latent_probe/data/maestro_v3_extract/maestro-v3.0.0
+/home/stoneyey/Desktop/MIC/maestro-20260501T152604Z-3-002
+/home/stoneyey/Desktop/MIC/maestro-20260501T152604Z-3-002/maestro
+/home/stoneyey/Desktop/MIC/maestro-20260501T152604Z-3-001
+/home/stoneyey/Desktop/MIC/maestro-20260501T152604Z-3-001/maestro
+/home/stoneyey/Desktop/MIC/data/maestro
+total 348588
+drwxr-xr-x 14 stoneyey stoneyey      4096 Sep  8 21:39 .
+drwxr-xr-x 14 stoneyey stoneyey      4096 Aug 29 22:24 ..
+-rwxr-xr-x  1 stoneyey stoneyey    243326 Apr 30 09:40 adapter.ipynb
+drwxrwxr-x  2 stoneyey stoneyey      4096 May  1 12:33 checkpoints
+drwxrwxr-x  2 stoneyey stoneyey      4096 May  6 13:40 .claude
+-rwxr-xr-x  1 stoneyey stoneyey      3051 May  1 01:20 config.py
+drwxrwxr-x  3 stoneyey stoneyey      4096 May  2 01:16 data
+drwxrwxr-x  8 stoneyey stoneyey      4096 Sep  8 20:29 .git
+-rw-rw-r--  1 stoneyey stoneyey       290 Sep  8 20:06 .gitignore
+drwxrwxr-x  3 stoneyey stoneyey      4096 May  1 11:36 maestro-20260501T152604Z-3-001
+drwxrwxr-x  3 stoneyey stoneyey      4096 May  1 11:36 maestro-20260501T152604Z-3-002
+-rw-rw-r--  1 stoneyey stoneyey     32727 May  2 02:34 MIC_Code_Review_Report.pdf
+-rwxr-xr-x  1 stoneyey stoneyey 356351498 Apr 30 09:42 MuseControlLite_ITC_(1).ipynb
+drwxrwxr-x  4 stoneyey stoneyey      4096 May  2 16:08 musicprefs
+drwxrwxr-x  6 stoneyey stoneyey      4096 May  2 16:10 outputs
+-rw-rw-r--  1 stoneyey stoneyey    215094 Jul  7 16:24 PITCH_CLASS_STEERING_FOR_DIFFUSION_BASED_MUSIC_GENERATION_VIA_LATENT_SPACE_PROBES.pdf
+drwxrwxr-x  2 stoneyey stoneyey      4096 May  5 09:57 __pycache__
+-rwxr-xr-x  1 stoneyey stoneyey      2182 May  1 01:26 README.md
+-rw-rw-r--  1 stoneyey stoneyey      2508 Jul 11 00:10 rebuttal_mlsp2026.txt
+maestro
+probe_dataset_5s.pt
+probe_dataset.pt
+probe_dataset_train.pt
+probe_dataset_val.pt
+evaluation
+generated_audio
+latents
+reference_audio
+/home/stoneyey/Desktop/jazz_transformer-mastercopy/output_4.midi
+/home/stoneyey/Desktop/jazz_transformer-mastercopy/output_2.midi
+/home/stoneyey/Desktop/jazz_transformer-mastercopy/output.midi
+
+### amg (arousal project) on this box?
+/home/stoneyey/Desktop/amg
+DONE sa3 env check
