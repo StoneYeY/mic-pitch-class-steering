@@ -153,7 +153,8 @@ class SA3Generator:
                                                   negative_conditioning=neg, sample_size=self.sample_size,
                                                   sampler_type="euler", device=str(dev), seed=int(seed), callback=callback,
                                                   return_latents=True, disable_tqdm=True)
-            audio = self.model.pretransform.decode(lat)                           # (1, 2, samples)
+            lat = lat.detach()
+            audio = self.model.pretransform.decode(lat.to(next(self.model.parameters()).dtype))   # (1, 2, samples)
         if traj is not None:
             traj[steps - 1] = lat[0].detach().float().to(torch.float16).cpu()
             # make the per-step log describe the stored (post-update) latents, as in the SAO backend
