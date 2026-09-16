@@ -1,0 +1,7 @@
+{
+  "argmax_dcoh_pos": 10,
+  "argmin_dclap_pos": 2,
+  "corr_R_dcoh": -0.7681632996591466,
+  "corr_dcoh_dclap": NaN,
+  "corr_dcoh_dbce0": -0.25555375099373295
+}
