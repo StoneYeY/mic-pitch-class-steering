@@ -1,0 +1,48 @@
+# job=020b_sa3_expC exit=1 duration_s=30 host=stone-ye-PC finished=2026-09-16T19:23:34-04:00
+# (last 4000 lines; full log: runner/logs/020b_sa3_expC.full.log on stone-ye-PC)
+No module named 'flash_attn'
+flash_attn not installed, disabling Flash Attention
+No module named 'flash_attn'
+flash_attn varlen/bert_padding not available, disabling varlen attention
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/lightning_fabric/__init__.py:40: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+50 trials x 12 positions, burst=3, lambda=0.1
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/expC_burst.py", line 145, in <module>
+    main()
+  File "/home/stoneyey/w2s/w2s/scripts/expC_burst.py", line 72, in main
+    r0 = gen.run(tr.prompt, tr.seed, mel, make_schedule("sao"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/w2s/w2s/sa3.py", line 156, in run
+    audio = self.model.pretransform.decode(lat)                           # (1, 2, samples)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/stable_audio_tools/models/pretransforms.py", line 96, in decode
+    decoded = self.model.decode_audio(z, chunked=self.chunked, iterate_batch=self.iterate_batch, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/stable_audio_tools/models/autoencoders.py", line 1045, in decode_audio
+    return self.decode(latents, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/stable_audio_tools/models/autoencoders.py", line 893, in decode
+    decoded = self.decoder(latents, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/stable_audio_tools/models/autoencoders.py", line 430, in forward
+    x = layer(x)
+        ^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: expected scalar type Float but found BFloat16
+ERROR conda.cli.main_run:execute(125): `conda run python w2s/scripts/expC_burst.py` failed. (See above for error)
