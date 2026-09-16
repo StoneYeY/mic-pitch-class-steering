@@ -1,0 +1,15 @@
+# job=019_sa3_expA exit=1 duration_s=30 host=stone-ye-PC finished=2026-09-16T19:15:29-04:00
+# (last 4000 lines; full log: runner/logs/019_sa3_expA.full.log on stone-ye-PC)
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/expA_trajectories.py", line 119, in <module>
+    main()
+  File "/home/stoneyey/w2s/w2s/scripts/expA_trajectories.py", line 38, in main
+    gen = make_generator()
+  File "/home/stoneyey/w2s/w2s/backend.py", line 17, in make_generator
+    model, cfg = load_sa3(device)
+  File "/home/stoneyey/w2s/w2s/sa3.py", line 42, in load_sa3
+    from stable_audio_tools import get_pretrained_model
+ModuleNotFoundError: No module named 'stable_audio_tools'
