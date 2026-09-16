@@ -1,0 +1,464 @@
+# job=018b_sa3_probe exit=0 duration_s=240 host=stone-ye-PC finished=2026-09-16T19:22:27-04:00
+# (last 4000 lines; full log: runner/logs/018b_sa3_probe.full.log on stone-ye-PC)
+missing in stablenew: none
+1276 wav/midi pairs under /home/stoneyey/Desktop/sa_latent_probe/data/maestro_v3_extract/maestro-v3.0.0
+No module named 'flash_attn'
+flash_attn not installed, disabling Flash Attention
+No module named 'flash_attn'
+flash_attn varlen/bert_padding not available, disabling varlen attention
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/lightning_fabric/__init__.py:40: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+/home/stoneyey/w2s/w2s/scripts/sa3_encode_maestro.py:63: UserWarning: torchaudio._backend.utils.info has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  info = torchaudio.info(wav); dur = info.num_frames / info.sample_rate
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torchaudio/_backend/soundfile_backend.py:120: UserWarning: torchaudio._backend.common.AudioMetaData has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  return AudioMetaData(
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torchaudio/_backend/utils.py:213: UserWarning: In 2.9, this function's implementation will be changed to use torchaudio.load_with_torchcodec` under the hood. Some parameters like ``normalize``, ``format``, ``buffer_size``, and ``backend`` will be ignored. We recommend that you port your code to rely directly on TorchCodec's decoder instead: https://docs.pytorch.org/torchcodec/stable/generated/torchcodec.decoders.AudioDecoder.html#torchcodec.decoders.AudioDecoder.
+  warnings.warn(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] WON'T CONVERT flex_attention /home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/attention/flex_attention.py line 1234 
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] due to: 
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] Traceback (most recent call last):
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1272, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     result = self._inner_convert(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]              ^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 629, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return _compile(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1111, in _compile
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     guarded_code = compile_inner(code, one_graph, hooks, transform)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_utils_internal.py", line 97, in wrapper_function
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return function(*args, **kwargs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 793, in compile_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return _compile_inner(code, one_graph, hooks, transform)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 832, in _compile_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     out_code = transform_code_object(code, transform)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/bytecode_transformation.py", line 1424, in transform_code_object
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     transformations(instructions, code_options)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 267, in _fn
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return fn(*args, **kwargs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 753, in transform
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     tracer.run()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3497, in run
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     super().run()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     while self.step():
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]           ^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self.dispatch_table[inst.opcode](self, inst)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3672, in RETURN_VALUE
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self._return(inst)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3653, in _return
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     all_stack_locals_metadata = self.output.compile_subgraph(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1382, in compile_subgraph
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self.compile_and_call_fx_graph(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1696, in compile_and_call_fx_graph
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = self.call_user_compiler(gm, self.example_inputs())
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1811, in call_user_compiler
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return self._call_user_compiler(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1871, in _call_user_compiler
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     raise BackendCompilerFailed(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1846, in _call_user_compiler
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/repro/after_dynamo.py", line 150, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_gm = compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/__init__.py", line 2380, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return compile_fx(model_, inputs_, config_patches=self.config)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2002, in compile_fx
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return compile_fx(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2418, in compile_fx
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return aot_autograd(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/backends/common.py", line 109, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     cg = aot_module_simplified(gm, example_inputs, **self.kwargs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1199, in aot_module_simplified
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = AOTAutogradCache.load(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py", line 1140, in load
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = dispatch_and_compile()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1184, in dispatch_and_compile
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn, _ = create_aot_dispatcher_function(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 576, in create_aot_dispatcher_function
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return _create_aot_dispatcher_function(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 836, in _create_aot_dispatcher_function
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn, fw_metadata = compiler_fn(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                                ^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", line 245, in aot_dispatch_base
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fw = compiler(fw_module, updated_flat_args)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 483, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return self.compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2250, in fw_compiler_base
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return inner_compile(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/contextlib.py", line 81, in inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return func(*args, **kwds)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 745, in compile_fx_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return wrap_compiler_debug(_compile_fx_inner, compiler_name="inductor")(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/repro/after_aot.py", line 124, in debug_wrapper
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     inner_compiled_fn = compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 860, in _compile_fx_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     (key_info, cache_info) = FxGraphCache.prepare_key(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 1474, in prepare_key
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     key, debug_lines = compiled_fx_graph_hash(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                        ^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 960, in compiled_fx_graph_hash
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     details = FxGraphHashDetails(gm, example_inputs, fx_kwargs, inputs_to_check)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 896, in __init__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self.system_info = CacheBase.get_system()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                        ^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 205, in get_system
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     from triton.compiler.compiler import triton_key
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/triton/compiler/compiler.py)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] 
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] 
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] Traceback (most recent call last):
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1272, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     result = self._inner_convert(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]              ^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 629, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return _compile(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1111, in _compile
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     guarded_code = compile_inner(code, one_graph, hooks, transform)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_utils_internal.py", line 97, in wrapper_function
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return function(*args, **kwargs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 793, in compile_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return _compile_inner(code, one_graph, hooks, transform)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 832, in _compile_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     out_code = transform_code_object(code, transform)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/bytecode_transformation.py", line 1424, in transform_code_object
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     transformations(instructions, code_options)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 267, in _fn
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return fn(*args, **kwargs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 753, in transform
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     tracer.run()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3497, in run
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     super().run()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     while self.step():
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]           ^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self.dispatch_table[inst.opcode](self, inst)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3672, in RETURN_VALUE
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self._return(inst)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3653, in _return
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     all_stack_locals_metadata = self.output.compile_subgraph(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1382, in compile_subgraph
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self.compile_and_call_fx_graph(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1696, in compile_and_call_fx_graph
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = self.call_user_compiler(gm, self.example_inputs())
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1811, in call_user_compiler
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return self._call_user_compiler(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1871, in _call_user_compiler
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     raise BackendCompilerFailed(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1846, in _call_user_compiler
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/repro/after_dynamo.py", line 150, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_gm = compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/__init__.py", line 2380, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return compile_fx(model_, inputs_, config_patches=self.config)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2002, in compile_fx
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return compile_fx(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2418, in compile_fx
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return aot_autograd(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/backends/common.py", line 109, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     cg = aot_module_simplified(gm, example_inputs, **self.kwargs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1199, in aot_module_simplified
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = AOTAutogradCache.load(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py", line 1140, in load
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = dispatch_and_compile()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1184, in dispatch_and_compile
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn, _ = create_aot_dispatcher_function(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 576, in create_aot_dispatcher_function
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return _create_aot_dispatcher_function(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 836, in _create_aot_dispatcher_function
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn, fw_metadata = compiler_fn(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                                ^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", line 245, in aot_dispatch_base
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fw = compiler(fw_module, updated_flat_args)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 483, in __call__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return self.compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2250, in fw_compiler_base
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return inner_compile(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/contextlib.py", line 81, in inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return func(*args, **kwds)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 745, in compile_fx_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     return wrap_compiler_debug(_compile_fx_inner, compiler_name="inductor")(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/repro/after_aot.py", line 124, in debug_wrapper
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     inner_compiled_fn = compiler_fn(gm, example_inputs)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 860, in _compile_fx_inner
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     (key_info, cache_info) = FxGraphCache.prepare_key(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 1474, in prepare_key
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     key, debug_lines = compiled_fx_graph_hash(
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                        ^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 960, in compiled_fx_graph_hash
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     details = FxGraphHashDetails(gm, example_inputs, fx_kwargs, inputs_to_check)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 896, in __init__
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     self.system_info = CacheBase.get_system()
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]                        ^^^^^^^^^^^^^^^^^^^^^^
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 205, in get_system
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339]     from triton.compiler.compiler import triton_key
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/triton/compiler/compiler.py)
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] 
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+W0916 19:18:41.265000 3404383 site-packages/torch/_dynamo/convert_frame.py:1339] 
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torchaudio/_backend/utils.py:213: UserWarning: In 2.9, this function's implementation will be changed to use torchaudio.load_with_torchcodec` under the hood. Some parameters like ``normalize``, ``format``, ``buffer_size``, and ``backend`` will be ignored. We recommend that you port your code to rely directly on TorchCodec's decoder instead: https://docs.pytorch.org/torchcodec/stable/generated/torchcodec.decoders.AudioDecoder.html#torchcodec.decoders.AudioDecoder.
+  warnings.warn(
+  val: 6 clips  [2s]  last latent (1, 256, 107)
+/home/stoneyey/w2s/w2s/scripts/sa3_encode_maestro.py:63: UserWarning: torchaudio._backend.utils.info has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  info = torchaudio.info(wav); dur = info.num_frames / info.sample_rate
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torchaudio/_backend/soundfile_backend.py:120: UserWarning: torchaudio._backend.common.AudioMetaData has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  return AudioMetaData(
+  val: 12 clips  [4s]  last latent (1, 256, 107)
+  val: 18 clips  [6s]  last latent (1, 256, 107)
+  val: 24 clips  [9s]  last latent (1, 256, 107)
+  val: 30 clips  [11s]  last latent (1, 256, 107)
+  val: 36 clips  [13s]  last latent (1, 256, 107)
+  val: 42 clips  [15s]  last latent (1, 256, 107)
+  val: 48 clips  [17s]  last latent (1, 256, 107)
+  val: 54 clips  [18s]  last latent (1, 256, 107)
+  val: 60 clips  [20s]  last latent (1, 256, 107)
+  val: 66 clips  [21s]  last latent (1, 256, 107)
+  val: 72 clips  [24s]  last latent (1, 256, 107)
+  val: 78 clips  [26s]  last latent (1, 256, 107)
+  val: 84 clips  [28s]  last latent (1, 256, 107)
+  val: 90 clips  [29s]  last latent (1, 256, 107)
+  val: 96 clips  [31s]  last latent (1, 256, 107)
+  val: 102 clips  [33s]  last latent (1, 256, 107)
+  val: 108 clips  [35s]  last latent (1, 256, 107)
+  train: 6 clips  [36s]  last latent (1, 256, 107)
+  train: 12 clips  [38s]  last latent (1, 256, 107)
+  train: 18 clips  [40s]  last latent (1, 256, 107)
+  train: 24 clips  [41s]  last latent (1, 256, 107)
+  train: 30 clips  [43s]  last latent (1, 256, 107)
+  train: 36 clips  [45s]  last latent (1, 256, 107)
+  train: 42 clips  [46s]  last latent (1, 256, 107)
+  train: 48 clips  [48s]  last latent (1, 256, 107)
+  train: 54 clips  [50s]  last latent (1, 256, 107)
+  train: 60 clips  [52s]  last latent (1, 256, 107)
+  train: 66 clips  [53s]  last latent (1, 256, 107)
+  train: 72 clips  [55s]  last latent (1, 256, 107)
+  train: 78 clips  [57s]  last latent (1, 256, 107)
+  train: 84 clips  [58s]  last latent (1, 256, 107)
+  train: 90 clips  [60s]  last latent (1, 256, 107)
+  train: 96 clips  [61s]  last latent (1, 256, 107)
+  train: 102 clips  [63s]  last latent (1, 256, 107)
+  train: 108 clips  [64s]  last latent (1, 256, 107)
+  train: 114 clips  [66s]  last latent (1, 256, 107)
+  train: 120 clips  [67s]  last latent (1, 256, 107)
+  train: 126 clips  [69s]  last latent (1, 256, 107)
+  train: 132 clips  [70s]  last latent (1, 256, 107)
+  train: 138 clips  [72s]  last latent (1, 256, 107)
+  train: 144 clips  [74s]  last latent (1, 256, 107)
+  train: 147 clips  [74s]  last latent (1, 256, 107)
+  train: 153 clips  [76s]  last latent (1, 256, 107)
+  train: 159 clips  [77s]  last latent (1, 256, 107)
+  train: 165 clips  [79s]  last latent (1, 256, 107)
+  train: 171 clips  [80s]  last latent (1, 256, 107)
+  train: 177 clips  [83s]  last latent (1, 256, 107)
+  train: 183 clips  [85s]  last latent (1, 256, 107)
+  train: 189 clips  [87s]  last latent (1, 256, 107)
+  train: 195 clips  [88s]  last latent (1, 256, 107)
+  train: 201 clips  [90s]  last latent (1, 256, 107)
+  train: 207 clips  [92s]  last latent (1, 256, 107)
+  train: 213 clips  [93s]  last latent (1, 256, 107)
+  train: 219 clips  [95s]  last latent (1, 256, 107)
+  train: 225 clips  [96s]  last latent (1, 256, 107)
+  train: 231 clips  [98s]  last latent (1, 256, 107)
+  train: 237 clips  [101s]  last latent (1, 256, 107)
+  train: 243 clips  [103s]  last latent (1, 256, 107)
+  train: 249 clips  [104s]  last latent (1, 256, 107)
+  train: 255 clips  [106s]  last latent (1, 256, 107)
+  train: 261 clips  [107s]  last latent (1, 256, 107)
+  train: 267 clips  [109s]  last latent (1, 256, 107)
+  train: 273 clips  [111s]  last latent (1, 256, 107)
+  train: 279 clips  [113s]  last latent (1, 256, 107)
+  train: 285 clips  [114s]  last latent (1, 256, 107)
+  train: 291 clips  [117s]  last latent (1, 256, 107)
+  train: 297 clips  [119s]  last latent (1, 256, 107)
+  train: 303 clips  [120s]  last latent (1, 256, 107)
+  train: 309 clips  [122s]  last latent (1, 256, 107)
+  train: 315 clips  [124s]  last latent (1, 256, 107)
+  train: 321 clips  [126s]  last latent (1, 256, 107)
+  train: 327 clips  [128s]  last latent (1, 256, 107)
+  train: 333 clips  [129s]  last latent (1, 256, 107)
+  train: 339 clips  [131s]  last latent (1, 256, 107)
+  train: 345 clips  [132s]  last latent (1, 256, 107)
+  train: 351 clips  [134s]  last latent (1, 256, 107)
+  train: 357 clips  [136s]  last latent (1, 256, 107)
+  train: 363 clips  [138s]  last latent (1, 256, 107)
+  train: 369 clips  [140s]  last latent (1, 256, 107)
+  train: 375 clips  [141s]  last latent (1, 256, 107)
+  train: 381 clips  [143s]  last latent (1, 256, 107)
+  train: 387 clips  [145s]  last latent (1, 256, 107)
+  train: 393 clips  [146s]  last latent (1, 256, 107)
+  train: 399 clips  [148s]  last latent (1, 256, 107)
+  train: 405 clips  [149s]  last latent (1, 256, 107)
+  train: 411 clips  [151s]  last latent (1, 256, 107)
+  train: 417 clips  [152s]  last latent (1, 256, 107)
+  train: 423 clips  [154s]  last latent (1, 256, 107)
+  train: 429 clips  [156s]  last latent (1, 256, 107)
+  train: 435 clips  [157s]  last latent (1, 256, 107)
+  train: 441 clips  [159s]  last latent (1, 256, 107)
+  train: 447 clips  [161s]  last latent (1, 256, 107)
+  train: 453 clips  [163s]  last latent (1, 256, 107)
+  train: 459 clips  [164s]  last latent (1, 256, 107)
+  train: 465 clips  [166s]  last latent (1, 256, 107)
+  train: 471 clips  [167s]  last latent (1, 256, 107)
+  train: 477 clips  [169s]  last latent (1, 256, 107)
+  train: 483 clips  [172s]  last latent (1, 256, 107)
+  train: 489 clips  [173s]  last latent (1, 256, 107)
+  train: 495 clips  [175s]  last latent (1, 256, 107)
+  train: 501 clips  [176s]  last latent (1, 256, 107)
+  train: 507 clips  [178s]  last latent (1, 256, 107)
+  train: 513 clips  [182s]  last latent (1, 256, 107)
+  train: 518 clips  [183s]  last latent (1, 256, 107)
+  train: 524 clips  [184s]  last latent (1, 256, 107)
+  train: 530 clips  [186s]  last latent (1, 256, 107)
+  train: 536 clips  [188s]  last latent (1, 256, 107)
+  train: 542 clips  [190s]  last latent (1, 256, 107)
+  train: 548 clips  [191s]  last latent (1, 256, 107)
+  train: 554 clips  [193s]  last latent (1, 256, 107)
+  train: 560 clips  [197s]  last latent (1, 256, 107)
+  train: 566 clips  [199s]  last latent (1, 256, 107)
+  train: 572 clips  [202s]  last latent (1, 256, 107)
+  train: 578 clips  [204s]  last latent (1, 256, 107)
+  train: 584 clips  [206s]  last latent (1, 256, 107)
+  train: 590 clips  [208s]  last latent (1, 256, 107)
+  train: 596 clips  [209s]  last latent (1, 256, 107)
+  train: 602 clips  [211s]  last latent (1, 256, 107)
+  train: 608 clips  [213s]  last latent (1, 256, 107)
+{
+ "model": "stabilityai/stable-audio-3-medium-base",
+ "sr": 44100,
+ "hop": 4096,
+ "fps": 10.7666015625,
+ "clip_s": 9.93814058956916,
+ "n_files": {
+  "val": 18,
+  "train": 102
+ },
+ "n_val": 108,
+ "val_latent_stats": {
+  "mean": -0.029757000505924225,
+  "std": 0.645617663860321,
+  "rms": 0.6463029980659485,
+  "T": 107,
+  "C": 256
+ },
+ "val_label_density": 0.14651840925216675,
+ "n_train": 608,
+ "train_latent_stats": {
+  "mean": -0.030134353786706924,
+  "std": 0.677017867565155,
+  "rms": 0.6776881814002991,
+  "T": 107,
+  "C": 256
+ },
+ "train_label_density": 0.1538149118423462
+}
+done in 213s
+train (608, 256, 107) val (108, 256, 107)  label density 0.154
+ep   1 train 0.4481 val_bce 0.4105 f1@t0 0.000 f1@t.23 0.000 f1@t.41 0.000 [0s]
+ep   2 train 0.4003 val_bce 0.3664 f1@t0 0.090 f1@t.23 0.081 f1@t.41 0.062 [0s]
+ep   3 train 0.3445 val_bce 0.3223 f1@t0 0.299 f1@t.23 0.285 f1@t.41 0.242 [1s]
+ep   4 train 0.3233 val_bce 0.3167 f1@t0 0.380 f1@t.23 0.365 f1@t.41 0.324 [1s]
+ep   5 train 0.3216 val_bce 0.3139 f1@t0 0.426 f1@t.23 0.412 f1@t.41 0.367 [1s]
+ep   6 train 0.3067 val_bce 0.3017 f1@t0 0.483 f1@t.23 0.465 f1@t.41 0.413 [1s]
+ep   7 train 0.2981 val_bce 0.2956 f1@t0 0.467 f1@t.23 0.450 f1@t.41 0.395 [1s]
+ep   8 train 0.2956 val_bce 0.2921 f1@t0 0.470 f1@t.23 0.448 f1@t.41 0.394 [1s]
+ep   9 train 0.2911 val_bce 0.2931 f1@t0 0.485 f1@t.23 0.469 f1@t.41 0.411 [1s]
+ep  10 train 0.2975 val_bce 0.2862 f1@t0 0.506 f1@t.23 0.484 f1@t.41 0.427 [1s]
+ep  11 train 0.2859 val_bce 0.2849 f1@t0 0.496 f1@t.23 0.476 f1@t.41 0.410 [1s]
+ep  12 train 0.2836 val_bce 0.2836 f1@t0 0.540 f1@t.23 0.513 f1@t.41 0.451 [1s]
+ep  13 train 0.2781 val_bce 0.2836 f1@t0 0.483 f1@t.23 0.461 f1@t.41 0.398 [1s]
+ep  14 train 0.2800 val_bce 0.2826 f1@t0 0.507 f1@t.23 0.482 f1@t.41 0.417 [1s]
+ep  15 train 0.2741 val_bce 0.2806 f1@t0 0.528 f1@t.23 0.510 f1@t.41 0.449 [1s]
+ep  16 train 0.2714 val_bce 0.2780 f1@t0 0.525 f1@t.23 0.502 f1@t.41 0.438 [1s]
+ep  17 train 0.2754 val_bce 0.2793 f1@t0 0.532 f1@t.23 0.508 f1@t.41 0.444 [2s]
+ep  18 train 0.2603 val_bce 0.2822 f1@t0 0.520 f1@t.23 0.499 f1@t.41 0.435 [2s]
+ep  19 train 0.2683 val_bce 0.2769 f1@t0 0.571 f1@t.23 0.547 f1@t.41 0.472 [2s]
+ep  20 train 0.2624 val_bce 0.2774 f1@t0 0.568 f1@t.23 0.547 f1@t.41 0.481 [2s]
+ep  21 train 0.2650 val_bce 0.2782 f1@t0 0.540 f1@t.23 0.520 f1@t.41 0.459 [2s]
+ep  22 train 0.2802 val_bce 0.2740 f1@t0 0.532 f1@t.23 0.507 f1@t.41 0.438 [2s]
+ep  23 train 0.2526 val_bce 0.2746 f1@t0 0.560 f1@t.23 0.535 f1@t.41 0.467 [2s]
+ep  24 train 0.2514 val_bce 0.2750 f1@t0 0.569 f1@t.23 0.546 f1@t.41 0.477 [2s]
+ep  25 train 0.2554 val_bce 0.2734 f1@t0 0.575 f1@t.23 0.551 f1@t.41 0.477 [2s]
+ep  26 train 0.2552 val_bce 0.2739 f1@t0 0.559 f1@t.23 0.536 f1@t.41 0.460 [2s]
+ep  27 train 0.2585 val_bce 0.2719 f1@t0 0.546 f1@t.23 0.523 f1@t.41 0.450 [2s]
+ep  28 train 0.2481 val_bce 0.2730 f1@t0 0.559 f1@t.23 0.534 f1@t.41 0.456 [2s]
+ep  29 train 0.2499 val_bce 0.2716 f1@t0 0.568 f1@t.23 0.539 f1@t.41 0.461 [2s]
+ep  30 train 0.2489 val_bce 0.2705 f1@t0 0.568 f1@t.23 0.543 f1@t.41 0.465 [2s]
+ep  31 train 0.2440 val_bce 0.2744 f1@t0 0.549 f1@t.23 0.525 f1@t.41 0.458 [2s]
+ep  32 train 0.2553 val_bce 0.2710 f1@t0 0.557 f1@t.23 0.534 f1@t.41 0.457 [2s]
+ep  33 train 0.2442 val_bce 0.2722 f1@t0 0.568 f1@t.23 0.541 f1@t.41 0.468 [2s]
+ep  34 train 0.2529 val_bce 0.2700 f1@t0 0.580 f1@t.23 0.551 f1@t.41 0.472 [2s]
+ep  35 train 0.2475 val_bce 0.2705 f1@t0 0.577 f1@t.23 0.552 f1@t.41 0.479 [2s]
+ep  36 train 0.2400 val_bce 0.2700 f1@t0 0.585 f1@t.23 0.559 f1@t.41 0.476 [2s]
+ep  37 train 0.2496 val_bce 0.2689 f1@t0 0.585 f1@t.23 0.562 f1@t.41 0.479 [2s]
+ep  38 train 0.2621 val_bce 0.2701 f1@t0 0.581 f1@t.23 0.556 f1@t.41 0.479 [2s]
+ep  39 train 0.2495 val_bce 0.2692 f1@t0 0.584 f1@t.23 0.559 f1@t.41 0.479 [2s]
+ep  40 train 0.2464 val_bce 0.2699 f1@t0 0.579 f1@t.23 0.554 f1@t.41 0.474 [3s]
+ep  41 train 0.2440 val_bce 0.2691 f1@t0 0.578 f1@t.23 0.554 f1@t.41 0.475 [3s]
+ep  42 train 0.2325 val_bce 0.2689 f1@t0 0.591 f1@t.23 0.566 f1@t.41 0.484 [3s]
+ep  43 train 0.2399 val_bce 0.2688 f1@t0 0.580 f1@t.23 0.556 f1@t.41 0.476 [3s]
+ep  44 train 0.2294 val_bce 0.2690 f1@t0 0.584 f1@t.23 0.560 f1@t.41 0.479 [3s]
+ep  45 train 0.2370 val_bce 0.2685 f1@t0 0.586 f1@t.23 0.561 f1@t.41 0.477 [3s]
+ep  46 train 0.2405 val_bce 0.2687 f1@t0 0.579 f1@t.23 0.555 f1@t.41 0.473 [3s]
+ep  47 train 0.2586 val_bce 0.2687 f1@t0 0.582 f1@t.23 0.558 f1@t.41 0.475 [3s]
+ep  48 train 0.2456 val_bce 0.2688 f1@t0 0.581 f1@t.23 0.556 f1@t.41 0.475 [3s]
+ep  49 train 0.2420 val_bce 0.2687 f1@t0 0.581 f1@t.23 0.558 f1@t.41 0.475 [3s]
+ep  50 train 0.2459 val_bce 0.2687 f1@t0 0.581 f1@t.23 0.557 f1@t.41 0.475 [3s]
+{"t0.0": 0.586, "t0.09": 0.583, "t0.23": 0.561, "t0.33": 0.523, "t0.41": 0.477, "t0.5": 0.414, "t0.6": 0.323, "t0.7": 0.223, "t0.8": 0.128}
+probe 248k params, best epoch 45, saved results/018b_sa3_probe/sa3_probe_best.pt
