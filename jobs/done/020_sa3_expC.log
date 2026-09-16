@@ -1,0 +1,15 @@
+# job=020_sa3_expC exit=1 duration_s=30 host=stone-ye-PC finished=2026-09-16T19:16:02-04:00
+# (last 4000 lines; full log: runner/logs/020_sa3_expC.full.log on stone-ye-PC)
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/expC_burst.py", line 145, in <module>
+    main()
+  File "/home/stoneyey/w2s/w2s/scripts/expC_burst.py", line 51, in main
+    gen = make_generator()
+  File "/home/stoneyey/w2s/w2s/backend.py", line 17, in make_generator
+    model, cfg = load_sa3(device)
+  File "/home/stoneyey/w2s/w2s/sa3.py", line 42, in load_sa3
+    from stable_audio_tools import get_pretrained_model
+ModuleNotFoundError: No module named 'stable_audio_tools'
