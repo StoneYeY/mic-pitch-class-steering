@@ -1,0 +1,15 @@
+# job=018_sa3_probe exit=1 duration_s=30 host=stone-ye-PC finished=2026-09-16T19:14:56-04:00
+# (last 4000 lines; full log: runner/logs/018_sa3_probe.full.log on stone-ye-PC)
+
+CondaError: Run 'conda init' before 'conda activate'
+
+missing in stablenew: none
+1276 wav/midi pairs under /home/stoneyey/Desktop/sa_latent_probe/data/maestro_v3_extract/maestro-v3.0.0
+Traceback (most recent call last):
+  File "/home/stoneyey/w2s/w2s/scripts/sa3_encode_maestro.py", line 95, in <module>
+    main()
+  File "/home/stoneyey/w2s/w2s/scripts/sa3_encode_maestro.py", line 53, in main
+    model, cfg = load_sa3("cuda")
+  File "/home/stoneyey/w2s/w2s/sa3.py", line 42, in load_sa3
+    from stable_audio_tools import get_pretrained_model
+ModuleNotFoundError: No module named 'stable_audio_tools'
