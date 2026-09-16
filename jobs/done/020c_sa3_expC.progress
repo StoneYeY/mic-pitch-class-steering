@@ -1,14 +1,3 @@
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2418, in compile_fx
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     return aot_autograd(
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/backends/common.py", line 109, in __call__
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     cg = aot_module_simplified(gm, example_inputs, **self.kwargs)
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1199, in aot_module_simplified
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = AOTAutogradCache.load(
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py", line 1140, in load
 W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = dispatch_and_compile()
 W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^
 W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1184, in dispatch_and_compile
@@ -78,3 +67,14 @@ W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]
   190 new runs, 519s  last: pos=38 R=0.25 coh=0.255 clap=nan
   200 new runs, 546s  last: pos=30 R=0.16 coh=0.000 clap=nan
   210 new runs, 573s  last: pos=22 R=0.11 coh=0.150 clap=nan
+  220 new runs, 600s  last: pos=14 R=0.10 coh=0.257 clap=nan
+  230 new runs, 627s  last: pos=6 R=0.10 coh=0.257 clap=nan
+  240 new runs, 653s  last: pos=46 R=0.29 coh=0.042 clap=nan
+  250 new runs, 682s  last: pos=38 R=0.24 coh=0.110 clap=nan
+  260 new runs, 710s  last: pos=30 R=0.11 coh=0.155 clap=nan
+  270 new runs, 738s  last: pos=22 R=0.09 coh=0.087 clap=nan
+  280 new runs, 765s  last: pos=14 R=0.09 coh=0.133 clap=nan
+  290 new runs, 792s  last: pos=6 R=0.10 coh=0.000 clap=nan
+  300 new runs, 818s  last: pos=46 R=0.32 coh=0.000 clap=nan
+  310 new runs, 846s  last: pos=38 R=0.19 coh=0.300 clap=nan
+  320 new runs, 873s  last: pos=30 R=0.12 coh=0.065 clap=nan
