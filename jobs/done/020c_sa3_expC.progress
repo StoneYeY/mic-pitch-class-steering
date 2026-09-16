@@ -1,14 +1,3 @@
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", line 245, in aot_dispatch_base
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fw = compiler(fw_module, updated_flat_args)
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 483, in __call__
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     return self.compiler_fn(gm, example_inputs)
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2250, in fw_compiler_base
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     return inner_compile(
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/contextlib.py", line 81, in inner
-W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     return func(*args, **kwds)
 W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^
 W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 745, in compile_fx_inner
 W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]     return wrap_compiler_debug(_compile_fx_inner, compiler_name="inductor")(
@@ -78,3 +67,14 @@ W0916 19:26:34.680000 3406487 site-packages/torch/_dynamo/convert_frame.py:1339]
   410 new runs, 1120s  last: pos=6 R=0.09 coh=0.068 clap=nan
   420 new runs, 1146s  last: pos=46 R=0.23 coh=0.132 clap=nan
   430 new runs, 1174s  last: pos=38 R=0.09 coh=0.111 clap=nan
+  440 new runs, 1201s  last: pos=30 R=0.11 coh=0.384 clap=nan
+  450 new runs, 1228s  last: pos=22 R=0.07 coh=0.206 clap=nan
+  460 new runs, 1255s  last: pos=14 R=0.09 coh=0.000 clap=nan
+  470 new runs, 1283s  last: pos=6 R=0.10 coh=0.328 clap=nan
+  480 new runs, 1309s  last: pos=46 R=0.12 coh=0.327 clap=nan
+  490 new runs, 1338s  last: pos=38 R=0.31 coh=0.095 clap=nan
+  500 new runs, 1366s  last: pos=30 R=0.15 coh=0.056 clap=nan
+  510 new runs, 1393s  last: pos=22 R=0.09 coh=0.000 clap=nan
+  520 new runs, 1420s  last: pos=14 R=0.09 coh=0.102 clap=nan
+  530 new runs, 1447s  last: pos=6 R=0.10 coh=0.000 clap=nan
+  540 new runs, 1473s  last: pos=46 R=0.36 coh=0.021 clap=nan
