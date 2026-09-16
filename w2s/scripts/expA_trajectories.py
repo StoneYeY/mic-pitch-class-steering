@@ -25,8 +25,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from w2s import data, metrics, probe_eval  # noqa: E402
-from w2s.generate import W2SGenerator  # noqa: E402
-from w2s.mlsp_bridge import load_pipeline, load_probe  # noqa: E402
+from w2s.backend import make_generator  # noqa: E402
 from w2s.schedules import make_schedule  # noqa: E402
 
 RES = Path(os.environ.get("W2S_RESULTS", "results/expA")); RES.mkdir(parents=True, exist_ok=True)
@@ -36,8 +35,7 @@ STEPS = 50
 
 
 def main():
-    pipe, probe = load_pipeline(), load_probe()
-    gen = W2SGenerator(pipe, probe)
+    gen = make_generator()
     sao = make_schedule("sao")
     n_aud = int(np.ceil(5.0 * gen.fps))
     rows, meta = [], []

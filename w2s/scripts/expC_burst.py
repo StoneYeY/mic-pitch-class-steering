@@ -26,8 +26,7 @@ import torch.nn.functional as F
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from w2s import data, metrics  # noqa: E402
 from w2s.evalclip import ClipEvaluator  # noqa: E402
-from w2s.generate import W2SGenerator  # noqa: E402
-from w2s.mlsp_bridge import load_pipeline, load_probe  # noqa: E402
+from w2s.backend import make_generator  # noqa: E402
 from w2s.schedules import GuidanceSchedule, make_schedule  # noqa: E402
 
 RES = Path(os.environ.get("W2S_RESULTS", "results/expC")); RES.mkdir(parents=True, exist_ok=True)
@@ -49,9 +48,8 @@ def probe_bce(gen, z_final: np.ndarray, target: np.ndarray, n_aud: int) -> float
 
 
 def main():
-    pipe, probe = load_pipeline(), load_probe()
-    gen = W2SGenerator(pipe, probe)
-    ev = ClipEvaluator(use_clap=True, device=str(gen.device))
+    gen = make_generator()
+    ev = ClipEvaluator(use_clap=os.environ.get("W2S_CLAP", "1") != "0", device=str(gen.device))
     csv = RES / "per_run.csv"
     done = set()
     if csv.exists():

@@ -29,8 +29,7 @@ import soundfile as sf
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from w2s import data, metrics, schedules as S  # noqa: E402
 from w2s.evalclip import ClipEvaluator  # noqa: E402
-from w2s.generate import W2SGenerator  # noqa: E402
-from w2s.mlsp_bridge import load_pipeline, load_probe  # noqa: E402
+from w2s.backend import make_generator  # noqa: E402
 
 RES = Path(os.environ.get("W2S_RESULTS", "results/expB")); RES.mkdir(parents=True, exist_ok=True)
 RUNS = Path(os.environ.get("W2S_RUNS", "runs/expB")); RUNS.mkdir(parents=True, exist_ok=True)
@@ -98,9 +97,8 @@ def build_schedules() -> dict[str, S.GuidanceSchedule]:
 
 def main():
     sch = build_schedules()
-    pipe, probe = load_pipeline(), load_probe()
-    gen = W2SGenerator(pipe, probe)
-    ev = ClipEvaluator(use_clap=True, device=str(gen.device))
+    gen = make_generator()
+    ev = ClipEvaluator(use_clap=os.environ.get("W2S_CLAP", "1") != "0", device=str(gen.device))
     trials = data.trial_grid(SPLIT, melodies=MELODIES, seeds=SEEDS, prompt_ids=PROMPTS)
     csv = RES / "per_run.csv"
     rows = pd.read_csv(csv).to_dict("records") if csv.exists() else []

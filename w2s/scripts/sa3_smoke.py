@@ -33,7 +33,7 @@ try:
     import stable_audio_tools  # noqa: E402
     out["stable_audio_tools"] = getattr(stable_audio_tools, "__version__", "?")
     from stable_audio_tools import get_pretrained_model  # noqa: E402
-    from stable_audio_tools.inference.generation import generate_diffusion_cond  # noqa: E402
+    from stable_audio_tools.inference.generation import generate_diffusion_cond_inpaint as generate_diffusion_cond  # noqa: E402
     import inspect
     out["generate_sig"] = str(inspect.signature(generate_diffusion_cond))[:600]
     print("versions", out["torch"], out["stable_audio_tools"]); dump()
@@ -96,7 +96,7 @@ try:
     cond = [{"prompt": "A calm classical piano piece in the style of a nocturne", "seconds_total": DUR}]
     sample_size = int(round(DUR * cfg["sample_rate"] / out["downsampling_ratio"])) * out["downsampling_ratio"]
     out["gen_sample_size"] = sample_size
-    kw = dict(steps=STEPS, cfg_scale=CFG, conditioning=cond, sample_size=sample_size, sample_rate=cfg["sample_rate"],
+    kw = dict(steps=STEPS, cfg_scale=CFG, conditioning=cond, sample_size=sample_size,
               sampler_type="euler", device=dev, seed=0, callback=cb)
     t0 = time.time()
     with torch.no_grad():
@@ -104,6 +104,9 @@ try:
     out["gen_s"] = round(time.time() - t0, 1)
     out["gen_audio_shape"] = list(audio.shape)
     out["n_callback_steps"] = len(log); out["callback_log_head"] = log[:3]; out["callback_log_tail"] = log[-3:]
+    out["t_schedule"] = [round(r["t"], 4) for r in log]
+    out["model_attrs"] = {k: getattr(model, k, None) for k in ("mask_padding_attention", "use_effective_length_for_schedule", "sampling_dist_shift")}
+    out["model_attrs"] = {k: (str(v) if v is not None else None) for k, v in out["model_attrs"].items()}
     out["peak_vram_gb"] = round(torch.cuda.max_memory_allocated() / 2**30, 2)
     a = audio[0].float().cpu()
     a = a / max(1e-6, a.abs().max())
@@ -112,6 +115,10 @@ try:
     out["audio_len_s"] = round(a.shape[-1] / cfg["sample_rate"], 2)
     print("generation", {k: out[k] for k in ("gen_s", "gen_audio_shape", "n_callback_steps", "peak_vram_gb", "audio_len_s")}); dump()
 
+    t0 = time.time()
+    with torch.no_grad():
+        generate_diffusion_cond(model, **{**kw, "callback": None})
+    out["gen_s_nocb"] = round(time.time() - t0, 1)
     # ---- return_latents path (needed to record trajectories) ----
     with torch.no_grad():
         lat = generate_diffusion_cond(model, **{**kw, "return_latents": True, "steps": 8})
