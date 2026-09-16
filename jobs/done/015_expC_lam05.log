@@ -1,3 +1,8 @@
+# job=015_expC_lam05 exit=0 duration_s=2725 host=stone-ye-PC finished=2026-09-16T11:35:33-04:00
+# (last 4000 lines; full log: runner/logs/015_expC_lam05.full.log on stone-ye-PC)
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]Loading pipeline components...:  17%|█▋        | 1/6 [00:01<00:07,  1.40s/it]
+Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 4341.88it/s]
+Loading pipeline components...:  83%|████████▎ | 5/6 [00:01<00:00,  4.01it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
   WeightNorm.apply(module, name, dim)
 Loading pipeline components...: 100%|██████████| 6/6 [00:01<00:00,  3.54it/s]
 Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 21142.74it/s]
@@ -78,3 +83,19 @@
   570 new runs, 2585s  last: pos=22 R=0.29 coh=0.036 clap=0.264
   580 new runs, 2630s  last: pos=14 R=0.29 coh=0.168 clap=0.258
   590 new runs, 2675s  last: pos=6 R=0.29 coh=0.142 clap=0.290
+  600 new runs, 2719s  last: pos=46 R=0.46 coh=0.228 clap=0.253
+    position   R_at  d_coherence_mlsp  d_coherence_mlsp_lo  d_coherence_mlsp_hi  d_clap  logmel_l1  d_bce0
+0          2  0.307             0.004               -0.006                0.015  -0.008      0.132  -0.016
+1          6  0.301             0.003               -0.011                0.017  -0.004      0.236  -0.018
+2         10  0.292             0.008               -0.007                0.022  -0.007      0.317  -0.027
+3         14  0.282             0.011               -0.009                0.032  -0.013      0.397  -0.042
+4         18  0.296             0.049                0.019                0.080  -0.012      0.544  -0.060
+5         22  0.294             0.090                0.056                0.125  -0.012      0.566  -0.079
+6         26  0.292             0.099                0.068                0.131  -0.013      0.498  -0.103
+7         30  0.321             0.067                0.046                0.087  -0.009      0.396  -0.103
+8         34  0.330             0.040                0.025                0.057  -0.010      0.236  -0.083
+9         38  0.389             0.030                0.019                0.043  -0.013      0.169  -0.087
+10        42  0.464             0.026                0.015                0.037  -0.012      0.160  -0.102
+11        46  0.484             0.025                0.014                0.036  -0.011      0.174  -0.124
+{'argmax_dcoh_pos': 26, 'argmin_dclap_pos': 14, 'corr_R_dcoh': -0.1911351527295456, 'corr_dcoh_dclap': -0.49029966782845863, 'corr_dcoh_dbce0': -0.5864173073410027}
+done in 2719s
