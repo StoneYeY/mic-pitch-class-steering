@@ -5,5 +5,49 @@
  "dur": 5.0,
  "torch": "2.8.0+cu128",
  "stable_audio_tools": "?",
- "generate_sig": "(model, steps: int = 250, cfg_scale=6, conditioning: dict = None, conditioning_tensors: Optional[dict] = None, negative_conditioning: dict = None, negative_conditioning_tensors: Optional[dict] = None, batch_size: int = 1, sample_size: int = 2097152, sample_rate: int = 48000, seed: int = -1, device: str = 'cuda', init_audio: Optional[Tuple[int, torch.Tensor]] = None, init_noise_level: float = 1.0, return_latents=False, inversion_params: dict = None, adapt_duration_to_conditioning: Optional[bool] = None, duration_padding_sec: float = 6.0, use_effective_length_for_schedule: Optional[bool] = None,"
+ "generate_sig": "(model, steps: int = 250, cfg_scale=6, conditioning: dict = None, conditioning_tensors: Optional[dict] = None, negative_conditioning: dict = None, negative_conditioning_tensors: Optional[dict] = None, batch_size: int = 1, sample_size: int = 2097152, sample_rate: int = 48000, seed: int = -1, device: str = 'cuda', init_audio: Optional[Tuple[int, torch.Tensor]] = None, init_noise_level: float = 1.0, return_latents=False, inversion_params: dict = None, adapt_duration_to_conditioning: Optional[bool] = None, duration_padding_sec: float = 6.0, use_effective_length_for_schedule: Optional[bool] = None,",
+ "load_s": 1599.3,
+ "sample_rate": 44100,
+ "sample_size": 16777216,
+ "pretransform": {
+  "type": "autoencoder",
+  "iterate_batch": false,
+  "chunked": true
+ },
+ "latent_dim": 256,
+ "downsampling_ratio": 4096,
+ "diffusion_objective": "rectified_flow",
+ "conditioning_ids": [
+  "prompt",
+  "seconds_total"
+ ],
+ "n_params_M": 2305.5,
+ "dtype": "torch.bfloat16",
+ "enc_input_shape": [
+  1,
+  2,
+  220500
+ ],
+ "enc_latent_shape": [
+  1,
+  256,
+  54
+ ],
+ "latent_fps": 10.8,
+ "latent_stats": {
+  "mean": -0.030376076698303223,
+  "std": 0.5516514182090759,
+  "rms": 0.5524671673774719,
+  "ch_std_min": 0.13477134704589844,
+  "ch_std_max": 0.5838420987129211
+ },
+ "dec_output_shape": [
+  1,
+  2,
+  221184
+ ],
+ "recon_snr_db": 14.457845687866211,
+ "gen_sample_size": 221184,
+ "error": "KeyError('inpaint_mask')",
+ "traceback": "Traceback (most recent call last):\n  File \"/home/stoneyey/w2s/w2s/scripts/sa3_smoke.py\", line 103, in <module>\n    audio = generate_diffusion_cond(model, **kw)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/stable_audio_tools/inference/generation.py\", line 212, in generate_diffusion_cond\n    conditioning_inputs = model.get_conditioning_inputs(conditioning_tensors)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/stable_audio_tools/models/diffusion.py\", line 223, in get_conditioning_inputs\n    local_add_cond = torch.cat([conditioning_tensors[key][0] for key in self.local_add_cond_ids], dim=1)\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/stable_audio_tools/models/diffusion.py\", line 223, in <listcomp>\n    local_add_cond = torch.cat([conditioning_tensors[key][0] for key in self.local_add_cond_ids], dim=1)\n                                ~~~~~~~~~~~~~~~~~~~~^^^^^\nKeyError: 'inpaint_mask'\n"
 }
