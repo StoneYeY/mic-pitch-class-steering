@@ -1,1 +1,1 @@
-{"host":"stone-ye-PC","state":"running","job":"017_sa3_smoke","gpu":"NVIDIA GeForce RTX 5080, 15 MiB, 16303 MiB, 0 %","time":"2026-09-16T18:39:24-04:00","commit":"1645583","queue":22,"done":21}
+{"host":"stone-ye-PC","state":"running","job":"017_sa3_smoke","gpu":"NVIDIA GeForce RTX 5080, 18 MiB, 16303 MiB, 0 %","time":"2026-09-16T18:44:26-04:00","commit":"8a52e77","queue":22,"done":21}

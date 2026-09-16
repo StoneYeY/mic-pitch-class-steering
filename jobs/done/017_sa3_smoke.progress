@@ -1,0 +1,80 @@
+drwxrwxr-x  8 stoneyey stoneyey  4096 Jun 12 16:05 outputs
+-rw-rw-r--  1 stoneyey stoneyey  9907 Jun 21 10:28 README.md
+-rw-rw-r--  1 stoneyey stoneyey  7898 Jun 12 10:13 REVIEW_LOG.md
+-rwxrwxr-x  1 stoneyey stoneyey  1765 Jun  5 18:45 run_all.sh
+drwxrwxr-x  3 stoneyey stoneyey  4096 Jun 12 22:57 scripts
+drwxrwxr-x  3 stoneyey stoneyey  4096 Aug 17 10:55 shuffled_target_handoff_extracted
+-rw-rw-r--  1 stoneyey stoneyey  8292 Aug 17 10:53 shuffled_target_handoff.zip
+drwxrwxr-x  3 stoneyey stoneyey  4096 Jun 12 22:57 src
+-rw-rw-r--  1 stoneyey stoneyey 19326 Jun 21 10:32 TRANSCRIPT.md
+-rw-rw-r--  1 stoneyey stoneyey 15142 Jun 16 18:21 WORKER_LOG.md
+-rw-rw-r--  1 stoneyey stoneyey 19027 Jun 21 10:31 WORKER_TRANSCRIPT.md
+# Stable Audio 3 — Latent Probing
+
+This project extracts **Stable Audio 3 medium** VAE latents over four
+music/audio datasets and probes whether the latents encode interpretable
+musical information (instrument, dynamics, rhythm, pitch, structure).
+
+The focus is **representation probing**, not generation.
+
+🤗 **Hugging Face mirror (private):**
+[`StoneYeY/sa-latent-probe`](https://huggingface.co/StoneYeY/sa-latent-probe)
+
+```bash
+# Teammate access (after invite):
+git clone https://huggingface.co/StoneYeY/sa-latent-probe
+# or
+python -c "from huggingface_hub import snapshot_download; \
+  snapshot_download('StoneYeY/sa-latent-probe', repo_type='model')"
+```
+
+## Results — all 4 datasets
+
+7,090 clips: MAESTRO 2,000 (v3.0.0, 30 s windows) · Slakh 2,000 (30 s windows)
+· Groove 1,090 (full files) · FSD50K eval 2,000 (full files). SA3-medium VAE,
+bfloat16, chunked encoder.
+
+### Probe A — instrument / style classification
+
+| Dataset | Vocab (top-N) | Linear acc / f1 | MLP acc / f1 | Chance |
+|---|---|---|---|---|
+| FSD50K | 10 sound tags | 0.37 / 0.33 | **0.41 / 0.38** | 0.17 |
+| Groove | 10 drum styles | 0.50 / 0.38 | **0.65 / 0.53** | 0.41 |
+| Slakh | 10 instrument classes (rarest-non-universal heuristic) | 0.22 / 0.17 | **0.23 / 0.21** | 0.16 |
+
+Slakh's modest accuracy reflects the difficulty of the task (almost every
+track contains Bass / Drums / Guitar / Piano; we predict the rarest non-universal
+class), not a model failure.
+
+### Probe B — loudness regression (R²)
+
+| Dataset | RMS linear → MLP | LUFS linear → MLP |
+/home/stoneyey/Desktop/sa_latent_probe/src/probe.py
+/home/stoneyey/Desktop/sa_latent_probe/src/audio_stats.py
+/home/stoneyey/Desktop/sa_latent_probe/src/vae_loader.py
+/home/stoneyey/Desktop/sa_latent_probe/src/probe_data.py
+/home/stoneyey/Desktop/sa_latent_probe/src/labels.py
+/home/stoneyey/Desktop/sa_latent_probe/src/datasets.py
+/home/stoneyey/Desktop/sa_latent_probe/src/pianoroll.py
+/home/stoneyey/Desktop/sa_latent_probe/src/audio_io.py
+/home/stoneyey/Desktop/sa_latent_probe/src/__init__.py
+/home/stoneyey/Desktop/sa_latent_probe/scripts/05_embeddings.py
+/home/stoneyey/Desktop/sa_latent_probe/scripts/01_extract_latents.py
+/home/stoneyey/Desktop/sa_latent_probe/scripts/02_audio_stats.py
+/home/stoneyey/Desktop/sa_latent_probe/scripts/03_pianoroll.py
+/home/stoneyey/Desktop/sa_latent_probe/scripts/04_train_probes.py
+/home/stoneyey/Desktop/sa_latent_probe/scripts/00_benchmark.py
+/home/stoneyey/Desktop/sa_latent_probe/scripts/06_cross_dataset.py
+
+### MAESTRO wav count
+21
+
+### smoke test in env stablenew
+versions 2.8.0+cu128 ?
+No module named 'flash_attn'
+flash_attn not installed, disabling Flash Attention
+No module named 'flash_attn'
+flash_attn varlen/bert_padding not available, disabling varlen attention
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/lightning_fabric/__init__.py:40: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)

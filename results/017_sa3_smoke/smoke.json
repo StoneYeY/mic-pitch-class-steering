@@ -1,0 +1,9 @@
+{
+ "model": "stabilityai/stable-audio-3-medium-base",
+ "steps": 50,
+ "cfg": 7.0,
+ "dur": 5.0,
+ "torch": "2.8.0+cu128",
+ "stable_audio_tools": "?",
+ "generate_sig": "(model, steps: int = 250, cfg_scale=6, conditioning: dict = None, conditioning_tensors: Optional[dict] = None, negative_conditioning: dict = None, negative_conditioning_tensors: Optional[dict] = None, batch_size: int = 1, sample_size: int = 2097152, sample_rate: int = 48000, seed: int = -1, device: str = 'cuda', init_audio: Optional[Tuple[int, torch.Tensor]] = None, init_noise_level: float = 1.0, return_latents=False, inversion_params: dict = None, adapt_duration_to_conditioning: Optional[bool] = None, duration_padding_sec: float = 6.0, use_effective_length_for_schedule: Optional[bool] = None,"
+}
