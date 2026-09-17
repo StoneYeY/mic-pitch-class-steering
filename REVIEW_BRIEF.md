@@ -177,3 +177,18 @@ cd paper && latexmk -pdf main.tex
 | 听评 | 未做；§5 加 "perceptual validation of the CLAP and Fréchet-distance quality proxies … left to future work" |
 
 未改：题目；作者信息；`\copyrightnotice` 仍注释（camera-ready 再开）。
+
+## 11. Stable Audio 3 迁移实验（v3，2026-09-16 晚）
+
+**动机：** 评审/作者疑问"为什么用 SAO 1.0 而不是已发布数月的 SA3"。§3 已加说明；同时在 `stable-audio-3-medium-base`（2.3B，rectified flow，256 通道 latent @ 10.8 fps，50 步 Euler，CFG 7，默认 log-SNR-shift 时间表）上复现 Exp A/C 和一个小 Exp B。发布版 `stable-audio-3-medium` 是对抗式 post-training 的 8 步采样器，不适合做 schedule 分析，故用 base。
+
+**实现：** `w2s/sa3.py`（`SA3Generator`，与 `W2SGenerator` 同接口；用 `generate_diffusion_cond_inpaint`，callback 里 in-place 修改 `x_i`；轨迹行 i = 更新后 latent x_{i+1}）、`w2s/backend.py`（`W2S_BACKEND=sa3`）、`w2s/scripts/sa3_encode_maestro.py`（MAESTRO v3 120 首 × 6 段 10 s → 608 train / 108 val）、`sa3_train_probe.py`（同 MLSP CNN 结构 248k 参数，噪声增广按 RF 插值 t∈{0,.1,…,.6}）。Job 016/017/017b/018b/019c/020c/021。GPU 环境 `stablenew`（需 `conda run -n stablenew`）。
+
+**结果（`results/018b_sa3_probe`, `019c_sa3_expA`, `020c_sa3_expC`, `021_sa3_expB`）：**
+- probe 验证集 micro-F1 0.59（t=0），随噪声下降（t=0.41→0.48，0.6→0.32）。
+- Exp A：F1 沿真实轨迹单调升，在 76% 处才到峰值 95%；R_t 与 F1 相关 0.93（单轨迹中位数 0.89）。
+- Exp C：ΔC 在前 40% 步平坦 ≈0.08（此处时间表 t≥0.95，probe 处于 chance），后 20% 掉到 0.017；corr(R_t, ΔC) = −0.77。**甜点区在轨迹起点——与 SAO 相反。** bootstrap 峰中位数 position 10，区间 [10,18]。
+- Exp B（50 配对 trial，K=15）：SAO-unguided 0.09 / Early 0.44 / Mid 0.40 / Late 0.18 / Uniform 0.43 / MLSP 窗 0.28 / **RAPG-cal(ΔC)（步 4–18）0.47** / Top-K const 0.44；RAPG vs MLSP 窗 p=3.5e-5；voiced coverage 0.78 vs 0.66（无 gaming）。
+- 论文：新增 §4.5 + Fig. 3（`fig_sa3.pdf`，含顶部噪声水平刻度），摘要/贡献 2/§3/§5 同步；结论改为"甜点区是模型特定的，固定窗不迁移，测 ΔC 再放预算的流程迁移"。正文仍 4 页 + 参考文献 1 页；数字由 `make_figures.py --sa3A/--sa3C/--sa3B` 生成（`numbers_sa3.tex`）。
+
+**注意点：** SA3 的 Gaussian-proxy 变体（Exp A 的 `gauss_proxy`）在 RF 参数化下无意义（未用于论文）；Exp C 在 SA3 上未算 CLAP（`W2S_CLAP=0`）。
