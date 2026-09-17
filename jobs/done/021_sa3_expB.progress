@@ -1,9 +1,3 @@
-W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_fn = compiler_fn(gm, example_inputs)
-W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_dynamo/repro/after_dynamo.py", line 150, in __call__
-W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]     compiled_gm = compiler_fn(gm, example_inputs)
-W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/__init__.py", line 2380, in __call__
 W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]     return compile_fx(model_, inputs_, config_patches=self.config)
 W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]   File "/home/stoneyey/anaconda3/envs/stablenew/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2002, in compile_fx
@@ -78,3 +72,9 @@ W0916 20:00:43.715000 3410711 site-packages/torch/_dynamo/convert_frame.py:1339]
   180 runs (471s, 2.6s/run)  last: test-p04-alternating-s0 late coh=0.500 clap=nan upd=15
   200 runs (524s, 2.6s/run)  last: test-p04-zigzag-s0 topk_dc_const coh=0.467 clap=nan upd=15
   220 runs (576s, 2.6s/run)  last: test-p05-alternating-s0 late coh=0.143 clap=nan upd=15
+  240 runs (628s, 2.6s/run)  last: test-p05-zigzag-s0 topk_dc_const coh=0.255 clap=nan upd=15
+  260 runs (680s, 2.6s/run)  last: test-p06-alternating-s0 late coh=0.007 clap=nan upd=15
+  280 runs (733s, 2.6s/run)  last: test-p06-zigzag-s0 topk_dc_const coh=0.235 clap=nan upd=15
+  300 runs (785s, 2.6s/run)  last: test-p07-alternating-s0 late coh=0.000 clap=nan upd=15
+  320 runs (837s, 2.6s/run)  last: test-p07-zigzag-s0 topk_dc_const coh=0.460 clap=nan upd=15
+  340 runs (889s, 2.6s/run)  last: test-p08-alternating-s0 late coh=0.054 clap=nan upd=15
