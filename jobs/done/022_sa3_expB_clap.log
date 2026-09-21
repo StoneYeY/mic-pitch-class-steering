@@ -1,0 +1,36 @@
+# job=022_sa3_expB_clap exit=0 duration_s=31 host=stone-ye-PC finished=2026-09-21T17:44:16-04:00
+# (last 4000 lines; full log: runner/logs/022_sa3_expB_clap.full.log on stone-ye-PC)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 27508.68it/s]
+filled clap for 400/400 rows (0 wavs missing)
+               coherence_mlsp   clap
+method                              
+early                   0.440  0.331
+late                    0.181  0.328
+mid                     0.403  0.353
+mlsp                    0.277  0.361
+rapg_cal_dc             0.466  0.330
+sao                     0.094  0.375
+topk_dc_const           0.442  0.335
+uniform                 0.434  0.338
+          method   n  coherence_mlsp  chroma_cos   clap  n_updates  runtime_s  p_coherence_mlsp_vs_mlsp_holm  p_clap_vs_sao_holm
+0            sao  50           0.094       0.225  0.375        0.0      1.439                          0.000                 NaN
+1          early  50           0.440       0.474  0.331       15.0      1.457                          0.001               0.002
+2            mid  49           0.403       0.446  0.353       15.0      1.454                          0.002               0.006
+3           late  49           0.181       0.339  0.328       15.0      1.455                          0.004               0.000
+4        uniform  50           0.434       0.491  0.338       15.0      1.455                          0.000               0.006
+5           mlsp  50           0.277       0.396  0.361       15.0      1.455                            NaN               0.086
+6    rapg_cal_dc  50           0.466       0.488  0.330       15.0      1.455                          0.000               0.006
+7  topk_dc_const  50           0.442       0.476  0.335       15.0      1.455                          0.002               0.007
+
+per-melody coherence:
+ melody         alternating  ascending  descending  pedal  zigzag
+method                                                          
+early                0.459      0.420       0.307  0.673   0.340
+late                 0.127      0.182       0.133  0.283   0.182
+mid                  0.397      0.395       0.281  0.604   0.336
+mlsp                 0.221      0.308       0.216  0.399   0.241
+rapg_cal_dc          0.442      0.399       0.328  0.804   0.354
+sao                  0.069      0.107       0.052  0.145   0.097
+topk_dc_const        0.478      0.363       0.326  0.733   0.311
+uniform              0.369      0.428       0.341  0.690   0.343
+DONE
