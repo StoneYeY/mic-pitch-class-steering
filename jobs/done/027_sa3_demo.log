@@ -1,0 +1,15 @@
+# job=027_sa3_demo exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-21T18:33:36-04:00
+# (last 4000 lines; full log: runner/logs/027_sa3_demo.full.log on stone-ye-PC)
+test-p00-ascending-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p02-alternating-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p04-pedal-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+test-p06-zigzag-s0: ['sao', 'mlsp', 'rapg_cal_dc']
+missing runs/021_sa3_expB/test-p10-descending-s0__sao.wav
+missing runs/021_sa3_expB/test-p10-descending-s0__mlsp.wav
+missing runs/021_sa3_expB/test-p10-descending-s0__rapg_cal_dc.wav
+test-p10-descending-s0: []
+missing runs/021_sa3_expB/test-p12-ascending-s0__sao.wav
+missing runs/021_sa3_expB/test-p12-ascending-s0__mlsp.wav
+missing runs/021_sa3_expB/test-p12-ascending-s0__rapg_cal_dc.wav
+test-p12-ascending-s0: []
+wrote 6 items, 17 demo wavs
