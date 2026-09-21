@@ -1,3 +1,5 @@
+# job=026_sao_legacy_mlsp exit=0 duration_s=996 host=stone-ye-PC finished=2026-09-21T18:33:03-04:00
+# (last 4000 lines; full log: runner/logs/026_sao_legacy_mlsp.full.log on stone-ye-PC)
   MLSP-fixed ....................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.  K=15
 Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]Loading pipeline components...:  33%|███▎      | 2/6 [00:00<00:00,  8.39it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
   WeightNorm.apply(module, name, dim)
@@ -33,3 +35,14 @@ split=test trials=225 methods=['mlsp'] -> 225 runs (0 done)
   160 runs (700s, 4.4s/run)  last: test-p10-pedal-s0 mlsp coh=0.256 clap=0.205 upd=15
   180 runs (787s, 4.4s/run)  last: test-p11-zigzag-s2 mlsp coh=0.283 clap=0.090 upd=15
   200 runs (874s, 4.4s/run)  last: test-p13-descending-s1 mlsp coh=0.148 clap=0.467 upd=15
+  220 runs (962s, 4.4s/run)  last: test-p14-pedal-s0 mlsp coh=0.500 clap=0.194 upd=15
+  method    n  fad_clap_maestro  fad_clap_sao
+0   mlsp  225             0.837           0.0
+  method    n  coherence_mlsp  chroma_cos   clap  n_updates  runtime_s  fad_clap_maestro
+0   mlsp  225           0.259       0.356  0.311       15.0      3.212             0.837
+
+per-melody coherence:
+ melody  alternating  ascending  descending  pedal  zigzag
+method                                                   
+mlsp          0.309        0.2         0.2  0.391   0.195
+done: 225 new runs in 985s
