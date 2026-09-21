@@ -1,0 +1,20 @@
+# job=028_sa3_expC_clap exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-21T18:34:11-04:00
+# (last 4000 lines; full log: runner/logs/028_sa3_expC_clap.full.log on stone-ye-PC)
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 26867.30it/s]
+rescoring 650 rows from runs/020c_sa3_expC
+filled clap for 650/650 rows (0 wavs missing)
+    position  progress   R_at  d_coherence_mlsp  d_clap  logmel_l1
+0          2      0.06  0.098             0.074  -0.010      1.279
+1          6      0.14  0.097             0.075  -0.007      1.286
+2         10      0.22  0.096             0.089  -0.006      1.280
+3         14      0.30  0.093             0.082  -0.004      1.236
+4         18      0.38  0.091             0.086  -0.006      1.207
+5         22      0.46  0.091             0.040   0.001      1.076
+6         26      0.54  0.101             0.032   0.002      0.759
+7         30      0.62  0.130             0.038   0.008      0.577
+8         34      0.70  0.187             0.019   0.010      0.495
+9         38      0.78  0.249             0.022   0.006      0.469
+10        42      0.86  0.286             0.015   0.001      0.475
+11        46      0.94  0.301             0.018   0.004      0.493
+argmax d_coh at progress 0.22 | argmin d_clap at progress 0.06
+DONE
