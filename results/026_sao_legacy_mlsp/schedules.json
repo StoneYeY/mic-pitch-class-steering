@@ -1,0 +1,29 @@
+{
+ "mlsp": {
+  "name": "MLSP-fixed",
+  "steps": [
+   20,
+   22,
+   24,
+   26,
+   28,
+   30,
+   32,
+   34,
+   36,
+   38,
+   40,
+   42,
+   44,
+   46,
+   48
+  ],
+  "lam": 0.05,
+  "adaptive_strength": false,
+  "r_bar": 1.0,
+  "eta": null,
+  "budget": null,
+  "N": 50,
+  "meta": {}
+ }
+}
