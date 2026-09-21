@@ -70,6 +70,7 @@ class SA3Generator:
         self.device = torch.device(device) if device is not None else next(probe.parameters()).device
         self.alpha = alpha
         self.reliability_mode = reliability_mode
+        self.random_grad = False
         self.sr = int(cfg["sample_rate"])
         self.hop = int(cfg["model"]["pretransform"]["config"]["downsampling_ratio"])   # 4096
         self.latent_dim = int(cfg["model"]["pretransform"]["config"]["latent_dim"])   # 256
@@ -134,6 +135,9 @@ class SA3Generator:
                 g_rms = g_reg.pow(2).mean().sqrt(); z_rms = z_reg.pow(2).mean().sqrt()
                 update = lam * z_rms * grad / (g_rms + 1e-8)
                 update = torch.clamp(update, -self.alpha * z_rms, self.alpha * z_rms)
+                if self.random_grad:   # control: a random direction with exactly the norm of the probe update
+                    rnd = torch.randn_like(update)
+                    update = rnd * (update.norm() / (rnd.norm() + 1e-8))
                 with torch.no_grad():
                     x.sub_(update.to(x.dtype))                                   # in place -> reaches the sampler
                 state["n_used"] += 1

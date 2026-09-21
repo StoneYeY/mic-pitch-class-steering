@@ -49,6 +49,7 @@ class W2SGenerator:
         self.device = torch.device(device) if device is not None else next(probe.parameters()).device
         self.alpha = alpha                       # MAX_UPDATE_RATIO in MLSP
         self.reliability_mode = reliability_mode
+        self.random_grad = False                 # set True for the random-direction control (same update norm)
         self.sr = int(pipe.vae.config.sampling_rate)
         self.hop = int(pipe.vae.hop_length)      # 2048 for SAO
         self.fps = self.sr / self.hop            # 21.53 Hz
@@ -111,6 +112,9 @@ class W2SGenerator:
                 z_rms = z_reg.pow(2).mean().sqrt()
                 update = lam * z_rms * grad / (g_rms + 1e-8)
                 update = torch.clamp(update, -self.alpha * z_rms, self.alpha * z_rms)
+                if self.random_grad:   # control: a random direction with exactly the norm of the probe update
+                    rnd = torch.randn_like(update)
+                    update = rnd * (update.norm() / (rnd.norm() + 1e-8))
                 with torch.no_grad():
                     latents.sub_(update.to(latents.dtype))
                 state["n_used"] += 1

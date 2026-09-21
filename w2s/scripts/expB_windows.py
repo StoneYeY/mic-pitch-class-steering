@@ -45,6 +45,7 @@ LAM_RAPG = float(os.environ.get("LAMBDA_RAPG", str(LAM)))
 EXPA = Path(os.environ.get("EXPA_DIR", "results/003_expA_trajectories"))
 EXPC = Path(os.environ.get("EXPC_DIR", "results/004_expC_burst"))
 REF_DIR = Path(os.path.expanduser(os.environ.get("REF_DIR", "~/Desktop/MIC/outputs/reference_audio")))
+TARGET_FPS = float(os.environ["TARGET_FPS"]) if os.environ.get("TARGET_FPS") else None   # 204.8 reproduces the legacy MLSP placement
 STEPS = 50
 
 
@@ -114,7 +115,7 @@ def main():
             if (tr.tid, m) in done:
                 continue
             wav = RUNS / f"{tr.tid}__{m}.wav"
-            r = gen.run(tr.prompt, tr.seed, mel, s)
+            r = gen.run(tr.prompt, tr.seed, mel, s, target_fps=TARGET_FPS)
             sf.write(str(wav), r.audio, r.sr)
             e = ev.evaluate(r.audio, gen.sr, mel, tgt_aud, n_aud, tr.prompt, wav)
             if "_clap_emb" in e:
