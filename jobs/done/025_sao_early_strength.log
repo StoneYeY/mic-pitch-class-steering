@@ -1,3 +1,50 @@
+# job=025_sao_early_strength exit=0 duration_s=1359 host=stone-ye-PC finished=2026-09-21T18:16:24-04:00
+# (last 4000 lines; full log: runner/logs/025_sao_early_strength.full.log on stone-ye-PC)
+### lambda=alpha=0.2
+         SAO ..................................................  K=0
+       Early ###############...................................  K=15
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]Loading pipeline components...:  17%|█▋        | 1/6 [00:00<00:03,  1.62it/s]
+Loading weights:   0%|          | 0/99 [00:00<?, ?it/s][A
+Loading weights:  83%|████████▎ | 82/99 [00:00<00:00, 790.47it/s][ALoading weights: 100%|██████████| 99/99 [00:00<00:00, 692.15it/s]
+Loading pipeline components...:  33%|███▎      | 2/6 [00:00<00:01,  2.79it/s]/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading pipeline components...:  83%|████████▎ | 5/6 [00:01<00:00,  5.22it/s]Loading pipeline components...: 100%|██████████| 6/6 [00:01<00:00,  5.53it/s]Loading pipeline components...: 100%|██████████| 6/6 [00:01<00:00,  4.54it/s]
+[backend] alpha=0.2 random_grad=False
+Loading weights:   0%|          | 0/447 [00:00<?, ?it/s]Loading weights: 100%|██████████| 447/447 [00:00<00:00, 22010.49it/s]
+[evalclip] CLAP loaded: laion/clap-htsat-unfused on cuda:0
+split=dev trials=50 methods=['sao', 'early'] -> 100 runs (0 done)
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.0.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.0 and t0=0.3.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+/home/stoneyey/anaconda3/envs/mic/lib/python3.10/site-packages/torchsde/_brownian/brownian_interval.py:602: UserWarning: Should have tb>=t0 but got tb=0.29999998211860657 and t0=0.3.
+  warnings.warn(f"Should have {tb_name}>=t0 but got {tb_name}={tb} and t0={self._start}.")
+  20 runs (89s, 4.5s/run)  last: dev-p00-zigzag-s1 early coh=0.158 clap=0.195 upd=15
+  40 runs (178s, 4.4s/run)  last: dev-p01-zigzag-s1 early coh=0.226 clap=0.202 upd=15
+  60 runs (266s, 4.4s/run)  last: dev-p02-zigzag-s1 early coh=0.138 clap=0.189 upd=15
+  80 runs (354s, 4.4s/run)  last: dev-p03-zigzag-s1 early coh=0.256 clap=0.246 upd=15
+  100 runs (441s, 4.4s/run)  last: dev-p04-zigzag-s1 early coh=0.200 clap=0.292 upd=15
+reference embeddings: (600, 512) from 600 clips
+  method   n  fad_clap_maestro  fad_clap_sao
+0    sao  50             0.882         0.000
+1  early  50             0.806         0.124
+  method   n  coherence_mlsp  chroma_cos   clap  n_updates  runtime_s  fad_clap_maestro  p_clap_vs_sao_holm
+0    sao  50           0.119       0.289  0.207        0.0      3.195             0.882                 NaN
+1  early  50           0.230       0.397  0.187       15.0      3.215             0.806               0.001
+
+per-melody coherence:
+ melody  alternating  ascending  descending  pedal  zigzag
+method                                                   
 early         0.196      0.147       0.199  0.430   0.177
 sao           0.181      0.114       0.125  0.034   0.141
 done: 100 new runs in 451s
@@ -78,3 +125,18 @@ split=dev trials=50 methods=['sao', 'early'] -> 100 runs (0 done)
   20 runs (87s, 4.4s/run)  last: dev-p00-zigzag-s1 early coh=0.565 clap=0.094 upd=15
   40 runs (175s, 4.4s/run)  last: dev-p01-zigzag-s1 early coh=0.384 clap=0.187 upd=15
   60 runs (262s, 4.4s/run)  last: dev-p02-zigzag-s1 early coh=0.274 clap=0.201 upd=15
+  80 runs (349s, 4.4s/run)  last: dev-p03-zigzag-s1 early coh=0.284 clap=0.174 upd=15
+  100 runs (436s, 4.4s/run)  last: dev-p04-zigzag-s1 early coh=0.165 clap=0.216 upd=15
+  method   n  fad_clap_maestro  fad_clap_sao
+0    sao  50             0.882         0.000
+1  early  50             0.748         0.265
+  method   n  coherence_mlsp  chroma_cos   clap  n_updates  runtime_s  fad_clap_maestro  p_clap_vs_sao_holm
+0    sao  50           0.119       0.289  0.207        0.0      3.182             0.882                 NaN
+1  early  50           0.411       0.476  0.173       15.0      3.213             0.748                 0.0
+
+per-melody coherence:
+ melody  alternating  ascending  descending  pedal  zigzag
+method                                                   
+early         0.475      0.309       0.297  0.588   0.385
+sao           0.181      0.114       0.125  0.034   0.141
+done: 100 new runs in 437s
