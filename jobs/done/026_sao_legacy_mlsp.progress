@@ -29,3 +29,7 @@ split=test trials=225 methods=['mlsp'] -> 225 runs (0 done)
   80 runs (351s, 4.4s/run)  last: test-p05-descending-s1 mlsp coh=0.189 clap=0.314 upd=15
   100 runs (439s, 4.4s/run)  last: test-p06-pedal-s0 mlsp coh=0.488 clap=0.225 upd=15
   120 runs (526s, 4.4s/run)  last: test-p07-zigzag-s2 mlsp coh=0.253 clap=0.340 upd=15
+  140 runs (613s, 4.4s/run)  last: test-p09-descending-s1 mlsp coh=0.178 clap=0.462 upd=15
+  160 runs (700s, 4.4s/run)  last: test-p10-pedal-s0 mlsp coh=0.256 clap=0.205 upd=15
+  180 runs (787s, 4.4s/run)  last: test-p11-zigzag-s2 mlsp coh=0.283 clap=0.090 upd=15
+  200 runs (874s, 4.4s/run)  last: test-p13-descending-s1 mlsp coh=0.148 clap=0.467 upd=15
