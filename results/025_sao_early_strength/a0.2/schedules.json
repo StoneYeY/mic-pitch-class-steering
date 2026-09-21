@@ -1,0 +1,40 @@
+{
+ "sao": {
+  "name": "SAO",
+  "steps": [],
+  "lam": 0.0,
+  "adaptive_strength": false,
+  "r_bar": 1.0,
+  "eta": null,
+  "budget": null,
+  "N": 50,
+  "meta": {}
+ },
+ "early": {
+  "name": "Early",
+  "steps": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ],
+  "lam": 0.2,
+  "adaptive_strength": false,
+  "r_bar": 1.0,
+  "eta": null,
+  "budget": null,
+  "N": 50,
+  "meta": {}
+ }
+}
