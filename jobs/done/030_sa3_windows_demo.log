@@ -1,0 +1,15 @@
+# job=030_sa3_windows_demo exit=0 duration_s=30 host=stone-ye-PC finished=2026-09-23T16:47:45-04:00
+# (last 4000 lines; full log: runner/logs/030_sa3_windows_demo.full.log on stone-ye-PC)
+test-p00-ascending-s0: ['early', 'mid', 'late']
+test-p02-alternating-s0: ['early', 'mid', 'late']
+test-p04-pedal-s0: ['early', 'mid', 'late']
+test-p06-zigzag-s0: ['early', 'mid', 'late']
+missing runs/021_sa3_expB/test-p10-descending-s0__early.wav
+missing runs/021_sa3_expB/test-p10-descending-s0__mid.wav
+missing runs/021_sa3_expB/test-p10-descending-s0__late.wav
+test-p10-descending-s0: []
+missing runs/021_sa3_expB/test-p12-ascending-s0__early.wav
+missing runs/021_sa3_expB/test-p12-ascending-s0__mid.wav
+missing runs/021_sa3_expB/test-p12-ascending-s0__late.wav
+test-p12-ascending-s0: []
+wrote 6 items, 17 demo wavs
