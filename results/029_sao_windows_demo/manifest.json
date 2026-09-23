@@ -1,0 +1,75 @@
+{
+ "conditions": {
+  "early": "Early (0-14)",
+  "mid": "Mid (18-32)",
+  "late": "Late (35-49)"
+ },
+ "items": [
+  {
+   "prompt_id": 0,
+   "prompt": "Fast-paced Western Classical music with lively violin harmony, electric cello, piano and string accompaniments that are colourful, well-layered, dense, rich, full, pleasant, cheerful, merry and elegant.",
+   "melody": "ascending",
+   "target": "audio/target_ascending.demo.wav",
+   "clips": {
+    "early": "audio/test-p00-ascending-s0__early.demo.wav",
+    "mid": "audio/test-p00-ascending-s0__mid.demo.wav",
+    "late": "audio/test-p00-ascending-s0__late.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 2,
+   "prompt": "Classical music piece with a gentle piano tune and a theremin playing the main melody, creating a unique and heart-touching atmosphere suitable for an animation movie/TV series.",
+   "melody": "alternating",
+   "target": "audio/target_alternating.demo.wav",
+   "clips": {
+    "early": "audio/test-p02-alternating-s0__early.demo.wav",
+    "mid": "audio/test-p02-alternating-s0__mid.demo.wav",
+    "late": "audio/test-p02-alternating-s0__late.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 4,
+   "prompt": "A slow and captivating piano piece that evokes sombre and reflective emotions with simple yet effective motifs.",
+   "melody": "pedal",
+   "target": "audio/target_pedal.demo.wav",
+   "clips": {
+    "early": "audio/test-p04-pedal-s0__early.demo.wav",
+    "mid": "audio/test-p04-pedal-s0__mid.demo.wav",
+    "late": "audio/test-p04-pedal-s0__late.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 6,
+   "prompt": "A piano arpeggio melody with reverb and environmental sounds, suitable for amateur video intros or outros.",
+   "melody": "zigzag",
+   "target": "audio/target_zigzag.demo.wav",
+   "clips": {
+    "early": "audio/test-p06-zigzag-s0__early.demo.wav",
+    "mid": "audio/test-p06-zigzag-s0__mid.demo.wav",
+    "late": "audio/test-p06-zigzag-s0__late.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 10,
+   "prompt": "Cozy jazz piano in a small club, late night",
+   "melody": "descending",
+   "target": "audio/target_descending.demo.wav",
+   "clips": {
+    "early": "audio/test-p10-descending-s0__early.demo.wav",
+    "mid": "audio/test-p10-descending-s0__mid.demo.wav",
+    "late": "audio/test-p10-descending-s0__late.demo.wav"
+   }
+  },
+  {
+   "prompt_id": 12,
+   "prompt": "Melancholic piano ballad, rainy day mood",
+   "melody": "ascending",
+   "target": "audio/target_ascending.demo.wav",
+   "clips": {
+    "early": "audio/test-p12-ascending-s0__early.demo.wav",
+    "mid": "audio/test-p12-ascending-s0__mid.demo.wav",
+    "late": "audio/test-p12-ascending-s0__late.demo.wav"
+   }
+  }
+ ]
+}
