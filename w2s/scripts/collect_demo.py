@@ -21,7 +21,12 @@ RUNSB = Path(os.environ.get("EXPB_RUNS", "runs/009_expB_full"))
 OUT = Path(os.environ.get("W2S_RESULTS", "results/demo")); (OUT / "audio").mkdir(parents=True, exist_ok=True)
 # curated (prompt_id, melody) pairs spanning styles + melody types
 PAIRS = [(0, "ascending"), (2, "alternating"), (4, "pedal"), (6, "zigzag"), (10, "descending"), (12, "ascending")]
-CONDS = {"sao": "SAO (unguided)", "mlsp": "MLSP-fixed", "rapg_cal_dc": "RAPG-cal(dC)"}
+if os.environ.get("DEMO_PAIRS"):            # e.g. "0:ascending,2:alternating"
+    PAIRS = [(int(a), b) for a, b in (x.split(":") for x in os.environ["DEMO_PAIRS"].split(","))]
+LABELS = {"sao": "SAO (unguided)", "mlsp": "MLSP-fixed", "rapg_cal_dc": "RAPG-cal(dC)",
+          "early": "Early (0-14)", "mid": "Mid (18-32)", "late": "Late (35-49)", "uniform": "Uniform",
+          "topk_dc_const": "Top-K(dC), constant strength", "rapg_cal_f1": "Top-K(F1) + R-scaling", "rapg_on": "R-threshold (online)"}
+CONDS = {k: LABELS.get(k, k) for k in os.environ.get("DEMO_CONDS", "sao,mlsp,rapg_cal_dc").split(",")}
 
 
 def to_mp3(src: Path, dst: Path):
