@@ -1,1 +1,1 @@
-{"host":"stone-ye-PC","state":"idle","job":"","gpu":"NVIDIA GeForce RTX 5080, 15 MiB, 16303 MiB, 0 %","time":"2026-09-21T18:34:11-04:00","commit":"4b73edb","queue":39,"done":39}
+{"host":"stone-ye-PC","state":"running","job":"029_sao_windows_demo","gpu":"NVIDIA GeForce RTX 5080, 15 MiB, 16303 MiB, 0 %","time":"2026-09-23T16:46:37-04:00","commit":"a99387b","queue":41,"done":39}
