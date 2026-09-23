@@ -1,4 +1,4 @@
-<title>When to Steer Listening Test</title>
+<title>When to Steer — Audio Examples</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -125,6 +125,22 @@
 
   main .wrap { padding-top: 28px; padding-bottom: 48px; }
 
+  /* results at a glance */
+  .glance { padding: 20px 22px; margin-bottom: 26px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+  .glance h2 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 0 0 8px; letter-spacing: -.01em; }
+  .glance .claim { margin: 0 0 16px; color: var(--ink-2); max-width: 80ch; }
+  .glance .claim b { color: var(--ink); font-weight: 600; }
+  .figs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; margin-bottom: 18px; }
+  .fig { margin: 0; background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 8px; }
+  .fig img { display: block; width: 100%; height: auto; }
+  .fig figcaption { font-size: 12.5px; color: var(--ink-2); margin: 8px 2px 0; line-height: 1.4; }
+  .glance h3 { font-family: var(--display); font-size: 15px; font-weight: 700; margin: 14px 0 6px; }
+  .glance table { font-size: 13.5px; }
+  .glance td.steps { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); white-space: nowrap; }
+  .glance tr.hl td { background: var(--accent-soft); }
+  .glance .foot { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
+  .group-lbl { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 6px 0 -4px; }
+
   /* instructions */
   .howto {
     display: grid; grid-template-columns: 1fr 1fr; gap: 18px 32px; align-items: start;
@@ -221,6 +237,7 @@
 
   @media (max-width: 640px) {
     .howto { grid-template-columns: 1fr; }
+    .figs { grid-template-columns: 1fr; }
     .clip { grid-template-columns: 26px 40px 1fr; }
     .scale .q { min-width: 0; }
   }
@@ -231,12 +248,12 @@
   <div class="wrap">
     <p class="eyebrow">Pitch-class probe guidance &middot; Stable Audio Open 1.0 and Stable Audio 3 &middot; ICASSP 2027 submission</p>
     <h1>When to Steer</h1>
-    <p class="lede">Audio examples for <i>When to Steer: Sensitivity-Calibrated Probe Guidance for Controllable Music Diffusion</i>. Every version of an item was generated from the <b>same prompt, seed and target melody</b>; only the diffusion steps at which the pitch-class probe was allowed to steer differ.</p>
+    <p class="lede">Results and audio examples for <i>When to Steer: Sensitivity-Calibrated Probe Guidance for Controllable Music Diffusion</i>. Every version of an item was generated from the <b>same prompt, seed and target melody</b>; only the diffusion steps at which the pitch-class probe was allowed to steer differ.</p>
     <p class="links"><a href="https://github.com/StoneYeY/mic-pitch-class-steering/tree/icassp">Code (GitHub, branch <code>icassp</code>)</a> &middot; <a href="https://github.com/StoneYeY/mic-pitch-class-steering/tree/icassp/results">Per-run results (CSV)</a> &middot; <a href="https://github.com/StoneYeY/mic-pitch-class-steering/blob/icassp/paper/When_to_Steer_ICASSP2027_final.pdf">Paper (PDF)</a> &middot; <a href="https://github.com/StoneYeY/mic-pitch-class-steering/blob/icassp/demo/build_demo.py">How this page was built</a></p>
     <div class="topbar">
       <div class="tabs" role="tablist">
-        <button class="tab" role="tab" data-mode="labeled" aria-selected="true">Labeled demo</button>
-        <button class="tab" role="tab" data-mode="blind" aria-selected="false">Blind listening test</button>
+        <button class="tab" role="tab" data-mode="labeled" aria-selected="true">Audio examples</button>
+        <button class="tab" role="tab" data-mode="blind" aria-selected="false" hidden>Blind listening test</button>
         <button class="tab" role="tab" data-mode="tally" aria-selected="false" hidden>Tally</button>
       </div>
       <div class="rater">
@@ -270,8 +287,9 @@
     </section>
     <section class="done" id="done" hidden>
       <h2>All six items saved. Thank you.</h2>
-      <p>You can revise any rating; changes are saved again automatically. The <b>Labeled demo</b> tab now reveals which version was which.</p>
+      <p>You can revise any rating; changes are saved again automatically. The <b>Audio examples</b> tab now reveals which version was which.</p>
     </section>
+    <section class="glance" id="glance" hidden></section>
     <section class="selection" id="selection"></section>
     <div id="stations"></div>
     <section id="tally" hidden></section>
@@ -281,7 +299,7 @@
 <footer>
   <div class="wrap">
     <p>Clips are 5-second generations from Stable Audio Open 1.0 (50 EDM-DPM-solver steps, classifier-free guidance 4.0) and, in the second block, from the Stable Audio 3 medium base checkpoint (50 Euler steps, classifier-free guidance 7), downsampled to 22.05 kHz mono for the page. Prompts are held-out test captions; melodies are sequences of seven or eight quarter notes at 120 BPM.</p>
-    <p>All guided versions use the same budget of 15 probe updates and the same update rule; they differ only in which sampling steps are guided. Condition labels follow the paper: MLSP window = every second step from 20 to 48 (the schedule of the prior work); SCPG = the 15 steps where a single steering burst changes melodic coherence most, measured once per model on development prompts (steps 19&ndash;33 on Stable Audio Open, 4&ndash;18 on Stable Audio 3), shown here with reliability-scaled strength on both models.</p>
+    <p>All guided versions use the same budget of 15 probe updates and the same update rule; they differ only in which sampling steps are guided. Condition labels follow the paper: Early / Mid / Late = the fixed windows of Table 1 (steps 0&ndash;14, 18&ndash;32, 35&ndash;49); MLSP window = every second step from 20 to 48 (the schedule of the prior work); SCPG = the 15 steps where a single steering burst changes melodic coherence most, measured once per model on development prompts (steps 19&ndash;33 on Stable Audio Open, 4&ndash;18 on Stable Audio 3), shown here with reliability-scaled strength on both models.</p>
   </div>
 </footer>
 
@@ -290,7 +308,10 @@
 (() => {
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
-  const CONDS = Object.keys(DATA.conditions);           // sao, mlsp, rapg_cal_dc
+  const CONDS = Object.keys(DATA.conditions);           // blind-test conditions: sao, mlsp, rapg_cal_dc
+  const LCONDS = DATA.labeled_conditions || DATA.conditions;   // labeled view may show more (fixed windows)
+  const GROUPS = DATA.labeled_groups || [{ title: "", conds: Object.keys(LCONDS) }];
+  const escapeHTML = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
   const LETTERS = ["A", "B", "C"];
   const PERMS = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
   const NOTE_NAMES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
@@ -397,6 +418,34 @@
 
   // ---------- render ----------
   const stationsEl = $("#stations");
+  function labeledClip(cond, label, c, schedules, adaptive) {
+    return `<div class="clip labeled" data-cond="${cond}">
+            <button class="play" type="button" aria-pressed="false" aria-label="Play ${escapeHTML(label)}">${ICON_PLAY}${ICON_PAUSE}</button>
+            <div class="meta"><span class="cond">${label}</span>
+              <span class="nums">coherence <b>${c.coh.toFixed(2)}</b> &middot; chroma <b>${c.chroma.toFixed(2)}</b>${c.clap != null ? ` &middot; CLAP <b>${c.clap.toFixed(2)}</b>` : ""} &middot; ${c.n_updates} updates${adaptive && adaptive[cond] ? ", reliability-scaled" : ""}</span>
+              ${schedSVG(cond, schedules)}</div>
+            <div class="wavebox"><canvas></canvas><span class="time"></span></div>
+          </div>`;
+  }
+  function labeledClips(item, conditions, groups, schedules, adaptive) {
+    let html = "";
+    groups.forEach(g => {
+      const present = g.conds.filter(cond => item.clips[cond] && conditions[cond]);
+      if (!present.length) return;
+      if (g.title) html += `<div class="group-lbl">${g.title}</div>`;
+      present.forEach(cond => { html += labeledClip(cond, conditions[cond], item.clips[cond], schedules, adaptive); });
+    });
+    return html;
+  }
+  function renderGlance() {
+    const el = $("#glance"), G = DATA.glance;
+    if (!G) { el.hidden = true; return; }
+    const figs = (G.figures || []).map(f => `<figure class="fig"><img src="${f.src}" alt="${escapeHTML(f.alt || "")}"><figcaption>${f.caption}</figcaption></figure>`).join("");
+    const tables = (G.tables || []).map(t => `<h3>${t.title}</h3><div class="tablebox"><table><thead><tr><th>Condition</th><th class="steps">guided steps</th><th class="num">coherence &uarr;</th><th class="num">CLAP &uarr;</th></tr></thead><tbody>` +
+      t.rows.map(r => `<tr${r.hl ? ' class="hl"' : ""}><td>${r.label}</td><td class="steps">${r.steps}</td><td class="num">${r.coh}</td><td class="num">${r.clap}</td></tr>`).join("") + `</tbody></table></div>`).join("");
+    el.innerHTML = `<h2>Results at a glance</h2><p class="claim">${G.claim}</p><div class="figs">${figs}</div>${tables}${G.foot ? `<p class="foot">${G.foot}</p>` : ""}`;
+    el.hidden = false;
+  }
   function renderExtraModels() {
     (DATA.models || []).forEach(m => {
       const head = document.createElement("h2"); head.className = "model-head"; head.textContent = m.name; stationsEl.appendChild(head);
@@ -404,17 +453,7 @@
       m.items.forEach((item, idx) => {
         const sec = document.createElement("section"); sec.className = "station"; sec.dataset.item = m.id + ":" + item.id;
         const melTag = `${item.melody} &middot; ${item.notes.length} notes &middot; ${item.tempo | 0} BPM`;
-        let clips = "";
-        Object.keys(m.conditions).forEach(cond => {
-          const c = item.clips[cond]; if (!c) return;
-          clips += `<div class="clip labeled" data-cond="${cond}">
-            <button class="play" type="button" aria-pressed="false" aria-label="Play ${m.conditions[cond]}">${ICON_PLAY}${ICON_PAUSE}</button>
-            <div class="meta"><span class="cond">${m.conditions[cond]}</span>
-              <span class="nums">coherence <b>${c.coh.toFixed(2)}</b> &middot; chroma <b>${c.chroma.toFixed(2)}</b>${c.clap != null ? ` &middot; CLAP <b>${c.clap.toFixed(2)}</b>` : ""} &middot; ${c.n_updates} updates${m.adaptive && m.adaptive[cond] ? ", reliability-scaled" : ""}</span>
-              ${schedSVG(cond, m.schedules)}</div>
-            <div class="wavebox"><canvas></canvas><span class="time"></span></div>
-          </div>`;
-        });
+        const clips = labeledClips(item, m.conditions, m.groups || [{ title: "", conds: Object.keys(m.conditions) }], m.schedules, m.adaptive);
         sec.innerHTML = `
           <div class="station-head"><h2>${m.short} item ${idx + 1} <span>of ${m.items.length}</span></h2><span class="mel-tag">${melTag}</span></div>
           <p class="prompt">${item.prompt}</p>
@@ -437,6 +476,7 @@
     stationsEl.innerHTML = "";
     players.clear(); current = null;
     const labeled = state.mode === "labeled";
+    if (labeled) renderGlance(); else $("#glance").hidden = true;
     $("#selection").hidden = false;
     $("#selection").innerHTML = labeled
       ? `<b>How the examples were chosen.</b> ${DATA.selection_note}`
@@ -450,17 +490,9 @@
       const sec = document.createElement("section"); sec.className = "station"; sec.dataset.item = item.id;
       const melTag = `${item.melody} &middot; ${item.notes.length} notes &middot; ${item.tempo | 0} BPM`;
       let clips = "";
-      LETTERS.forEach(L => {
-        const cond = a.mapping[L], c = item.clips[cond];
-        if (labeled) {
-          clips += `<div class="clip labeled" data-letter="${L}">
-            <button class="play" type="button" aria-pressed="false" aria-label="Play ${DATA.conditions[cond]}">${ICON_PLAY}${ICON_PAUSE}</button>
-            <div class="meta"><span class="cond">${DATA.conditions[cond]}</span>
-              <span class="nums">coherence <b>${c.coh.toFixed(2)}</b> &middot; chroma <b>${c.chroma.toFixed(2)}</b>${c.clap != null ? ` &middot; CLAP <b>${c.clap.toFixed(2)}</b>` : ""} &middot; ${c.n_updates} updates${DATA.adaptive[cond] ? ", reliability-scaled" : ""}</span>
-              ${schedSVG(cond)}</div>
-            <div class="wavebox"><canvas></canvas><span class="time"></span></div>
-          </div>`;
-        } else {
+      if (labeled) clips = labeledClips(item, LCONDS, GROUPS, DATA.schedules, DATA.adaptive);
+      else LETTERS.forEach(L => {
+        {
           clips += `<div class="clip" data-letter="${L}">
             <div class="letter">${L}</div>
             <button class="play" type="button" aria-pressed="false" aria-label="Play version ${L}">${ICON_PLAY}${ICON_PAUSE}</button>
@@ -486,8 +518,8 @@
       // players
       makePlayer(item.id + "|target", item.target, $(".target .play", sec), null, null);
       $$(".clip", sec).forEach(el => {
-        const L = el.dataset.letter, cond = a.mapping[L];
-        const p = makePlayer(item.id + "|" + L, item.clips[cond].audio, $(".play", el), $("canvas", el), $(".time", el));
+        const cond = labeled ? el.dataset.cond : a.mapping[el.dataset.letter];
+        const p = makePlayer(item.id + "|" + (labeled ? cond : el.dataset.letter), item.clips[cond].audio, $(".play", el), $("canvas", el), $(".time", el));
         drawWave(p); decodePeaks(p);
       });
       if (labeled) return;
@@ -588,6 +620,7 @@
     state.mode = m;
     $$(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.mode === m)));
     $("#howto").hidden = m !== "blind";
+    $(".rater").hidden = m === "labeled";
     $("#tally").hidden = m !== "tally";
     stationsEl.hidden = m === "tally";
     if (m === "tally") { $("#done").hidden = true; $("#selection").hidden = true; renderTally(); } else render();
@@ -600,7 +633,7 @@
     setMode(t.dataset.mode);
   }));
   let revealOK = false;
-  function confirmReveal() { if (revealOK) return true; const t = $('.tab[data-mode="labeled"]'); if (t.dataset.armed) { revealOK = true; t.textContent = "Labeled demo"; delete t.dataset.armed; return true; } t.dataset.armed = "1"; t.textContent = "Reveal labels? Click again"; setTimeout(() => { if (t.dataset.armed) { delete t.dataset.armed; t.textContent = "Labeled demo"; } }, 4000); return false; }
+  function confirmReveal() { if (revealOK) return true; const t = $('.tab[data-mode="labeled"]'); if (t.dataset.armed) { revealOK = true; t.textContent = "Audio examples"; delete t.dataset.armed; return true; } t.dataset.armed = "1"; t.textContent = "Reveal labels? Click again"; setTimeout(() => { if (t.dataset.armed) { delete t.dataset.armed; t.textContent = "Audio examples"; } }, 4000); return false; }
 
   // ---------- header ----------
   $("#rater-id").textContent = state.rater;
@@ -610,6 +643,7 @@
 
   const h = location.hash.replace("#", "");
   if (h === "tally") $('.tab[data-mode="tally"]').hidden = false;
+  if (h === "blind" || h === "tally") $('.tab[data-mode="blind"]').hidden = false;   // the blind test is unlisted
   setMode(h === "blind" ? "blind" : h === "tally" ? "tally" : "labeled");
   revealOK = true;   // the labeled demo is the landing view; the blind test is opt-in
 

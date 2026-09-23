@@ -229,13 +229,14 @@ cd paper && latexmk -pdf main.tex
 - 相关工作补引：Stable Audio 3 (`evans2026stableaudio3`)、ARC post-training (`novack2025arc`)、SMITIN (`koo2024smitin`)、MusicGen、P2 weighting、h-space；MLSP 引用加 arXiv:2609.04516。
 - 其它：Fig. 1 顶部加噪声水平轴；Fig. 3(b) 加 ΔCLAP 右轴；hyperref 元数据（pdftitle/pdfauthor）；伦理声明移到第 5 页并提及 SA3 + Stability AI Community License；作者单位 Zang = "Independent Researcher"（与 arXiv:2609.04516 一致，**仍需作者确认**）；旋律描述改为 "5 melodies of 7–8 quarter notes (3.5–4 s)"（alternating 是 7 音，原文"eight-note"不准确）。
 
-### 12.4 Demo 页（`demo/template.html`、`demo/build_demo.py`、`docs/index.html`，GitHub Pages）
+### 12.4 Demo 页（`demo/template.html`、`demo/build_demo.py`、`docs/index.html`，GitHub Pages；v2 于 9/23 晚重做为"结果 demo"）
 
-- 默认 **Labeled demo**（与 §6 "no human subjects" 一致）；Blind listening test 改为第二个 tab，并加 "Where ratings go" 说明：评分只存本地浏览器，不进论文。
-- 顶部链接行兑现脚注承诺：Code (branch icassp) / Per-run results (CSV) / Paper (PDF) / How this page was built。
-- 加 "How the examples were chosen"：6 个 prompt–melody 对在听之前固定（test prompts 0,2,4,6,10,12，seed 0），覆盖 5 条旋律，无挑选；225 trial 的逐条指标在 CSV。
-- 加 **SA3 对比块**（4 个 item：unguided / MLSP 窗 / SCPG+R-scaling 步 4–18），页脚写明两个模型的采样设置与 SCPG 步数（SAO 19–33、SA3 4–18）。
-- 网页版（claude.ai artifact，version 2）与 GitHub Pages 内容相同；后者评分只用 localStorage。
+- 落地页现在是 **Results and audio examples**，不再是听评测试：标题 "When to Steer — Audio Examples"；顶部 "Results at a glance" = 一段结论 + 论文 Fig. 1 / Fig. 3（从 `paper/fig_*.pdf` 栅格化嵌入）+ 两张测试集均值表（SAO n=225 = Table 1；SA3 n=50 = §4.5），数字直接读自 `results/*/table.csv`。
+- 每个 item 的带标签音频从 3 条扩到 **6 条**：Unguided；Early / Mid / Late 固定窗（job 029/030 从 Exp B 的 wav 收集，同一 seed）；MLSP 窗；SCPG + R-scaling。这样 "放置是主因"（Early 0.166 / Mid 0.424 / Late 0.315，同预算）在页面上可以直接听出来，而不只是看表。每条 clip 标出引导步、coherence / chroma / CLAP。
+- 顶部链接行兑现脚注承诺：Code (branch icassp) / Per-run results (CSV) / Paper (PDF) / How this page was built；"How the examples were chosen"：6 对 prompt–melody 在听之前固定（test prompts 0,2,4,6,10,12，seed 0），无挑选。
+- 盲测（A/B/C + MOS）保留但**不在页面上显示**，只能通过 `#blind` 打开；评分只存本地浏览器，页内注明不属于论文（§6 无人类被试）。评分者 ID / 进度条在结果视图中隐藏。
+- SA3 对比块 4 item，同样 6 条；页脚写明两模型采样设置、窗口定义与 SCPG 步数（SAO 19–33、SA3 4–18）。
+- claude.ai artifact（version 3）与 GitHub Pages 内容相同；后者评分只用 localStorage。
 
 ### 12.5 未做 / 作者侧待办
 
