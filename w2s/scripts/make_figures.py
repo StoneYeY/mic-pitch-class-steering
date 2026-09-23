@@ -22,13 +22,13 @@ plt.rcParams.update({"font.size": 8, "axes.titlesize": 8.5, "axes.labelsize": 8,
                      "axes.spines.top": False, "axes.spines.right": False})
 C = {"raw": "#1f4e79", "proxy": "#8c8c8c", "R": "#0e7c6b", "dcoh": "#1f4e79", "dclap": "#b8602a"}
 NAMES = {"sao": "SAO (unguided)", "early": "Early (0--14)", "mid": "Mid (18--32)", "late": "Late (35--49)",
-         "uniform": "Uniform", "mlsp": "MLSP-fixed", "rapg_cal_f1": "RAPG-cal ($F_1$)",
-         "rapg_cal_dc": "RAPG-cal ($\\Delta C$)", "rapg_on": "RAPG-online", "topk_dc_const": "Top-$K$($\\Delta C$), const.\\ $\\lambda$"}
+         "uniform": "Uniform", "mlsp": "MLSP-fixed (20--48)", "rapg_cal_f1": "Top-$K$($F_1$) + $R$-scaling",
+         "rapg_cal_dc": "SCPG + $R$-scaling", "rapg_on": "$R$-threshold (online)", "topk_dc_const": "SCPG: Top-$K$($\\Delta C$)"}
 
 
 def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path):
     fig, axes = plt.subplots(1, 2, figsize=(3.45, 2.6), gridspec_kw=dict(hspace=.5))
-    fig, (a, b) = plt.subplots(2, 1, figsize=(3.45, 3.3), sharex=True)
+    fig, (a, b) = plt.subplots(2, 1, figsize=(3.45, 2.5), sharex=True)
     s = pd.read_csv(expA / "summary.csv")
     raw, prox = s[s.variant == "raw"].sort_values("row"), s[s.variant == "gauss_proxy"].sort_values("row")
     a.plot(raw.progress, raw.f1, color=C["raw"], lw=1.4, label="probe $F_1$ (real trajectory)")
@@ -37,8 +37,19 @@ def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path):
     a2 = a.twinx(); a2.spines.right.set_visible(True)
     a2.plot(raw.progress, raw.R_entropy, color=C["R"], lw=1.4, label="reliability $R_t$")
     a2.set_ylabel("$R_t$", color=C["R"]); a2.tick_params(axis="y", colors=C["R"])
-    a.set_ylabel("micro-$F_1$"); a.set_title("(a) decodability along real SAO trajectories", loc="left")
+    a.set_ylabel("micro-$F_1$"); a.set_title("(a) decodability along real SAO trajectories", loc="left", pad=16)
     a.set_ylim(bottom=0)
+    # noise level of the stored latents, as the flow-time equivalent t = sigma/(1+sigma) with sigma = noise/signal rms
+    try:
+        rms0 = float(np.mean([x["rms0"] for x in json.load(open(expA / "corr.json"))["runs"]]))
+        sig = np.sqrt(np.maximum(raw.rms.values ** 2 - rms0 ** 2, 0)) / rms0; tflow = sig / (1 + sig)
+        top = a.secondary_xaxis("top")
+        ticks_t = [0.99, 0.95, 0.75, 0.5]
+        top.set_xticks([float(raw.progress.values[int(np.argmin(np.abs(tflow - t)))]) for t in ticks_t])
+        top.set_xticklabels([f"{t:.2f}" for t in ticks_t], fontsize=6); top.tick_params(length=2, pad=1)
+        top.set_xlabel("noise level $t$ (flow-time equivalent)", fontsize=6.5, labelpad=1)
+    except Exception as e:  # noqa: BLE001
+        print("no noise axis:", e)
     h1, l1 = a.get_legend_handles_labels(); h2, l2 = a2.get_legend_handles_labels()
     a.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False, fontsize=6.2)
     bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
@@ -61,7 +72,7 @@ def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path):
         b.legend(loc="upper left", frameon=False)
     if schedules:   # strip of guided steps
         y0 = b.get_ylim()[0]
-        for i, (k, lab) in enumerate((("early", "Early"), ("mlsp", "MLSP"), ("rapg_cal_dc", "RAPG"))):
+        for i, (k, lab) in enumerate((("early", "Early"), ("mlsp", "MLSP"), ("rapg_cal_dc", "SCPG"))):
             st = schedules.get(k, {}).get("steps")
             if st:
                 yy = y0 - (i + 1) * 0.0
@@ -73,8 +84,8 @@ def fig_pareto(expB: Path, out: Path):
     tab = pd.read_csv(expB / "table.csv").set_index("method")
     fig, ax = plt.subplots(figsize=(3.1, 2.5))
     SHORT = {"sao": "SAO", "early": "Early", "mid": "Mid", "late": "Late", "uniform": "Uniform",
-             "mlsp": "MLSP-fixed", "rapg_cal_f1": "RAPG-cal($F_1$)", "rapg_cal_dc": "RAPG-cal($\\Delta C$)",
-             "rapg_on": "RAPG-online", "topk_dc_const": "Top-$K$($\\Delta C$)"}
+             "mlsp": "MLSP-fixed", "rapg_cal_f1": "Top-$K$($F_1$)+R", "rapg_cal_dc": "SCPG+R",
+             "rapg_on": "R-threshold", "topk_dc_const": "SCPG"}
     # manual label offsets (points) to avoid overlap in the upper cluster
     OFF = {"sao": (6, -3), "early": (6, -2), "mid": (-4, 7), "late": (6, -8), "uniform": (6, -3),
            "mlsp": (-52, 6), "rapg_cal_f1": (-70, -10), "rapg_cal_dc": (4, 6), "rapg_on": (6, -3),
@@ -97,9 +108,9 @@ def fig_budget(expD: Path, out: Path, expB: Path | None = None):
     Paired subset of the test set (10 prompts x 5 melodies x seed 0). Writes fig_budget.pdf + numbers_budget.tex."""
     df = pd.read_csv(expD / "per_run.csv")
     rng = np.random.default_rng(0)
-    LAB = {"uniform": "Uniform", "topk_dc": "Top-$K$($\\Delta C$)", "late": "Late", "rapg_cal_dc": "RAPG-cal($\\Delta C$)"}
+    LAB = {"uniform": "Uniform", "topk_dc": "SCPG (Top-$K$($\\Delta C$))", "late": "Late", "rapg_cal_dc": "SCPG + $R$-scaling"}
     COL = {"uniform": C["raw"], "topk_dc": C["R"], "late": "#8c8c8c", "rapg_cal_dc": C["R"]}
-    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.75))
+    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.4))
     recs = {}
     for m in [m for m in ["uniform", "topk_dc", "late", "rapg_cal_dc"] if m in set(df.method)]:
         g = df[df.method == m].groupby("K")
@@ -122,7 +133,7 @@ def fig_budget(expD: Path, out: Path, expB: Path | None = None):
         for ax, key in ((a, "coherence_mlsp"), (b, "clap")):
             ax.axhline(ref[key].mean(), color="#888", lw=.8, ls=":", zorder=1)
         a.text(max(df.K), ref.coherence_mlsp.mean(), " unguided", fontsize=6.2, color="#666", va="bottom", ha="right")
-    a.set_ylabel("melodic coherence $\\uparrow$"); b.set_ylabel("CLAP score $\\uparrow$")
+    a.set_ylabel("coherence $\\uparrow$"); b.set_ylabel("CLAP $\\uparrow$")
     for ax in (a, b):
         ax.set_xlabel("guided steps $K$ (of 50)"); ax.set_xticks(sorted(set(df.K)))
     a.legend(frameon=False, loc="upper left", handlelength=1.5, borderaxespad=0.2)
@@ -151,7 +162,7 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
     Writes fig_sa3.pdf and numbers_sa3.tex."""
     s = pd.read_csv(expA / "summary.csv"); raw = s[s.variant == "raw"].sort_values("row")
     bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
-    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 2.0))
+    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.7))
     a.plot(raw.progress, raw.f1, color=C["raw"], lw=1.3, label="probe $F_1$")
     a.fill_between(raw.progress, raw.f1 - 1.96 * raw.f1_sem, raw.f1 + 1.96 * raw.f1_sem, color=C["raw"], alpha=.15, lw=0)
     a2 = a.twinx(); a2.spines.right.set_visible(True)
@@ -161,8 +172,17 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
     h1, l1 = a.get_legend_handles_labels(); h2, l2 = a2.get_legend_handles_labels()
     a.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False, fontsize=6, handlelength=1.4)
     b.errorbar(bp.progress, bp.d_coherence_mlsp, yerr=[bp.d_coherence_mlsp - bp.d_coherence_mlsp_lo, bp.d_coherence_mlsp_hi - bp.d_coherence_mlsp],
-               color=C["dcoh"], marker="o", ms=2.5, lw=1.1, capsize=1.5)
+               color=C["dcoh"], marker="o", ms=2.5, lw=1.1, capsize=1.5, label="$\\Delta$ coherence")
     b.axhline(0, color="k", lw=.5); b.set_ylabel("$\\Delta$ coherence"); b.set_xlabel("denoising progress $s$")
+    if "d_clap" in bp.columns and np.isfinite(bp.d_clap).any():
+        b2 = b.twinx(); b2.spines.right.set_visible(True)
+        b2.errorbar(bp.progress, bp.d_clap, yerr=[bp.d_clap - bp.d_clap_lo, bp.d_clap_hi - bp.d_clap], color=C["dclap"],
+                    marker="s", ms=2.2, lw=1.0, capsize=1.5, label="$\\Delta$ CLAP")
+        b2.tick_params(axis="y", colors=C["dclap"], labelsize=6, pad=1); b2.set_ylabel("$\\Delta$ CLAP", color=C["dclap"], fontsize=7)
+        b2.axhline(0, color=C["dclap"], lw=.4, ls=":")
+        b2.set_ylim(-0.02, 0.06)   # keep the CLAP trace in the lower band, under the coherence plateau
+        h1, l1 = b.get_legend_handles_labels(); h2, l2 = b2.get_legend_handles_labels()
+        b.legend(h1 + h2, l1 + l2, loc="upper right", frameon=False, fontsize=5.8, handlelength=1.2, borderaxespad=0.1)
     # noise-level ticks (sampler t) on top of both panels, from the per-step sigma column of Exp A
     sig = raw.set_index("row").sigma
     for ax in (a, b):
@@ -174,7 +194,7 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
     a.text(0.0, 1.32, "(a) decodability", transform=a.transAxes, fontsize=7.5, ha="left")
     b.text(0.0, 1.32, "(b) steering sens.", transform=b.transAxes, fontsize=7.5, ha="left")
     b.set_xlabel("progress $s$"); a.set_xlabel("progress $s$")
-    fig.subplots_adjust(left=0.12, right=0.985, top=0.76, bottom=0.2, wspace=0.8)
+    fig.subplots_adjust(left=0.12, right=0.9, top=0.76, bottom=0.2, wspace=0.85)
     fig.savefig(out / "fig_sa3.pdf"); plt.close(fig)
     f1 = raw.f1.values; sat = int(np.argmax(f1 >= 0.95 * f1.max()))
     corr = json.load(open(expA / "corr.json"))["corr"]
@@ -190,6 +210,8 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
         for m, n in names.items():
             if m in tb.index:
                 nums[f"saThreeCoh{n}"] = f"{tb.loc[m, 'coherence_mlsp']:.2f}"
+                if "clap" in tb.columns and pd.notna(tb.loc[m, "clap"]):
+                    nums[f"saThreeClap{n}"] = f"{tb.loc[m, 'clap']:.3f}"
         if "rapg_cal_dc" in tb.index and "p_coherence_mlsp_vs_mlsp" in tb.columns:
             pv = tb.loc["rapg_cal_dc", "p_coherence_mlsp_vs_mlsp"]
             nums["saThreePRAPGvsMLSP"] = f"{pv:.1e}".replace("e-0", "e-") if pv >= 1e-4 else "10^{-4}"
@@ -202,7 +224,7 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
 
 
 def table_and_numbers(expA: Path, expC: Path, expB: Path, out: Path, order=("sao", "early", "mid", "late", "uniform", "mlsp",
-                                                                        "rapg_cal_f1", "rapg_cal_dc", "rapg_on", "topk_dc_const")):
+                                                                        "rapg_cal_f1", "rapg_on", "topk_dc_const", "rapg_cal_dc")):
     tab = pd.read_csv(expB / "table.csv").set_index("method")
     lines = ["\\setlength{\\tabcolsep}{3.5pt}", "\\begin{tabular}{lccccc}", "\\toprule",
              "Method & Coh.\\ $\\uparrow$ & Chroma $\\uparrow$ & CLAP $\\uparrow$ & FAD $\\downarrow$ & \\#u.\\\\", "\\midrule"]
@@ -212,7 +234,9 @@ def table_and_numbers(expA: Path, expC: Path, expB: Path, out: Path, order=("sao
         if m not in tab.index:
             continue
         r = tab.loc[m]
-        dag = "$^\\dagger$" if m != "mlsp" and r.get("p_coherence_mlsp_vs_mlsp_holm", 1) < 0.05 else ""
+        dag = ""
+        if m != "mlsp" and r.get("p_coherence_mlsp_vs_mlsp_holm", 1) < 0.05:
+            dag = "$^{+}$" if r["coherence_mlsp"] > tab.loc["mlsp", "coherence_mlsp"] else "$^{-}$"
         fad = f"{r['fad_clap_maestro']:.2f}" if "fad_clap_maestro" in r and pd.notna(r["fad_clap_maestro"]) else "--"
         upd = f"{r['n_updates']:.1f}" if m == "rapg_on" else f"{int(round(r['n_updates']))}"
         lines.append(f"{NAMES.get(m, m)} & {r['coherence_mlsp']:.3f}{dag} & {r['chroma_cos']:.2f} & {r['clap']:.3f} & {fad} & {upd}\\\\")
@@ -230,6 +254,40 @@ def table_and_numbers(expA: Path, expC: Path, expB: Path, out: Path, order=("sao
         "peakDC": f"{100*(sC['argmax_dcoh_pos']+1)/STEPS:.0f}\\%",
         "peakF": f"{100*(sat+1)/STEPS:.0f}\\%",
     }
+    # ---- review additions: paired tests among the top schedules, realised strength, placement share, fixed-t rho ----
+    from scipy.stats import spearmanr, wilcoxon
+    prB = pd.read_csv(expB / "per_run.csv"); piv = prB.pivot(index="trial", columns="method", values="coherence_mlsp")
+    def paired(a, b):
+        d = (piv[a] - piv[b]).dropna(); nz = d[d != 0]
+        return d.mean(), wilcoxon(d).pvalue, int((nz > 0).sum()), int(len(nz))
+    def ptex(p):
+        return "p<10^{-6}" if p < 1e-6 else ("p<10^{-5}" if p < 1e-5 else ("p<10^{-4}" if p < 1e-4 else ("p<10^{-3}" if p < 1e-3 else (f"p={p:.3f}" if p < 0.01 else f"p={p:.2f}"))))
+    if {"rapg_cal_dc", "mid", "topk_dc_const", "mlsp"} <= set(piv.columns):
+        d, p, w, n = paired("rapg_cal_dc", "mid"); nums.update(dRvsMid=f"{d:+.3f}", pRvsMid=ptex(p), winsRvsMid=f"{w} of {n}")
+        d, p, w, n = paired("rapg_cal_dc", "topk_dc_const"); nums.update(dRvsTopK=f"{d:+.3f}", pRvsTopK=ptex(p), winsRvsTopK=f"{w} of {n}")
+        d, p, w, n = paired("topk_dc_const", "mid"); nums.update(dTopKvsMid=f"{d:+.3f}", pTopKvsMid=ptex(p), winsTopKvsMid=f"{w} of {n}")
+        d, p, w, n = paired("topk_dc_const", "mlsp"); nums.update(pTopKvsMLSP=ptex(p))
+        share = (tab.loc["topk_dc_const", "coherence_mlsp"] - tab.loc["mlsp", "coherence_mlsp"]) / (tab.loc["rapg_cal_dc", "coherence_mlsp"] - tab.loc["mlsp", "coherence_mlsp"])
+        nums["placementShare"] = f"{100*share:.0f}\\%"
+        nums["cohTopK"] = f"{tab.loc['topk_dc_const','coherence_mlsp']:.3f}"; nums["cohMid"] = f"{tab.loc['mid','coherence_mlsp']:.3f}"
+        nums["lamRealised"] = f"{prB[prB.method == 'rapg_cal_dc'].mean_lam.mean():.3f}"
+        nums["cohGainAbs"] = f"{tab.loc['rapg_cal_dc','coherence_mlsp'] - tab.loc['sao','coherence_mlsp']:.2f}"
+    psA = pd.read_csv(expA / "per_step.csv"); psA = psA[psA.variant == "raw"]
+    rhos = [spearmanr(g.R_entropy, g.f1).correlation for _, g in psA.groupby("row") if g.f1.std() > 0 and g.R_entropy.std() > 0]
+    rhos_late = [spearmanr(g.R_entropy, g.f1).correlation for r_, g in psA.groupby("row") if r_ >= 35 and g.f1.std() > 0]
+    nums["rhoFixedT"] = f"{np.nanmedian(rhos):.2f}"; nums["rhoFixedTlate"] = f"{np.nanmedian(rhos_late):.2f}"
+    nums["rhoFixedTpos"] = f"{100*np.mean(np.array(rhos) > 0):.0f}\\%"
+    st = json.load(open(expC / "stability.json")) if (expC / "stability.json").exists() else None
+    if st:
+        loo = sorted(set(int(v) for v in st["loo_prompt"].values())); nums["looRange"] = f"{loo[0]}--{loo[-1]}" if len(loo) > 1 else str(loo[0])
+        nums["looRangeS"] = f"{(loo[0]+1)/STEPS:.2f}--{(loo[-1]+1)/STEPS:.2f}" if len(loo) > 1 else f"{(loo[0]+1)/STEPS:.2f}"
+        nums["bootPeakShare"] = f"{100*st['boot_counts'][str(st['peak'])]/sum(st['boot_counts'].values()):.0f}\\%"
+    # noise level (flow-time equivalent) of SAO latents at the window edges, from the stored rms
+    rms0 = float(np.mean([x["rms0"] for x in json.load(open(expA / "corr.json"))["runs"]]))
+    def tflow(row):
+        sig = np.sqrt(max(rawA.rms.values[row] ** 2 - rms0 ** 2, 0)) / rms0; return sig, sig / (1 + sig)
+    for name, row in (("Eighteen", 18), ("ThirtyTwo", 32), ("Peak", int(sC["argmax_dcoh_pos"])), ("Fourteen", 14)):
+        sg, tf = tflow(row); nums[f"sigmaAt{name}"] = f"{sg:.0f}" if sg >= 10 else f"{sg:.1f}"; nums[f"tAt{name}"] = f"{tf:.2f}"
     (out / "numbers.tex").write_text("% auto-generated by make_figures.py\n" + "".join(f"\\newcommand{{\\{k}}}{{{v}}}\n" for k, v in nums.items()))
     print(json.dumps(nums, indent=1))
 

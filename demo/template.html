@@ -100,6 +100,14 @@
   }
   .lede { max-width: 62ch; margin: 0 0 20px; color: var(--ink-2); font-size: 16px; }
   .lede b { color: var(--ink); font-weight: 600; }
+  .links { margin: 0 0 14px; font-size: 13.5px; color: var(--ink-2); }
+  .links a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+  .links a:hover { border-bottom-color: var(--accent); }
+  .links code { font-family: var(--mono); font-size: 12px; }
+  .selection { margin: 0 0 22px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; font-size: 13.5px; color: var(--ink-2); }
+  .selection b { color: var(--ink); font-weight: 600; }
+  .model-head { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -.01em; margin: 26px 0 4px; }
+  .model-sub { margin: 0 0 14px; color: var(--ink-2); font-size: 13.5px; max-width: 80ch; }
   .topbar { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
   .tabs { display: flex; gap: 2px; }
   .tab {
@@ -221,13 +229,14 @@
 
 <header class="masthead">
   <div class="wrap">
-    <p class="eyebrow">Stable Audio Open 1.0 &middot; pitch-class probe guidance &middot; ICASSP 2027 submission</p>
+    <p class="eyebrow">Pitch-class probe guidance &middot; Stable Audio Open 1.0 and Stable Audio 3 &middot; ICASSP 2027 submission</p>
     <h1>When to Steer</h1>
-    <p class="lede">Six five-second generations, three versions each. Every version was made from the <b>same prompt, seed and target melody</b>; only the diffusion steps at which the pitch-class probe was allowed to steer differ. Rate how closely each version follows the target melody, and how it sounds.</p>
+    <p class="lede">Audio examples for <i>When to Steer: Sensitivity-Calibrated Probe Guidance for Controllable Music Diffusion</i>. Every version of an item was generated from the <b>same prompt, seed and target melody</b>; only the diffusion steps at which the pitch-class probe was allowed to steer differ.</p>
+    <p class="links"><a href="https://github.com/StoneYeY/mic-pitch-class-steering/tree/icassp">Code (GitHub, branch <code>icassp</code>)</a> &middot; <a href="https://github.com/StoneYeY/mic-pitch-class-steering/tree/icassp/results">Per-run results (CSV)</a> &middot; <a href="https://github.com/StoneYeY/mic-pitch-class-steering/blob/icassp/paper/When_to_Steer_ICASSP2027_final.pdf">Paper (PDF)</a> &middot; <a href="https://github.com/StoneYeY/mic-pitch-class-steering/blob/icassp/demo/build_demo.py">How this page was built</a></p>
     <div class="topbar">
       <div class="tabs" role="tablist">
-        <button class="tab" role="tab" data-mode="blind" aria-selected="true">Blind test</button>
-        <button class="tab" role="tab" data-mode="labeled" aria-selected="false">Labeled demo</button>
+        <button class="tab" role="tab" data-mode="labeled" aria-selected="true">Labeled demo</button>
+        <button class="tab" role="tab" data-mode="blind" aria-selected="false">Blind listening test</button>
         <button class="tab" role="tab" data-mode="tally" aria-selected="false" hidden>Tally</button>
       </div>
       <div class="rater">
@@ -244,9 +253,10 @@
     <section class="howto" id="howto">
       <div>
         <h2>How to rate</h2>
-        <p>Use headphones. Play the <b>target melody</b> first: it is a plain tone sequence, eight notes at 120 BPM. Then play versions A, B and C.</p>
+        <p>Use headphones. Play the <b>target melody</b> first: it is a plain tone sequence, seven or eight notes at 120 BPM. Then play versions A, B and C.</p>
         <p><b>Follows melody</b> asks whether the music's melody moves through the same notes, in the same order and at roughly the same time as the target. <b>Sound quality</b> asks whether the clip sounds like clean, plausible music regardless of the melody.</p>
         <p>Finally pick the version that follows the target best. Ratings save automatically once all three versions of an item are rated.</p>
+        <p><b>Where ratings go.</b> On this public page your ratings stay in your own browser (local storage) and are never sent anywhere; they are not part of the paper, which uses no human ratings. Taking the test is voluntary.</p>
       </div>
       <div>
         <label for="rater-name">Your name or initials (optional)</label>
@@ -262,6 +272,7 @@
       <h2>All six items saved. Thank you.</h2>
       <p>You can revise any rating; changes are saved again automatically. The <b>Labeled demo</b> tab now reveals which version was which.</p>
     </section>
+    <section class="selection" id="selection"></section>
     <div id="stations"></div>
     <section id="tally" hidden></section>
   </div>
@@ -269,8 +280,8 @@
 
 <footer>
   <div class="wrap">
-    <p>Clips are excerpts of 5-second generations from Stable Audio Open 1.0 (50 EDM-DPM-solver steps, classifier-free guidance 4.0), downsampled to 22.05 kHz mono for the page. Prompts are held-out test captions; melodies are eight-note sequences at 120 BPM.</p>
-    <p>The three versions are: unguided sampling; MLSP-fixed guidance on every second step from 20 to 48; and RAPG-cal(&Delta;C), guidance on the 15 steps where a single steering burst changes melodic coherence most (steps 19&ndash;33), with the strength scaled by the probe's reliability. All guided versions use the same budget of 15 probe updates. Companion page for <i>When to Steer: Reliability-Adaptive Probe Guidance for Controllable Music Diffusion</i>.</p>
+    <p>Clips are 5-second generations from Stable Audio Open 1.0 (50 EDM-DPM-solver steps, classifier-free guidance 4.0) and, in the second block, from the Stable Audio 3 medium base checkpoint (50 Euler steps, classifier-free guidance 7), downsampled to 22.05 kHz mono for the page. Prompts are held-out test captions; melodies are sequences of seven or eight quarter notes at 120 BPM.</p>
+    <p>All guided versions use the same budget of 15 probe updates and the same update rule; they differ only in which sampling steps are guided. Condition labels follow the paper: MLSP window = every second step from 20 to 48 (the schedule of the prior work); SCPG = the 15 steps where a single steering burst changes melodic coherence most, measured once per model on development prompts (steps 19&ndash;33 on Stable Audio Open, 4&ndash;18 on Stable Audio 3), shown here with reliability-scaled strength on both models.</p>
   </div>
 </footer>
 
@@ -375,8 +386,8 @@
     });
     return s + "</svg>";
   }
-  function schedSVG(cond) {
-    const steps = new Set(DATA.schedules[cond] || []), N = 50, W = 420, H = 26, cw = W / N;
+  function schedSVG(cond, schedules) {
+    const steps = new Set((schedules || DATA.schedules)[cond] || []), N = 50, W = 420, H = 26, cw = W / N;
     let s = `<svg class="sched" viewBox="0 0 ${W} ${H}" role="img" aria-label="Guided diffusion steps">`;
     for (let t = 0; t < N; t++) s += `<rect x="${(t * cw + 0.6).toFixed(1)}" y="2" width="${(cw - 1.2).toFixed(1)}" height="12" rx="1" style="fill:${steps.has(t) ? "var(--amber)" : "var(--rule-2)"}"/>`;
     [0, 10, 20, 30, 40, 49].forEach(t => { s += `<text x="${(t * cw + cw / 2).toFixed(1)}" y="24" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" style="fill:var(--muted)">${t}</text>`; });
@@ -386,10 +397,54 @@
 
   // ---------- render ----------
   const stationsEl = $("#stations");
+  function renderExtraModels() {
+    (DATA.models || []).forEach(m => {
+      const head = document.createElement("h2"); head.className = "model-head"; head.textContent = m.name; stationsEl.appendChild(head);
+      const sub = document.createElement("p"); sub.className = "model-sub"; sub.innerHTML = m.note; stationsEl.appendChild(sub);
+      m.items.forEach((item, idx) => {
+        const sec = document.createElement("section"); sec.className = "station"; sec.dataset.item = m.id + ":" + item.id;
+        const melTag = `${item.melody} &middot; ${item.notes.length} notes &middot; ${item.tempo | 0} BPM`;
+        let clips = "";
+        Object.keys(m.conditions).forEach(cond => {
+          const c = item.clips[cond]; if (!c) return;
+          clips += `<div class="clip labeled" data-cond="${cond}">
+            <button class="play" type="button" aria-pressed="false" aria-label="Play ${m.conditions[cond]}">${ICON_PLAY}${ICON_PAUSE}</button>
+            <div class="meta"><span class="cond">${m.conditions[cond]}</span>
+              <span class="nums">coherence <b>${c.coh.toFixed(2)}</b> &middot; chroma <b>${c.chroma.toFixed(2)}</b>${c.clap != null ? ` &middot; CLAP <b>${c.clap.toFixed(2)}</b>` : ""} &middot; ${c.n_updates} updates${m.adaptive && m.adaptive[cond] ? ", reliability-scaled" : ""}</span>
+              ${schedSVG(cond, m.schedules)}</div>
+            <div class="wavebox"><canvas></canvas><span class="time"></span></div>
+          </div>`;
+        });
+        sec.innerHTML = `
+          <div class="station-head"><h2>${m.short} item ${idx + 1} <span>of ${m.items.length}</span></h2><span class="mel-tag">${melTag}</span></div>
+          <p class="prompt">${item.prompt}</p>
+          <div class="target">
+            <button class="play" type="button" aria-pressed="false" aria-label="Play target melody">${ICON_PLAY}${ICON_PAUSE}</button>
+            <div><div class="lbl">Target melody</div>${rollSVG(item)}</div>
+          </div>
+          <div class="clips">${clips}</div>`;
+        stationsEl.appendChild(sec);
+        makePlayer(m.id + "|" + item.id + "|target", item.target, $(".target .play", sec), null, null);
+        $$(".clip", sec).forEach(el => {
+          const cond = el.dataset.cond;
+          const p = makePlayer(m.id + "|" + item.id + "|" + cond, item.clips[cond].audio, $(".play", el), $("canvas", el), $(".time", el));
+          drawWave(p); decodePeaks(p);
+        });
+      });
+    });
+  }
   function render() {
     stationsEl.innerHTML = "";
     players.clear(); current = null;
     const labeled = state.mode === "labeled";
+    $("#selection").hidden = false;
+    $("#selection").innerHTML = labeled
+      ? `<b>How the examples were chosen.</b> ${DATA.selection_note}`
+      : `<b>Items.</b> ${DATA.selection_note} The three versions of each item are shown in a random order that is fixed per rater.`;
+    if (labeled) {
+      const head = document.createElement("h2"); head.className = "model-head"; head.textContent = DATA.model_name; stationsEl.appendChild(head);
+      const sub = document.createElement("p"); sub.className = "model-sub"; sub.innerHTML = DATA.model_note; stationsEl.appendChild(sub);
+    }
     DATA.items.forEach((item, idx) => {
       const a = answerFor(item);
       const sec = document.createElement("section"); sec.className = "station"; sec.dataset.item = item.id;
@@ -401,7 +456,7 @@
           clips += `<div class="clip labeled" data-letter="${L}">
             <button class="play" type="button" aria-pressed="false" aria-label="Play ${DATA.conditions[cond]}">${ICON_PLAY}${ICON_PAUSE}</button>
             <div class="meta"><span class="cond">${DATA.conditions[cond]}</span>
-              <span class="nums">coherence <b>${c.coh.toFixed(2)}</b> &middot; chroma <b>${c.chroma.toFixed(2)}</b> &middot; CLAP <b>${c.clap.toFixed(2)}</b> &middot; ${c.n_updates} updates${DATA.adaptive[cond] ? ", reliability-scaled" : ""}</span>
+              <span class="nums">coherence <b>${c.coh.toFixed(2)}</b> &middot; chroma <b>${c.chroma.toFixed(2)}</b>${c.clap != null ? ` &middot; CLAP <b>${c.clap.toFixed(2)}</b>` : ""} &middot; ${c.n_updates} updates${DATA.adaptive[cond] ? ", reliability-scaled" : ""}</span>
               ${schedSVG(cond)}</div>
             <div class="wavebox"><canvas></canvas><span class="time"></span></div>
           </div>`;
@@ -453,6 +508,7 @@
       $$(".best-seg button", sec).forEach(b => b.addEventListener("click", () => { a.best = b.dataset.v; refresh(); scheduleSave(item, sec); }));
       refresh();
     });
+    if (labeled) renderExtraModels();
     updateProgress();
   }
 
@@ -534,7 +590,7 @@
     $("#howto").hidden = m !== "blind";
     $("#tally").hidden = m !== "tally";
     stationsEl.hidden = m === "tally";
-    if (m === "tally") { $("#done").hidden = true; renderTally(); } else render();
+    if (m === "tally") { $("#done").hidden = true; $("#selection").hidden = true; renderTally(); } else render();
   }
   $$(".tab").forEach(t => t.addEventListener("click", () => {
     if (t.dataset.mode === "labeled" && state.mode === "blind") {
@@ -554,8 +610,8 @@
 
   const h = location.hash.replace("#", "");
   if (h === "tally") $('.tab[data-mode="tally"]').hidden = false;
-  setMode(h === "demo" ? "labeled" : h === "tally" ? "tally" : "blind");
-  if (h === "demo") revealOK = true;
+  setMode(h === "blind" ? "blind" : h === "tally" ? "tally" : "labeled");
+  revealOK = true;   // the labeled demo is the landing view; the blind test is opt-in
 
   // shared store (claude.ai artifact runtime); the page works without it
   (async () => {

@@ -192,3 +192,53 @@ cd paper && latexmk -pdf main.tex
 - 论文：新增 §4.5 + Fig. 3（`fig_sa3.pdf`，含顶部噪声水平刻度），摘要/贡献 2/§3/§5 同步；结论改为"甜点区是模型特定的，固定窗不迁移，测 ΔC 再放预算的流程迁移"。正文仍 4 页 + 参考文献 1 页；数字由 `make_figures.py --sa3A/--sa3C/--sa3B` 生成（`numbers_sa3.tex`）。
 
 **注意点：** SA3 的 Gaussian-proxy 变体（Exp A 的 `gauss_proxy`）在 RF 参数化下无意义（未用于论文）；Exp C 在 SA3 上未算 CLAP（`W2S_CLAP=0`）。
+
+## 12. 模拟评审（3 位审稿人 + AC）与三个补充角度的回应（v4，2026-09-23）
+
+模拟评审打分 3/4/2（AC：borderline，主要卡在 §4.5 的措辞、命名、随机方向对照缺失、早窗结论过强、旧对齐结果未量化）。三个补充角度：AI 味措辞、评测↔结论对应、demo 页与脚注承诺不符。处理如下；**§10 里"题目未改"已失效，题目和方法名已改**。
+
+### 12.1 新增 GPU 作业（全部 exit 0，结果已在仓库）
+
+| Job | 目的 | 结果 → 论文位置 |
+|---|---|---|
+| 022 `sa3_expB_clap` | SA3 Exp B 补 CLAP（`rescore_expB_clap.py`，从保存的 wav 重打分） | `results/021_sa3_expB/table.csv`：unguided 0.375 / SCPG 0.330 / MLSP 窗 0.361 / early 0.331 → §4.5 "the gain is not free… CLAP falls 0.375→0.335 (Holm p<0.001)" |
+| 023 `sao_randburst` | SAO 峰值位置（step 26）随机方向对照，`W2S_RANDOM_GRAD=1`（同范数随机向量） | ΔC 0.003 (n.s.) vs 0.104 probe 梯度，paired p<1e-6 → §4.2 `\RANDNOTE` |
+| 024 `sa3_randburst` | SA3 同上（position 10） | −0.026 vs 0.089，p<1e-4 → §4.5 `\RANDNOTESAThree` |
+| 025 `sao_early_strength` | 早窗 (0–14) 在 λ=α∈{0.2,0.5,1.0} 下是否能 steer（dev 集，2 seeds） | coherence 0.12→0.23/0.29/0.41，CLAP 0.207→0.187/0.184/0.173 → §4.2 `\EARLYNOTE`："early window is inert only at this step size … at matched update norm the mid window is where a step counts most" |
+| 026 `sao_legacy_mlsp` | 用 MLSP 原始（错位）对齐 `TARGET_FPS=204.8` 跑完整测试集 | 对真旋律 0.259，对其第一个音级 0.68 → §3 `\LEGACYNOTE`（"finding stands, but outputs followed the first note"） |
+| 027 `sa3_demo` | SA3 demo 音频（prompts 0/2/4/6 × sao/mlsp/rapg_cal_dc） | `results/027_sa3_demo/audio/*.demo.wav` → demo 页 SA3 块 |
+| 028 `sa3_expC_clap` | SA3 Exp C 补 ΔCLAP 列 | `results/020c_sa3_expC/by_position.csv` 的 `d_clap` → Fig. 3(b) 右轴 |
+
+### 12.2 无 GPU 分析（`make_figures.py` "review macros" 块，全部由 CSV 自动生成）
+
+- 配对检验补齐：Top-K(ΔC) vs MLSP 窗 p<1e-6；vs Mid +0.010, p=0.002；R-scaling vs Top-K +0.011，122/184 trial 胜，p<1e-5（`\pTopKvsMLSP` 等）。
+- 放置贡献占比：(0.434−0.363)/(0.445−0.363)=**86%**（原文"about 85%"改为计算值）。
+- **实际 λ 披露**：R-scaling 在测试集上的实际均值 λ=0.057（非 0.05）→ §4.3 明写"its gain cannot be separated from a 15% larger average step"。
+- 固定 t 的跨样本 Spearman(R_t, F1)：中位 0.27（早）/0.57（后 15 步），86% 位置为正 → §4.1（回应"相关是趋势共享的假象"）。
+- 峰稳定性：bootstrap 92% 在 s=0.54，留一 prompt 峰范围 0.54–0.62 → §4.2。
+- 噪声水平换算（用于跨模型比较）：SAO step 18 ↔ σ≈27 (t≈0.96)，step 32 ↔ σ≈3.2 (t≈0.76)；SA3 的窗 t≥0.95。→ §4.5 把 "opposite end" 改为 "**adjacent in noise level**: SAO's steps 18–32 span σ≈27→3.2 (t≈0.96→0.76) while SA3's plateau is t≥0.95"。
+- Holm family 明确：每个参照/指标 9 个比较。
+- 校准成本：每模型一次 burst sweep，12 位置 × 50 dev trial + 参照 = 650 次生成（SAO 0.8 GPU-h，SA3 0.5）。
+
+### 12.3 论文改动（`paper/main.tex`，5 页 = 正文 4 + 参考文献/伦理 1，0 overfull）
+
+- **题目/命名**：*When to Steer: Sensitivity-Calibrated Probe Guidance for Controllable Music Diffusion*；方法名 **SCPG**（"RAPG" 全部退役）；表行 "SCPG: Top-K(ΔC)"、"SCPG + R-scaling"、"Top-K(F1) + R-scaling"、"R-threshold (online)"，`+/−` 标记 = 相对 MLSP 窗 Holm 校正后显著高/低。
+- §4.5 八处逐句修正：opposite→adjacent；"2.3B" → "1.4B-parameter flow-matching transformer (2.3B with autoencoder and text encoder)"；"rises monotonically" → "essentially monotonically"；"useless on SAO" → "barely moves pitch-class content on SAO at this step size"；加随机方向对照；加 CLAP 代价；加"neither fixed window transfers, the burst sweep does"；FAD 未在 SA3 评估写明。
+- AI 味清理：删掉 "Crucially/Notably/Importantly"、"paradigm"、"robust" 类空词，结论一段改为具体陈述；"determines everything" → "placement is the dominant factor"；限制条件压成一句 "Limits: pitch-class control, guidance on z_t, 50-step samplers, unvalidated quality proxies."
+- 评测↔结论：贡献 3 与 §5 只声称 §4 里检验过的内容（placement 主要、R-scaling 小增益且与步长混杂、R-threshold 无增益、SA3 窗不同但流程迁移）；"10≈25" 已是 "recover 95%"。
+- 相关工作补引：Stable Audio 3 (`evans2026stableaudio3`)、ARC post-training (`novack2025arc`)、SMITIN (`koo2024smitin`)、MusicGen、P2 weighting、h-space；MLSP 引用加 arXiv:2609.04516。
+- 其它：Fig. 1 顶部加噪声水平轴；Fig. 3(b) 加 ΔCLAP 右轴；hyperref 元数据（pdftitle/pdfauthor）；伦理声明移到第 5 页并提及 SA3 + Stability AI Community License；作者单位 Zang = "Independent Researcher"（与 arXiv:2609.04516 一致，**仍需作者确认**）；旋律描述改为 "5 melodies of 7–8 quarter notes (3.5–4 s)"（alternating 是 7 音，原文"eight-note"不准确）。
+
+### 12.4 Demo 页（`demo/template.html`、`demo/build_demo.py`、`docs/index.html`，GitHub Pages）
+
+- 默认 **Labeled demo**（与 §6 "no human subjects" 一致）；Blind listening test 改为第二个 tab，并加 "Where ratings go" 说明：评分只存本地浏览器，不进论文。
+- 顶部链接行兑现脚注承诺：Code (branch icassp) / Per-run results (CSV) / Paper (PDF) / How this page was built。
+- 加 "How the examples were chosen"：6 个 prompt–melody 对在听之前固定（test prompts 0,2,4,6,10,12，seed 0），覆盖 5 条旋律，无挑选；225 trial 的逐条指标在 CSV。
+- 加 **SA3 对比块**（4 个 item：unguided / MLSP 窗 / SCPG+R-scaling 步 4–18），页脚写明两个模型的采样设置与 SCPG 步数（SAO 19–33、SA3 4–18）。
+- 网页版（claude.ai artifact，version 2）与 GitHub Pages 内容相同；后者评分只用 localStorage。
+
+### 12.5 未做 / 作者侧待办
+
+- 听评（perceptual study）未做，§5 明写为 future work。
+- **作者信息**：Zang 单位待确认；三位作者 ORCiD（提交系统必填）；`\copyrightnotice` 仍注释（camera-ready 再开）。
+- ICASSP LLM 政策：任何由助手起草的段落作者需自行改写；投稿截止 **2026-09-23 23:59:59 AoE**（= 9/24 07:59 EDT），可 Revise Submission 到同一时刻。
