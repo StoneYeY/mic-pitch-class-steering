@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 
 import matplotlib
+from matplotlib.patches import Rectangle
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
@@ -22,62 +23,76 @@ plt.rcParams.update({"font.size": 8, "axes.titlesize": 8.5, "axes.labelsize": 8,
                      "axes.spines.top": False, "axes.spines.right": False})
 C = {"raw": "#1f4e79", "proxy": "#8c8c8c", "R": "#0e7c6b", "dcoh": "#1f4e79", "dclap": "#b8602a"}
 NAMES = {"sao": "SAO (unguided)", "early": "Early (0--14)", "mid": "Mid (18--32)", "late": "Late (35--49)",
-         "uniform": "Uniform", "mlsp": "MLSP-fixed (20--48)", "rapg_cal_f1": "Top-$K$($F_1$) + $R$-scaling",
+         "uniform": "Uniform", "mlsp": "MLSP-fixed (20:2:48)", "rapg_cal_f1": "Top-$K$($F_1$) + $R$-scaling",
          "rapg_cal_dc": "SCPG + $R$-scaling", "rapg_on": "$R$-threshold (online)", "topk_dc_const": "SCPG: Top-$K$($\\Delta C$)"}
 
 
-def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path):
-    fig, axes = plt.subplots(1, 2, figsize=(3.45, 2.6), gridspec_kw=dict(hspace=.5))
-    fig, (a, b) = plt.subplots(2, 1, figsize=(3.45, 2.5), sharex=True)
+def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, figsize=(3.45, 3.05), *, name="fig_trajectory.pdf",
+                   model="SAO", noise="rms", noise_ticks=(0.99, 0.95, 0.75, 0.5), show_proxy=True, dclap_ylim=(-0.03, 0.03)):
+    """Figs. 1 and 3: (a) decodability / reliability along real trajectories, (b) burst steering sensitivity,
+    (c) a labelled strip of the guided steps of three schedules.  noise="rms": noise level from the stored latent rms
+    (SAO, EDM latents); noise="sigma": the sampler's own flow time from the per-step sigma column (SA3)."""
+    fig, (a, b, c) = plt.subplots(3, 1, figsize=figsize, sharex=True,
+                                  gridspec_kw=dict(height_ratios=[1.0, 1.0, 0.28], hspace=0.42))
     s = pd.read_csv(expA / "summary.csv")
     raw, prox = s[s.variant == "raw"].sort_values("row"), s[s.variant == "gauss_proxy"].sort_values("row")
     a.plot(raw.progress, raw.f1, color=C["raw"], lw=1.4, label="probe $F_1$ (real trajectory)")
     a.fill_between(raw.progress, raw.f1 - 1.96 * raw.f1_sem, raw.f1 + 1.96 * raw.f1_sem, color=C["raw"], alpha=.15, lw=0)
-    a.plot(prox.progress, prox.f1, color=C["proxy"], lw=1.2, ls="--", label="$F_1$, Gaussian proxy")
+    if show_proxy:
+        a.plot(prox.progress, prox.f1, color=C["proxy"], lw=1.2, ls="--", label="$F_1$, Gaussian proxy")
     a2 = a.twinx(); a2.spines.right.set_visible(True)
     a2.plot(raw.progress, raw.R_entropy, color=C["R"], lw=1.4, label="reliability $R_t$")
     a2.set_ylabel("$R_t$", color=C["R"]); a2.tick_params(axis="y", colors=C["R"])
-    a.set_ylabel("micro-$F_1$"); a.set_title("(a) decodability along real SAO trajectories", loc="left", pad=16)
+    a.set_ylabel("micro-$F_1$"); a.set_title(f"(a) decodability along real {model} trajectories", loc="left", pad=18)
     a.set_ylim(bottom=0)
-    # noise level of the stored latents, as the flow-time equivalent t = sigma/(1+sigma) with sigma = noise/signal rms
+    # noise level of the stored latents, as the flow-time equivalent tau = sigma/(1+sigma) with sigma = noise/signal rms
     try:
-        rms0 = float(np.mean([x["rms0"] for x in json.load(open(expA / "corr.json"))["runs"]]))
-        sig = np.sqrt(np.maximum(raw.rms.values ** 2 - rms0 ** 2, 0)) / rms0; tflow = sig / (1 + sig)
+        if noise == "sigma":
+            tflow = raw.sigma.values
+        else:
+            rms0 = float(np.mean([x["rms0"] for x in json.load(open(expA / "corr.json"))["runs"]]))
+            sig = np.sqrt(np.maximum(raw.rms.values ** 2 - rms0 ** 2, 0)) / rms0; tflow = sig / (1 + sig)
         top = a.secondary_xaxis("top")
-        ticks_t = [0.99, 0.95, 0.75, 0.5]
+        ticks_t = list(noise_ticks)
         top.set_xticks([float(raw.progress.values[int(np.argmin(np.abs(tflow - t)))]) for t in ticks_t])
         top.set_xticklabels([f"{t:.2f}" for t in ticks_t], fontsize=6); top.tick_params(length=2, pad=1)
-        top.set_xlabel("noise level $t$ (flow-time equivalent)", fontsize=6.5, labelpad=1)
+        top.set_xlabel("noise level $\\tau$", fontsize=6.5, labelpad=1)
     except Exception as e:  # noqa: BLE001
         print("no noise axis:", e)
     h1, l1 = a.get_legend_handles_labels(); h2, l2 = a2.get_legend_handles_labels()
-    a.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False, fontsize=6.2)
+    a.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False, fontsize=6.2, handlelength=1.6)
     bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
     b.errorbar(bp.progress, bp.d_coherence_mlsp, yerr=[bp.d_coherence_mlsp - bp.d_coherence_mlsp_lo, bp.d_coherence_mlsp_hi - bp.d_coherence_mlsp],
                color=C["dcoh"], marker="o", ms=3, lw=1.2, capsize=2, label="$\\Delta$ coherence")
     b.axhline(0, color="k", lw=.5)
-    handles = [b.get_legend_handles_labels()]
     has_clap = np.isfinite(bp.d_clap).any()
     if has_clap:
         b2 = b.twinx(); b2.spines.right.set_visible(True)
         b2.errorbar(bp.progress, bp.d_clap, yerr=[bp.d_clap - bp.d_clap_lo, bp.d_clap_hi - bp.d_clap], color=C["dclap"],
                     marker="s", ms=3, lw=1.2, capsize=2, label="$\\Delta$ CLAP")
         b2.set_ylabel("$\\Delta$ CLAP", color=C["dclap"]); b2.tick_params(axis="y", colors=C["dclap"])
-    b.set_ylabel("$\\Delta$ coherence"); b.set_xlabel("denoising progress $s=t/N$")
+        b2.set_ylim(*dclap_ylim)
+    b.set_ylim(top=float(bp.d_coherence_mlsp_hi.max()) * 1.4)
+    b.set_ylabel("$\\Delta$ coherence")
     b.set_title("(b) steering sensitivity of a 3-step burst at $s$", loc="left")
     if has_clap:
         h1, l1 = b.get_legend_handles_labels(); h2, l2 = b2.get_legend_handles_labels()
-        b.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False)
+        b.legend(h1 + h2, l1 + l2, loc="upper right", frameon=False, fontsize=6.2, handlelength=1.6)
     else:
-        b.legend(loc="upper left", frameon=False)
-    if schedules:   # strip of guided steps
-        y0 = b.get_ylim()[0]
-        for i, (k, lab) in enumerate((("early", "Early"), ("mlsp", "MLSP"), ("rapg_cal_dc", "SCPG"))):
-            st = schedules.get(k, {}).get("steps")
-            if st:
-                yy = y0 - (i + 1) * 0.0
-                b.scatter([(t + 1) / STEPS for t in st], [yy] * len(st), marker="|", s=12, color=["#444", "#888", C["R"]][i], label=None)
-    fig.tight_layout(); fig.savefig(out / "fig_trajectory.pdf"); plt.close(fig)
+        b.legend(loc="upper right", frameon=False)
+    # (c) labelled strip of guided steps
+    rows = (("early", "Early", "#666666"), ("mlsp", "MLSP", "#9a9a9a"), ("rapg_cal_dc", "SCPG", C["R"]))
+    c.set_ylim(-0.6, len(rows) - 0.4); c.set_yticks(range(len(rows))); c.set_yticklabels([r[1] for r in rows], fontsize=6)
+    c.invert_yaxis(); c.tick_params(axis="y", length=0); c.tick_params(axis="x", labelsize=6.5)
+    for sp in ("top", "right", "left"):
+        c.spines[sp].set_visible(False)
+    for i, (k, lab, col) in enumerate(rows):
+        st = (schedules or {}).get(k, {}).get("steps") or []
+        for st_i in st:
+            c.add_patch(Rectangle(((st_i + 0.5) / STEPS, i - 0.32), 1.0 / STEPS, 0.64, color=col, lw=0))
+    c.set_xlim(0, 1.0); c.set_xlabel("denoising progress $s$")
+    fig.subplots_adjust(left=0.15, right=0.87, top=0.855, bottom=0.125)
+    fig.savefig(out / name); plt.close(fig)
 
 
 def fig_pareto(expB: Path, out: Path):
@@ -110,7 +125,7 @@ def fig_budget(expD: Path, out: Path, expB: Path | None = None):
     rng = np.random.default_rng(0)
     LAB = {"uniform": "Uniform", "topk_dc": "SCPG (Top-$K$($\\Delta C$))", "late": "Late", "rapg_cal_dc": "SCPG + $R$-scaling"}
     COL = {"uniform": C["raw"], "topk_dc": C["R"], "late": "#8c8c8c", "rapg_cal_dc": C["R"]}
-    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.4))
+    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.6))
     recs = {}
     for m in [m for m in ["uniform", "topk_dc", "late", "rapg_cal_dc"] if m in set(df.method)]:
         g = df[df.method == m].groupby("K")
@@ -162,40 +177,10 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
     Writes fig_sa3.pdf and numbers_sa3.tex."""
     s = pd.read_csv(expA / "summary.csv"); raw = s[s.variant == "raw"].sort_values("row")
     bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
-    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.7))
-    a.plot(raw.progress, raw.f1, color=C["raw"], lw=1.3, label="probe $F_1$")
-    a.fill_between(raw.progress, raw.f1 - 1.96 * raw.f1_sem, raw.f1 + 1.96 * raw.f1_sem, color=C["raw"], alpha=.15, lw=0)
-    a2 = a.twinx(); a2.spines.right.set_visible(True)
-    a2.plot(raw.progress, raw.R_entropy, color=C["R"], lw=1.3, label="$R_t$")
-    a2.tick_params(axis="y", colors=C["R"], labelsize=6, pad=1)
-    a.set_ylabel("micro-$F_1$"); a.set_ylim(bottom=0); a.set_xlabel("denoising progress $s$")
-    h1, l1 = a.get_legend_handles_labels(); h2, l2 = a2.get_legend_handles_labels()
-    a.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False, fontsize=6, handlelength=1.4)
-    b.errorbar(bp.progress, bp.d_coherence_mlsp, yerr=[bp.d_coherence_mlsp - bp.d_coherence_mlsp_lo, bp.d_coherence_mlsp_hi - bp.d_coherence_mlsp],
-               color=C["dcoh"], marker="o", ms=2.5, lw=1.1, capsize=1.5, label="$\\Delta$ coherence")
-    b.axhline(0, color="k", lw=.5); b.set_ylabel("$\\Delta$ coherence"); b.set_xlabel("denoising progress $s$")
-    if "d_clap" in bp.columns and np.isfinite(bp.d_clap).any():
-        b2 = b.twinx(); b2.spines.right.set_visible(True)
-        b2.errorbar(bp.progress, bp.d_clap, yerr=[bp.d_clap - bp.d_clap_lo, bp.d_clap_hi - bp.d_clap], color=C["dclap"],
-                    marker="s", ms=2.2, lw=1.0, capsize=1.5, label="$\\Delta$ CLAP")
-        b2.tick_params(axis="y", colors=C["dclap"], labelsize=6, pad=1); b2.set_ylabel("$\\Delta$ CLAP", color=C["dclap"], fontsize=7)
-        b2.axhline(0, color=C["dclap"], lw=.4, ls=":")
-        b2.set_ylim(-0.02, 0.06)   # keep the CLAP trace in the lower band, under the coherence plateau
-        h1, l1 = b.get_legend_handles_labels(); h2, l2 = b2.get_legend_handles_labels()
-        b.legend(h1 + h2, l1 + l2, loc="upper right", frameon=False, fontsize=5.8, handlelength=1.2, borderaxespad=0.1)
-    # noise-level ticks (sampler t) on top of both panels, from the per-step sigma column of Exp A
+    sched3 = json.load(open(expB / "schedules.json")) if expB is not None and (expB / "schedules.json").exists() else None
+    fig_trajectory(expA, expC, sched3, out, figsize=(3.45, 3.05), name="fig_sa3.pdf", model="SA3", noise="sigma",
+                   noise_ticks=sigma_ticks, show_proxy=False, dclap_ylim=(-0.03, 0.06))
     sig = raw.set_index("row").sigma
-    for ax in (a, b):
-        top = ax.secondary_xaxis("top"); top.set_xticks([(int(np.argmin(np.abs(sig.values - t))) + 1) / STEPS for t in sigma_ticks])
-        top.set_xticklabels([f"{t:.2f}" for t in sigma_ticks], fontsize=5.5); top.tick_params(length=2, pad=1)
-        top.set_xlabel("noise level $t$", fontsize=6, labelpad=1)
-    for ax in (a, b):
-        ax.set_xticks([0, 0.5, 1.0]); ax.set_xlim(-0.02, 1.02)
-    a.text(0.0, 1.32, "(a) decodability", transform=a.transAxes, fontsize=7.5, ha="left")
-    b.text(0.0, 1.32, "(b) steering sens.", transform=b.transAxes, fontsize=7.5, ha="left")
-    b.set_xlabel("progress $s$"); a.set_xlabel("progress $s$")
-    fig.subplots_adjust(left=0.12, right=0.9, top=0.76, bottom=0.2, wspace=0.85)
-    fig.savefig(out / "fig_sa3.pdf"); plt.close(fig)
     f1 = raw.f1.values; sat = int(np.argmax(f1 >= 0.95 * f1.max()))
     corr = json.load(open(expA / "corr.json"))["corr"]
     peak = int(bp.d_coherence_mlsp.values.argmax())

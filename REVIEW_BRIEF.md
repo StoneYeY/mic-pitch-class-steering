@@ -1,6 +1,6 @@
 # "When to Steer" — 评审简报（供 code-review / paper-review agent 使用）
 
-**日期：** 2026-09-09（首版）→ 2026-09-23（v4，见 §10–§12）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
+**日期：** 2026-09-09（首版）→ 2026-09-23（v5，见 §10–§13）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
 **仓库：** https://github.com/StoneYeY/mic-pitch-class-steering ，分支 **`icassp`**（`main` 是 MLSP 2026 原始代码，不要评那个）
 **论文：** `paper/main.tex`（编译：`cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main`；最终 PDF `paper/When_to_Steer_ICASSP2027_final.pdf`，5 页 = 正文 4 + 参考文献/伦理 1）
 **Demo：** https://stoneyey.github.io/mic-pitch-class-steering/ （结果 + 带标签音频；`docs/index.html` 自包含），生成脚本 `demo/build_demo.py` + `demo/template.html`
@@ -243,3 +243,29 @@ cd paper && latexmk -pdf main.tex
 - 听评（perceptual study）未做，§5 明写为 future work。
 - **作者信息**：Zang 单位待确认；三位作者 ORCiD（提交系统必填）；`\copyrightnotice` 仍注释（camera-ready 再开）。
 - ICASSP LLM 政策：任何由助手起草的段落作者需自行改写；投稿截止 **2026-09-23 23:59:59 AoE**（= 9/24 07:59 EDT），可 Revise Submission 到同一时刻。
+
+## 13. 写作审阅（第三轮，2026-09-23 晚）的回应（v5）
+
+审阅重点是措辞与论证边界（AI 味、重复包装、结论强于证据、段落堆叠、图文呈现）。全文按其建议重写，正文仍 4 页 + 第 5 页参考文献/伦理，0 overfull；数字全部由 `make_figures.py` 从 CSV 生成，改写后逐条核对过。
+
+| 审阅意见 | 处理 |
+|---|---|
+| 摘要把"F1 达峰值 95% 的位置"和"敏感度峰值"都写成 peak | 改为 "bursts change melodic coherence most at 54% of sampling, whereas probe F1 reaches 95% of its maximum only at 88%" |
+| "audio realism unchanged" / "quality question is settled" / "no measurable quality cost" | 全部改为只陈述 CLAP（不显著）和 FAD（数值接近），§4.3 明写 "Neither metric measures perceived quality"，§5 写明需要听评；摘要补 SA3 的 CLAP 0.375→0.335 |
+| "连续窗口 ⇒ 不遗漏交互" | 删除；改为 "Ranking steps by single-burst effects is a heuristic; the full-budget evaluation of Sec. 4.3 tests whether it yields an effective multi-step schedule" |
+| R-scaling "only its distribution changes" | 限定为开发集均值匹配，测试集实际均值可能不同；0.445 退出摘要，§4.3 保留数值 + 15% 步长混杂 |
+| LatCH 20% vs Early 0–14（30%） | Baselines 明确：Early 是 "budget-matched early schedule inspired by LatCH"，LatCH 自身窗口是前 20%（10/50），Early 为匹配预算取前 30%，在本文更新规则下测试早期放置；§4.5 改称 "the budget-matched early schedule (0–14)"；删除 "as LatCH may" |
+| "zero overhead / no inference cost" | 改为 "Once calibrated, SCPG requires no online schedule search and uses the same number of guidance updates as the fixed-schedule baselines" |
+| 机制解释写成事实 | 改为 "One possible explanation is … our experiments do not identify this mechanism" |
+| 命名：actual accuracy / reliability / entropy not meaningful / at chance / Transfer | 分别改为 pYIN-derived labels、"target-free reliability proxy" + sigmoid 不构成类别分布的具体说明、"probe F1 remains low"、"Evaluation on Stable Audio 3"；coherence 定义处注明只是 pitch-class match rate |
+| 同一发现反复包装（read/write/nudge/push、≠、sweet spot…） | 摘要留一次对照；结果只给测量；结论只说适用范围。全文已无 cheap / hand-picked / Curiously / nudge / push / sweet spot / not free / wrong quantity / stand out / settled / triples / handful |
+| 摘要 240 词过密 | 重写为 178 词：问题→校准→54%/88%→0.363→0.434→SA3 与 CLAP 代价；删 125k、R-scaling、在线阈值 |
+| 贡献列表 220 词 | 压成三条各 1–2 句（对照分析 / SCPG 及其可靠性消融 / 两模型评估含代价） |
+| 方法顺序：先 R 后 SCPG | 改为 2.1 更新规则 → 2.2 敏感度校准与 SCPG（burst = 连续三步 {p,p+1,p+2}，λ=0.10；12 个位置线性插值到 50 步并 3 步滑动平均；Top-K，平局取早）→ 2.3 可靠性变体（R-scaling、在线阈值）作消融 |
+| §4.2 / §4.3 / §4.5 长段 | §4.2 拆为主结果 + 稳健性；§4.3 按"主比较 / 指标边界 / R 消融"三段；§4.5 拆为设置 / 发现 / 结果与代价 |
+| §3 "so the finding of [12] stands" 辩护语气 | 删除；只写错误、影响、统一修复，原对齐的 0.259 / 0.68 作括号内诊断 |
+| 结论 "Limits: …" 像工作笔记 | 按示范改写，限制写成完整句（pitch-class、z_t、50 步配置、CLAP/FAD 为代理、需听评） |
+| 图 1 版面 / 图 1 与图 3 组织不一致 / 符号 t 复用 / 表 1 位置 / MLSP 标签 / "0.54−−0.62" / 表注过密 | 图 1 改为三面板（(a) (b) + 带 Early/MLSP/SCPG 标签的步序条），3.05 in 高；图 3 改为与图 1 完全相同的版式与配色；噪声坐标改为 τ，t 只表示步；表 1 移到第 3 页 §4.3 旁；标签改 "MLSP-fixed (20:2:48)" 并在表注解释；区间改为 "between s=0.54 and 0.62"；表注精简并注明 MLSP-fixed n=224（一次生成失败） |
+| 校对 agent 补充发现 | 步索引与进度定义对齐（t=0…N−1，s=(t+1)/N，图轴改为 "denoising progress s"）；"late bursts change the audio little" 补数据（final-latent BCE −0.14 vs −0.11；log-mel 0.21 vs 0.53）；"any 15 steps inside it are near-equivalent" 降为 "schedules inside it should be near-equivalent"；§4.5 "SAO's steps 18–32" 改为 "SAO's mid window (steps 18–32)"；摘要 "0.28" 注明是 prior schedule；"alternating arpeggio" 统一为 "alternating pattern" |
+
+未采纳：图 1 仍为单栏（双栏会挤掉正文）；§4.2 稳健性段保留六项检验（各一句）。

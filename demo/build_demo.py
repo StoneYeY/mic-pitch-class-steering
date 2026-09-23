@@ -149,20 +149,22 @@ def num(method: str, col: str = "coherence_mlsp") -> float:
     return float(table[table.method == method][col].iloc[0])
 
 
-claim = (f"<b>Where the probe is most accurate is not where it steers best.</b> Along real Stable Audio Open trajectories the probe's "
-         f"decodability keeps rising until denoising is nearly complete, whereas a single guidance step changes the output most "
-         f"around the middle of sampling (Fig. 1). Spending the same budget of 15 updates at the steps of highest measured "
-         f"steering sensitivity (SCPG, steps 19–33) raises melodic coherence from <b>{num('mlsp'):.3f}</b> (the fixed window of "
-         f"the prior work) to <b>{num('topk_dc_const'):.3f}</b>, and to <b>{num('rapg_cal_dc'):.3f}</b> with reliability-scaled step "
-         f"sizes, with CLAP unchanged; the early window (steps 0–14) barely moves the melody at this step size. "
-         f"On Stable Audio 3 the sensitive window lies at the start of the trajectory instead (steps 4–18), again far from where the "
-         f"probe is most reliable (Fig. 3): the window is model-specific, but one burst sweep locates it in either model.")
+claim = (f"<b>Guidance is most effective before the probe is most accurate.</b> Along real Stable Audio Open trajectories, "
+         f"a three-step guidance burst changes melodic coherence most at 54% of sampling, whereas the probe's decodability "
+         f"(micro-F<sub>1</sub>) reaches 95% of its maximum only at 88% (Fig. 1). Sensitivity-calibrated probe guidance (SCPG) "
+         f"allocates a fixed budget of 15 updates to the steps with the largest measured coherence gain on a development set; "
+         f"on held-out prompts it raises melodic coherence from <b>{num('mlsp'):.3f}</b> (the corrected prior schedule) to "
+         f"<b>{num('topk_dc_const'):.3f}</b>, and to <b>{num('rapg_cal_dc'):.3f}</b> with reliability-scaled step sizes, while CLAP "
+         f"does not differ significantly and FAD is numerically similar. On Stable Audio 3 the same calibration selects an earlier "
+         f"interval (steps 4–18) and raises coherence from 0.28 to 0.44 relative to the prior schedule, at a cost in CLAP "
+         f"(0.375 unguided → 0.335). The effective interval differs between the two models; measuring it costs one burst sweep "
+         f"on five development prompts.")
 
 figures = []
 png = fig_png(Path(args.paper) / "fig_trajectory.pdf")
 if png:
     figures.append(dict(src=png, alt="Probe decodability and steering sensitivity along Stable Audio Open trajectories",
-                        caption="<b>Fig. 1 (Stable Audio Open).</b> (a) Probe micro-F<sub>1</sub> and target-free reliability R<sub>t</sub> along 50 real trajectories. (b) Change in coherence and CLAP from a 3-step burst at one position (mean, 95% CI). Sensitivity peaks mid-trajectory; decodability keeps rising."))
+                        caption="<b>Fig. 1 (Stable Audio Open).</b> (a) Probe micro-F<sub>1</sub> and target-free reliability R<sub>t</sub> along 50 real trajectories; top axis: noise level τ. (b) Change in coherence and CLAP from a three-step burst starting at one position (mean, 95% CI). Bottom: guided steps of the Early, MLSP-fixed and SCPG schedules."))
 glance = dict(claim=claim, figures=figures, tables=[
     dict(title=f"Stable Audio Open 1.0 — test-set means (Table 1 of the paper; {n_test} generations per row, 15 updates each)",
          rows=table_rows(table, sched, {**LABELED, "topk_dc_const": "SCPG: Top-K(ΔC), constant step size"}, hl={"rapg_cal_dc", "topk_dc_const"}))],
@@ -192,7 +194,7 @@ if args.sa3_res:
     png3 = fig_png(Path(args.paper) / "fig_sa3.pdf")
     if png3:
         glance["figures"].append(dict(src=png3, alt="The same analysis on Stable Audio 3 medium base",
-                                      caption="<b>Fig. 3 (Stable Audio 3 medium, base checkpoint).</b> (a) Decodability and reliability along 50 real trajectories; (b) change in coherence and CLAP from a 3-step burst at one position. Here the sensitive window is at the start of the trajectory (noise level t ≥ 0.95) while decodability peaks late."))
+                                      caption="<b>Fig. 3 (Stable Audio 3 medium, base checkpoint).</b> The same analysis: here the largest coherence gains lie at the start of the trajectory (noise level τ ≥ 0.95) while decodability peaks late. Bottom: guided steps of the Early, MLSP-fixed and SCPG (4–18) schedules."))
     glance["tables"].append(dict(title=f"Stable Audio 3 medium base — test-set means (§4.5 of the paper; {n3} generations per row, 15 updates each)",
                                  rows=table_rows(tb3, sched3, LABELED3, hl={"rapg_cal_dc"})))
     payload["models"].append(dict(id="sa3", name="Stable Audio 3 medium (base checkpoint)", short="SA3",
