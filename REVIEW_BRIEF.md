@@ -1,9 +1,9 @@
 # "When to Steer" — 评审简报（供 code-review / paper-review agent 使用）
 
-**日期：** 2026-09-09  **投稿：** ICASSP 2027（截止 2026-09-16，不延期；4 页正文 + 第 5 页只放参考文献；非双盲）
+**日期：** 2026-09-09（首版）→ 2026-09-23（v4，见 §10–§12）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
 **仓库：** https://github.com/StoneYeY/mic-pitch-class-steering ，分支 **`icassp`**（`main` 是 MLSP 2026 原始代码，不要评那个）
-**论文：** `paper/main.tex`（编译：`cd paper && latexmk -pdf main.tex`；PDF 已在 `paper/main.pdf`）
-**Demo：** `docs/index.html`（自包含听评/展示页），生成脚本 `demo/build_demo.py` + `demo/template.html`
+**论文：** `paper/main.tex`（编译：`cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main`；最终 PDF `paper/When_to_Steer_ICASSP2027_final.pdf`，5 页 = 正文 4 + 参考文献/伦理 1）
+**Demo：** https://stoneyey.github.io/mic-pitch-class-steering/ （结果 + 带标签音频；`docs/index.html` 自包含），生成脚本 `demo/build_demo.py` + `demo/template.html`
 
 ## 0. 你要做什么
 
