@@ -294,7 +294,6 @@ cd paper && latexmk -pdf main.tex
 5. **SA3 平台**：正文改为 ΔC≈0.08（前 40% 五个位置均值 0.081，前三个位置宏 0.079）。
 6. **图 1 边距**：右边距 0.845→0.82、下边距 0.125→0.14；`make_figures.py` 加入标题/轴标签越界守卫（越界即打印 WARNING），并用 `pdftotext -bbox-layout` 复核：图 1 字形最右 245.1 pt / 页宽 248.4 pt，图 3 239.3 pt，无越界。
 
-
 ## 16. v9（2026-09-23 深夜）：作者版正文 + 新摘要，仓库与投稿版对齐
 
 作者上传的 PDF（基于 v7 正文：单作者 Yushi Ye + ORCID；引言/§2.2/§3/结论的精简措辞；Codex 重排的图 1–3 版式与图注；作者自己的致谢文字）已按其内容重建为 `paper/main.tex`：从 git 中的 v7 源出发逐句移植作者改动（正文与上传版逐句 diff 一致，仅摘要不同），摘要换成本轮建议的 190 词版本（补回动机、术语定义与两处比较对象；"do not coincide" 而非 "peak"）。图 1–3 由 `make_figures.py` 重新生成为与上传版相同的版式（面板标题 "(a) SAO: decodability / (b) Three-step burst sensitivity / (c) Guided steps"，图例置于面板上方，图 2 图例居顶、横轴 "updates K"），标签越界守卫与 `pdftotext -bbox` 复核均通过。5 页（正文 4 页含致谢，第 5 页参考文献 + 伦理），0 overfull；`check_paper_numbers.py` 47/47 通过（表注片段已按作者措辞更新）。致谢为作者本人文字。
