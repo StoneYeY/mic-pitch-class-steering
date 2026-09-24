@@ -1,6 +1,6 @@
 # "When to Steer" — 评审简报（供 code-review / paper-review agent 使用）
 
-**日期：** 2026-09-09（首版）→ 2026-09-23（v5，见 §10–§13）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
+**日期：** 2026-09-09（首版）→ 2026-09-23（v6，见 §10–§14）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
 **仓库：** https://github.com/StoneYeY/mic-pitch-class-steering ，分支 **`icassp`**（`main` 是 MLSP 2026 原始代码，不要评那个）
 **论文：** `paper/main.tex`（编译：`cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main`；最终 PDF `paper/When_to_Steer_ICASSP2027_final.pdf`，5 页 = 正文 4 + 参考文献/伦理 1）
 **Demo：** https://stoneyey.github.io/mic-pitch-class-steering/ （结果 + 带标签音频；`docs/index.html` 自包含），生成脚本 `demo/build_demo.py` + `demo/template.html`
@@ -269,3 +269,18 @@ cd paper && latexmk -pdf main.tex
 | 校对 agent 补充发现 | 步索引与进度定义对齐（t=0…N−1，s=(t+1)/N，图轴改为 "denoising progress s"）；"late bursts change the audio little" 补数据（final-latent BCE −0.14 vs −0.11；log-mel 0.21 vs 0.53）；"any 15 steps inside it are near-equivalent" 降为 "schedules inside it should be near-equivalent"；§4.5 "SAO's steps 18–32" 改为 "SAO's mid window (steps 18–32)"；摘要 "0.28" 注明是 prior schedule；"alternating arpeggio" 统一为 "alternating pattern" |
 
 未采纳：图 1 仍为单栏（双栏会挤掉正文）；§4.2 稳健性段保留六项检验（各一句）。
+
+## 14. 第四轮复审（数据一致性，2026-09-23 晚）的回应（v6，最终）
+
+八条全部按复审意见做了局部修正，没有再改叙事：
+
+1. §4.5 SA3 主比较 p 值：常量 SCPG 0.44 vs MLSP 0.28 改为 **Holm-adjusted p=0.002**（新增自动宏 `\saThreePTopKvsMLSPholm`，来自 `021_sa3_expB/table.csv` 的 `p_coherence_mlsp_vs_mlsp_holm`）。
+2. §4.3 在线阈值：删除 "admits mostly late steps"；改为报告实测触发分布（首次更新在第 2–12 步，最后一次更新中位数在第 40 步），并在 §2.3 与 Baselines 注明在线变体同时使用 R-scaling。
+3. §4.3 "R-scaling changes nothing" 改为 "slightly reduces mean coherence, from 0.315 to 0.310 (paired p<1e-6)"。
+4. §4.2 CLAP 句改为 "lowers CLAP slightly at every position (mean ΔCLAP between −0.012 and −0.005 relative to the unguided output)"；§4.4 改为 "CLAP ranges from 0.351 to 0.373 across budgets and schedules (0.348 unguided on this subset), with overlapping CIs"。
+5. §4.2 删除 "changing the audio the least"，只写 s=0.94 相对 s=0.54：BCE 下降更多（−0.14 vs −0.11）、log-mel 变化更小（0.21 vs 0.53）。
+6. 表 1 注改为 "MLSP-fixed has 224 valid coherence values and 225 CLAP values, and paired tests use complete pairs"；§4.5 注明 SA3 的 Mid/Late 各 49 个有效 coherence 值。
+7. §4.4 删除 "not simply additive"；§4.5 删除 "should be near-equivalent"，只写 Early (0–14) 也在平台内且其均值在 SCPG 的 CI 内。
+8. 图 1 / 图 3 右边距从 0.87 改为 0.845，右轴标题（R_t、ΔCLAP）在 220 dpi 渲染下完整可见。
+
+**统计核对表：** 新脚本 `w2s/scripts/check_paper_numbers.py` 从 `results/` 重算正文里全部手写统计量（39 条：峰值/饱和位置、相关系数、bootstrap/LOO、随机方向对照、早窗强度扫描、表 1 各项、R 消融、在线阈值触发步、预算扫描、SA3 全部数字、旧对齐诊断），输出 `paper/STATS_CHECK.md`；当前 **39/39 一致**。自动宏（numbers*.tex、table_main.tex、budget_summary.csv）继续由 `make_figures.py` 重新生成后逐字节比对。

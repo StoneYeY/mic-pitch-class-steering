@@ -1,0 +1,45 @@
+# Hand-written statistics of main.tex, recomputed from results/
+
+39 claims checked, 0 mismatch(es).
+
+| Paper | Claim | Source | Recomputed | Status |
+|---|---|---|---|---|
+| §4.1 / abstract | F1 reaches 95% of its maximum at 88% of the trajectory | `003/summary.csv` | step 43 -> 88% | ok |
+| §4.1 | Pearson(R_t, F1) across steps = 0.96 | `003/corr.json` | 0.959 | ok |
+| §4.1 | median within-trajectory Pearson = 0.85 | `003/per_step.csv` | 0.846 | ok |
+| §4.1 | fixed-step Spearman median 0.27; 0.57 over the last 15 steps | `003/per_step.csv` | 0.27; 0.57 | ok |
+| §4.2 / abstract | peak at s=0.54 (54%), dC=0.104 | `004/by_position.csv` | s=0.54, dC=0.104 | ok |
+| §4.2 | burst in the first 20% changes coherence by < 1/10 of the peak | `004/by_position.csv` | max early dC=0.0036 vs peak/10=0.0104 | ok |
+| §4.2 | BCE change -0.14 at s=0.94 vs -0.11 at s=0.54; log-mel 0.21 vs 0.53 | `004/by_position.csv` | -0.138 vs -0.109; 0.211 vs 0.532 | ok |
+| §4.2 | mean dCLAP between -0.012 and -0.005 at every position | `004/by_position.csv` | -0.0118 .. -0.0050 | ok |
+| §4.2 | bootstrap argmax at s=0.54 in 92%, within 0.46-0.62 in all | `004/stability.json` | 92%; positions ['22', '26', '30'] | ok |
+| §4.2 | leave-one-prompt-out peaks between s=0.54 and 0.62 | `004/stability.json` | positions [26, 30] | ok |
+| §4.2 | mid beats early in 88% of trials, p<1e-7 | `004/per_run.csv` | 88%, p=1.6e-08 | ok |
+| §4.2 | random-direction burst 0.003 (n.s.) vs 0.104, paired p<1e-6 | `023 + 004 per_run.csv` | 0.003 (p vs 0: 0.39) vs 0.104, p=4.9e-07 | ok |
+| §4.2 | lambda=0.05 sweep: peak s=0.54, dC=0.099, Pearson 0.99 | `015/by_position.csv` | s=0.54, dC=0.099, r=0.990 | ok |
+| §4.2 | early window at lambda=alpha=0.2/0.5/1.0: coherence 0.12 -> 0.23/0.29/0.41; CLAP 0.207 -> 0.187/0.184/0.173 | `025/a*/table.csv` | 0.2: 0.23/0.187 (unguided 0.12/0.207); 0.5: 0.29/0.184 (unguided 0.12/0.207); 1.0: 0.41/0.173 (unguided 0.12/0.207) | ok |
+| Table 1 caption | MLSP-fixed: 224 valid coherence values, 225 CLAP values | `009/per_run.csv` | coh n=224, clap n=225 | ok |
+| §4.3 | Early 0.17 vs unguided 0.13; Mid 0.42 | `009/table.csv` | 0.17 vs 0.13; 0.42 | ok |
+| §4.3 | SCPG selects 19-33; decodability-calibrated ablation = late window 35-49 | `009/schedules.json` | topk 19-33; f1 35-49 | ok |
+| §4.3 | alternating pattern: SCPG+R 0.327 vs MLSP-fixed 0.346 | `009/per_melody.csv` | 0.327 vs 0.346 | ok |
+| §4.3 | CLAP: SCPG variants 0.321-0.324, MLSP-fixed 0.316, unguided 0.307 | `009/table.csv` | 0.321/0.324, 0.316, 0.307 | ok |
+| §4.3 | no guided method differs significantly from MLSP-fixed in CLAP (Holm) | `009/per_run.csv` | min Holm p = 0.968 | ok |
+| §4.3 | FAD 0.75-0.76 (SCPG variants) vs 0.79 (MLSP-fixed) | `009/fad.csv` | 0.75/0.76 vs 0.79 | ok |
+| §4.3 | voiced fraction 0.88 SCPG / 0.86 MLSP-fixed / 0.84 unguided | `009/per_run.csv` | 0.88/0.86/0.84 | ok |
+| §4.3 | first-pitch-class collapse: 0.445 vs 0.255 | `009/per_run.csv` | 0.445 vs 0.255 | ok |
+| §4.3 | R-scaling on the late window: 0.315 -> 0.310, paired p<1e-6 | `009/per_run.csv` | 0.315 -> 0.310, d=-0.0056, p=6.2e-07 | ok |
+| §4.3 | online R-threshold 0.351 vs 0.363, p=0.53; first update at steps 2-12, last at step 40 (median) | `009/per_run.csv` | 0.351 vs 0.363, p=0.53; first 2-12, last median 40 | ok |
+| §2.3 / §3 | online R-threshold also uses R-scaling | `009/schedules.json` | adaptive_strength=True | ok |
+| §4.3 | R-scaling vs constant: +0.011, better in 122 of 184 non-tied trials, p<1e-5; realised mean lambda 0.057 | `009/per_run.csv` | d=+0.011, 122 of 184, p=1.4e-06; lambda=0.057 | ok |
+| §4.3 | about 86% of the improvement over MLSP-fixed comes from placement | `009/table.csv` | 86.1% | ok |
+| §4.4 | 10 SCPG updates 0.38 vs 25 uniform 0.40; K=25 SCPG 0.56 | `014/pareto.csv` | 0.38 vs 0.40; 0.56 | ok |
+| §4.4 | CLAP 0.351-0.373 across budgets; 0.348 unguided on the subset | `014/pareto.csv + 009/per_run.csv` | 0.351-0.373; 0.348 | ok |
+| §4.4 | SCPG better than uniform at every K, paired p<1e-5 | `014/per_run.csv` | max p over K = 5.4e-06 | ok |
+| §4.5 | SA3: F1 reaches 95% of max at 76% | `019c/summary.csv` | 76% | ok |
+| §4.5 | SA3 burst gain ~0.079 over the first 40%, 0.017 in the last 20% | `020c/by_position.csv` | first 40%: 0.081; last 20%: 0.017 | ok |
+| §4.5 | SA3 random-direction control -0.026 vs 0.089, paired p<1e-4 | `024 + 020c per_run.csv` | -0.026 vs 0.089, p=2.7e-05 | ok |
+| §4.5 | SA3: 49 valid coherence values for Mid and Late | `021/per_run.csv` | mid 49, late 49 | ok |
+| §4.5 | SCPG 0.44 vs MLSP-fixed 0.28, Holm-adjusted p=0.002 | `021/per_run.csv` | 0.44 vs 0.28, Holm p=0.0020 | ok |
+| §4.5 | SA3 CLAP 0.375 -> 0.335 under SCPG (Holm p<0.01); all guided except MLSP-fixed (0.361, n.s.) decrease | `021/per_run.csv` | 0.375 -> 0.335, Holm p=0.0069; mlsp p=0.086; others max p=0.0069 | ok |
+| §4.5 | SA3 calibration selects steps 4-18; Early (0-14) 0.44 within the CI of SCPG | `021/schedules.json + table.csv` | 4-18; early 0.44, SCPG CI [0.37, 0.51] | ok |
+| §3 | original alignment: 0.259 against the melody, 0.68 against its first pitch class | `026/table.csv` | 0.259; 0.68 | ok |

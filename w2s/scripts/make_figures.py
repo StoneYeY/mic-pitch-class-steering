@@ -91,7 +91,7 @@ def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, fi
         for st_i in st:
             c.add_patch(Rectangle(((st_i + 0.5) / STEPS, i - 0.32), 1.0 / STEPS, 0.64, color=col, lw=0))
     c.set_xlim(0, 1.0); c.set_xlabel("denoising progress $s$")
-    fig.subplots_adjust(left=0.15, right=0.87, top=0.855, bottom=0.125)
+    fig.subplots_adjust(left=0.15, right=0.845, top=0.855, bottom=0.125)
     fig.savefig(out / name); plt.close(fig)
 
 
@@ -200,6 +200,9 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
         if "rapg_cal_dc" in tb.index and "p_coherence_mlsp_vs_mlsp" in tb.columns:
             pv = tb.loc["rapg_cal_dc", "p_coherence_mlsp_vs_mlsp"]
             nums["saThreePRAPGvsMLSP"] = f"{pv:.1e}".replace("e-0", "e-") if pv >= 1e-4 else "10^{-4}"
+        if "topk_dc_const" in tb.index and "p_coherence_mlsp_vs_mlsp_holm" in tb.columns:
+            ph = float(tb.loc["topk_dc_const", "p_coherence_mlsp_vs_mlsp_holm"])
+            nums["saThreePTopKvsMLSPholm"] = f"{ph:.3f}" if ph >= 0.001 else f"{ph:.1e}"
         st = json.load(open(expB / "schedules.json")).get("rapg_cal_dc", {}).get("steps")
         if st:
             nums["saThreeRAPGsteps"] = f"{min(st)}--{max(st)}"
