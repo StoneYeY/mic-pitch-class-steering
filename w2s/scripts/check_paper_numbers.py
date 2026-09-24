@@ -119,7 +119,7 @@ add("§4.2", "early window at lambda=alpha=0.2/0.5/1.0: coherence 0.12 -> 0.23/0
 
 # ============================================================ Exp B (009): main table
 g = pb.groupby("method")
-add("Table 1 caption", "MLSP-fixed: 224 valid coherence values, 225 CLAP values; every other method 225", "009/per_run.csv", "per-run", f"coh n={g.coherence_mlsp.count().to_dict()}", g.coherence_mlsp.count()["mlsp"] == 224 and g.clap.count()["mlsp"] == 225 and (g.coherence_mlsp.count().drop("mlsp") == 225).all(), tex=["224 valid coherence values and 225 CLAP values"])
+add("Table 1 caption", "MLSP-fixed: 224 valid coherence values, 225 CLAP values; every other method 225", "009/per_run.csv", "per-run", f"coh n={g.coherence_mlsp.count().to_dict()}", g.coherence_mlsp.count()["mlsp"] == 224 and g.clap.count()["mlsp"] == 225 and (g.coherence_mlsp.count().drop("mlsp") == 225).all(), tex=["224 valid MLSP-fixed coherence values (225 CLAP values"])
 cm = g.coherence_mlsp.mean()
 add("§4.3", "Early 0.17 vs unguided 0.13; Mid 0.42 (Early > unguided, Mid > Early)", "009/per_run.csv", "per-run", f"{cm['early']:.2f} vs {cm['sao']:.2f}; {cm['mid']:.2f}", round(cm["early"], 2) == 0.17 and round(cm["sao"], 2) == 0.13 and round(cm["mid"], 2) == 0.42 and cm["sao"] < cm["early"] < cm["mid"], tex=["($0.17$ vs $0.13$)", "the mid window reaches $0.42$"])
 sch = json.load(open(R / "009_expB_full/schedules.json"))
