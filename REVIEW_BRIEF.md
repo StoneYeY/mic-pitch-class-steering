@@ -1,6 +1,6 @@
 # "When to Steer" — 评审简报（供 code-review / paper-review agent 使用）
 
-**日期：** 2026-09-09（首版）→ 2026-09-23（v6，见 §10–§14）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
+**日期：** 2026-09-09（首版）→ 2026-09-23（v7 定稿，见 §10–§15）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
 **仓库：** https://github.com/StoneYeY/mic-pitch-class-steering ，分支 **`icassp`**（`main` 是 MLSP 2026 原始代码，不要评那个）
 **论文：** `paper/main.tex`（编译：`cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main`；最终 PDF `paper/When_to_Steer_ICASSP2027_final.pdf`，5 页 = 正文 4 + 参考文献/伦理 1）
 **Demo：** https://stoneyey.github.io/mic-pitch-class-steering/ （结果 + 带标签音频；`docs/index.html` 自包含），生成脚本 `demo/build_demo.py` + `demo/template.html`
@@ -284,3 +284,12 @@ cd paper && latexmk -pdf main.tex
 8. 图 1 / 图 3 右边距从 0.87 改为 0.845，右轴标题（R_t、ΔCLAP）在 220 dpi 渲染下完整可见。
 
 **统计核对表：** 新脚本 `w2s/scripts/check_paper_numbers.py` 从 `results/` 重算正文里全部手写统计量（39 条：峰值/饱和位置、相关系数、bootstrap/LOO、随机方向对照、早窗强度扫描、表 1 各项、R 消融、在线阈值触发步、预算扫描、SA3 全部数字、旧对齐诊断），输出 `paper/STATS_CHECK.md`；当前 **39/39 一致**。自动宏（numbers*.tex、table_main.tex、budget_summary.csv）继续由 `make_figures.py` 重新生成后逐字节比对。
+
+## 15. 第五轮复审（核对脚本与收尾，2026-09-23 深夜）的回应（v7，定稿）
+
+1. **核对脚本漏检**：`w2s/scripts/check_paper_numbers.py` 重写。现在 (a) 每条比较同时检查数值与方向（不只看 p 值）；(b) 手写统计量优先从逐运行文件重算（47 条中 42 条 per-run，5 条读汇总），并在开头加了"汇总表 = 逐运行均值"的一致性检查（009 / 021 table.csv、004 by_position.csv、014 pareto.csv、003 summary.csv）；(c) bootstrap 与 LOO 峰值改为从 per_run 重新抽样/重算（seed 0，5000 次），再与 stability.json 比对；(d) 每条检查附带它所代表的正文片段，脚本读取 `paper/main.tex` 核对片段确实存在（"TEXT MISSING" 状态）。复审给的两个对抗测试（SA3 汇总均值改 0.99；预算实验方法标签互换）现在分别触发 1 条和 3 条失败。真实数据：**47/47 通过**，输出 `paper/STATS_CHECK.md`。
+2. **§4.3 变体混用**：alternating 改为常量 SCPG 的 0.317 vs 0.346；第一音级参照改为 0.434 vs 0.249（与该段讨论的常量 SCPG 一致；voiced fraction 0.88 两种变体相同）。
+3. **晚窗 p 值口径**：写明 "unadjusted paired p<10⁻⁶"（对 Late 的 Holm 校正后 ≈2.5e-6，仍 <1e-5）。
+4. **两句过强总结**：删除 "so late guidance changes what the probe reads … more than it changes the audio"；"at matched update norm" 改为 "under the common update rule and nominal guidance strength"。
+5. **SA3 平台**：正文改为 ΔC≈0.08（前 40% 五个位置均值 0.081，前三个位置宏 0.079）。
+6. **图 1 边距**：右边距 0.845→0.82、下边距 0.125→0.14；`make_figures.py` 加入标题/轴标签越界守卫（越界即打印 WARNING），并用 `pdftotext -bbox-layout` 复核：图 1 字形最右 245.1 pt / 页宽 248.4 pt，图 3 239.3 pt，无越界。

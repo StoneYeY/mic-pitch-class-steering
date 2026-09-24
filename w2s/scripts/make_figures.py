@@ -91,7 +91,15 @@ def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, fi
         for st_i in st:
             c.add_patch(Rectangle(((st_i + 0.5) / STEPS, i - 0.32), 1.0 / STEPS, 0.64, color=col, lw=0))
     c.set_xlim(0, 1.0); c.set_xlabel("denoising progress $s$")
-    fig.subplots_adjust(left=0.15, right=0.845, top=0.855, bottom=0.125)
+    fig.subplots_adjust(left=0.15, right=0.82, top=0.855, bottom=0.14)
+    # guard against clipped axis titles: every label must lie inside the figure canvas
+    fig.canvas.draw()
+    W, H = fig.get_size_inches() * fig.dpi
+    for ax in fig.get_axes():
+        for lab in (ax.xaxis.label, ax.yaxis.label, ax.title):
+            bb = lab.get_window_extent()
+            if lab.get_text() and (bb.x0 < 0 or bb.y0 < 0 or bb.x1 > W or bb.y1 > H):
+                print(f"WARNING clipped label {lab.get_text()!r} in {name}: {bb}")
     fig.savefig(out / name); plt.close(fig)
 
 
