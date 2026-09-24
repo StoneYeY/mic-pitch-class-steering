@@ -18,8 +18,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 STEPS = 50
-plt.rcParams.update({"font.size": 8, "axes.titlesize": 8.5, "axes.labelsize": 8, "legend.fontsize": 7,
-                     "xtick.labelsize": 7, "ytick.labelsize": 7, "font.family": "serif",
+plt.rcParams.update({"font.size": 9.2, "axes.titlesize": 9.2, "axes.labelsize": 9.2, "legend.fontsize": 9.2,
+                     "xtick.labelsize": 9.2, "ytick.labelsize": 9.2, "font.family": "serif", "pdf.fonttype": 42,
                      "axes.spines.top": False, "axes.spines.right": False})
 C = {"raw": "#1f4e79", "proxy": "#8c8c8c", "R": "#0e7c6b", "dcoh": "#1f4e79", "dclap": "#b8602a"}
 NAMES = {"sao": "SAO (unguided)", "early": "Early (0--14)", "mid": "Mid (18--32)", "late": "Late (35--49)",
@@ -27,15 +27,13 @@ NAMES = {"sao": "SAO (unguided)", "early": "Early (0--14)", "mid": "Mid (18--32)
          "rapg_cal_dc": "SCPG + $R$-scaling", "rapg_on": "$R$-threshold (online)", "topk_dc_const": "SCPG: Top-$K$($\\Delta C$)"}
 
 
-def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, figsize=(3.45, 3.35), *, name="fig_trajectory.pdf",
-                   model="SAO", noise="rms", noise_ticks=(0.99, 0.95, 0.75, 0.5), show_proxy=True, dclap_ylim=(-0.03, 0.03),
-                   margins=(0.16, 0.80, 0.81, 0.14)):
-    """Figs. 1 and 3: (a) decodability / reliability along real trajectories, (b) burst steering sensitivity,
-    (c) a labelled strip of the guided steps of three schedules.  noise="rms": noise level from the stored latent rms
-    (SAO, EDM latents); noise="sigma": the sampler's own flow time from the per-step sigma column (SA3)."""
-    k = 3.05 / figsize[1]   # keep the gaps and the strip legible when the figure is made shorter
-    fig, (a, b, c) = plt.subplots(3, 1, figsize=figsize, sharex=True,
-                                  gridspec_kw=dict(height_ratios=[1.0, 1.0, 0.40 * k], hspace=1.05 * k))
+def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, figsize=(86/25.4, 3.35), *, name="fig_trajectory.pdf",
+                   model="SAO", noise="rms", noise_ticks=(0.99, 0.95, 0.75, 0.5), show_proxy=True, dclap_ylim=(-0.03, 0.03)):
+    """Three panels at final column width; legends outside data; normal text >= 9 pt."""
+    fig = plt.figure(figsize=figsize)
+    a = fig.add_axes([.18, .64, .63, .215])
+    b = fig.add_axes([.18, .31, .63, .20], sharex=a)
+    c = fig.add_axes([.18, .12, .63, .105], sharex=a)
     s = pd.read_csv(expA / "summary.csv")
     raw, prox = s[s.variant == "raw"].sort_values("row"), s[s.variant == "gauss_proxy"].sort_values("row")
     a.plot(raw.progress, raw.f1, color=C["raw"], lw=1.4, label="Probe $F_1$")
@@ -44,66 +42,58 @@ def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, fi
         a.plot(prox.progress, prox.f1, color=C["proxy"], lw=1.2, ls="--", label="Proxy")
     a2 = a.twinx(); a2.spines.right.set_visible(True)
     a2.plot(raw.progress, raw.R_entropy, color=C["R"], lw=1.4, ls="-.", label="$R_t$")
-    a2.set_ylabel("$R_t$", color=C["R"]); a2.tick_params(axis="y", colors=C["R"])
-    a.set_ylabel("micro-$F_1$"); a.text(-0.16, 1.70, f"(a) {model}: decodability", transform=a.transAxes, fontsize=8, ha="left", va="bottom")
-    a.set_ylim(bottom=0)
-    # noise level of the stored latents, as the flow-time equivalent tau = sigma/(1+sigma) with sigma = noise/signal rms
-    try:
-        if noise == "sigma":
-            tflow = raw.sigma.values
-        else:
-            rms0 = float(np.mean([x["rms0"] for x in json.load(open(expA / "corr.json"))["runs"]]))
-            sig = np.sqrt(np.maximum(raw.rms.values ** 2 - rms0 ** 2, 0)) / rms0; tflow = sig / (1 + sig)
-        top = a.secondary_xaxis("top")
-        ticks_t = list(noise_ticks)
-        top.set_xticks([float(raw.progress.values[int(np.argmin(np.abs(tflow - t)))]) for t in ticks_t])
-        top.set_xticklabels([f"{t:.2f}" for t in ticks_t], fontsize=6); top.tick_params(length=2, pad=1)
-        top.set_xlabel("noise level $\\tau$", fontsize=6.5, labelpad=1)
-    except Exception as e:  # noqa: BLE001
-        print("no noise axis:", e)
-    h1, l1 = a.get_legend_handles_labels(); h2, l2 = a2.get_legend_handles_labels()
-    a.legend(h1 + h2, l1 + l2, loc="lower left", bbox_to_anchor=(0.0, 1.38), ncol=3, frameon=False, fontsize=6.5, handlelength=1.8, columnspacing=1.2, borderaxespad=0)
-    bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
-    b.errorbar(bp.progress, bp.d_coherence_mlsp, yerr=[bp.d_coherence_mlsp - bp.d_coherence_mlsp_lo, bp.d_coherence_mlsp_hi - bp.d_coherence_mlsp],
-               color=C["dcoh"], marker="o", ms=3, lw=1.2, capsize=2, label="$\\Delta$ coherence")
-    b.axhline(0, color="k", lw=.5)
-    has_clap = np.isfinite(bp.d_clap).any()
-    if has_clap:
-        b2 = b.twinx(); b2.spines.right.set_visible(True)
-        b2.errorbar(bp.progress, bp.d_clap, yerr=[bp.d_clap - bp.d_clap_lo, bp.d_clap_hi - bp.d_clap], color=C["dclap"],
-                    marker="s", ms=3, lw=1.2, capsize=2, label="$\\Delta$ CLAP")
-        b2.set_ylabel("$\\Delta$ CLAP", color=C["dclap"]); b2.tick_params(axis="y", colors=C["dclap"])
-        b2.set_ylim(*dclap_ylim)
-    b.set_ylim(top=float(bp.d_coherence_mlsp_hi.max()) * 1.4)
-    b.set_ylabel("$\\Delta$ coherence")
-    b.text(-0.16, 1.30, "(b) Three-step burst sensitivity", transform=b.transAxes, fontsize=8, ha="left", va="bottom")
-    if has_clap:
-        h1, l1 = b.get_legend_handles_labels(); h2, l2 = b2.get_legend_handles_labels()
-        b.legend(h1 + h2, l1 + l2, loc="lower left", bbox_to_anchor=(0.0, 1.03), ncol=2, frameon=False, fontsize=6.5, handlelength=1.8, columnspacing=1.5, borderaxespad=0)
+    a2.set_ylabel("$R_t$", color=C["R"], labelpad=3); a2.tick_params(axis="y", colors=C["R"], pad=2)
+    a.set_ylabel("micro-$F_1$", labelpad=2); a.set_ylim(bottom=0)
+    if noise == "sigma":
+        tflow = raw.sigma.values
     else:
-        b.legend(loc="lower left", bbox_to_anchor=(0.0, 1.0), frameon=False)
-    # (c) labelled strip of guided steps
-    rows = (("early", "Early", "#666666"), ("mlsp", "MLSP", "#9a9a9a"), ("rapg_cal_dc", "SCPG", C["R"]))
-    c.set_ylim(-0.6, len(rows) - 0.4); c.set_yticks(range(len(rows))); c.set_yticklabels([r[1] for r in rows], fontsize=6.5)
-    c.invert_yaxis(); c.tick_params(axis="y", length=0); c.tick_params(axis="x", labelsize=6.5)
-    for sp in ("top", "right", "left"):
-        c.spines[sp].set_visible(False)
-    for i, (k, lab, col) in enumerate(rows):
-        st = (schedules or {}).get(k, {}).get("steps") or []
-        for st_i in st:
-            c.add_patch(Rectangle(((st_i + 0.5) / STEPS, i - 0.32), 1.0 / STEPS, 0.64, color=col, lw=0))
-    c.text(-0.16, 1.15, "(c) Guided steps", transform=c.transAxes, fontsize=8, ha="left", va="bottom")
-    c.set_xlim(0, 1.0); c.set_xlabel("denoising progress $s$")
-    fig.subplots_adjust(left=margins[0], right=margins[1], top=margins[2], bottom=margins[3])
-    # guard against clipped axis titles: every label must lie inside the figure canvas
+        rms0 = float(np.mean([x["rms0"] for x in json.load(open(expA / "corr.json"))["runs"]]))
+        sig = np.sqrt(np.maximum(raw.rms.values ** 2 - rms0 ** 2, 0)) / rms0; tflow = sig / (1 + sig)
+    top = a.secondary_xaxis("top")
+    top.set_xticks([float(raw.progress.values[int(np.argmin(np.abs(tflow - t)))]) for t in noise_ticks])
+    top.set_xticklabels([f"{t:.2f}" for t in noise_ticks]); top.tick_params(length=2, pad=2)
+    fig.text(.08, .884, r"$\tau$", ha="center", va="center")
+    fig.text(.015, .987, f"(a) {model}: decodability", va="top")
+    h1, l1 = a.get_legend_handles_labels(); h2, l2 = a2.get_legend_handles_labels()
+    fig.legend(h1+h2, l1+l2, loc="upper center", bbox_to_anchor=(.5,.96), ncol=3,
+               frameon=False, handlelength=1.3, columnspacing=1., borderaxespad=0, labelspacing=.2)
+    bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
+    b.errorbar(bp.progress, bp.d_coherence_mlsp, yerr=[bp.d_coherence_mlsp-bp.d_coherence_mlsp_lo, bp.d_coherence_mlsp_hi-bp.d_coherence_mlsp],
+               color=C["dcoh"], marker="o", ms=3, lw=1.2, capsize=2, label=r"$\Delta$ coherence")
+    b.axhline(0, color="k", lw=.5)
+    b2 = b.twinx(); b2.spines.right.set_visible(True)
+    b2.errorbar(bp.progress, bp.d_clap, yerr=[bp.d_clap-bp.d_clap_lo, bp.d_clap_hi-bp.d_clap], color=C["dclap"],
+                marker="s", ms=3, lw=1.2, ls="--", capsize=2, label=r"$\Delta$ CLAP")
+    b2.set_ylabel(r"$\Delta$ CLAP", color=C["dclap"], labelpad=2); b2.tick_params(axis="y", colors=C["dclap"], pad=2)
+    b2.set_ylim(*dclap_ylim)
+    b2.set_yticks([-.02,0,.02] if dclap_ylim[1] < .04 else [0,.03,.06])
+    from matplotlib.ticker import FormatStrFormatter
+    b2.yaxis.set_major_formatter(FormatStrFormatter("%.2f"))
+    b.set_ylim(top=float(bp.d_coherence_mlsp_hi.max())*1.2)
+    b.set_ylabel(r"$\Delta$ coherence", labelpad=2)
+    fig.text(.015, .602, "(b) Three-step burst sensitivity", va="top")
+    h1,l1=b.get_legend_handles_labels(); h2,l2=b2.get_legend_handles_labels()
+    fig.legend(h1+h2,l1+l2,loc="upper center",bbox_to_anchor=(.5,.572),ncol=2,
+               frameon=False,handlelength=1.3,columnspacing=1.,borderaxespad=0)
+    fig.text(.015,.275,"(c) Guided steps",va="top")
+    rows=(("early","Early","#666666"),("mlsp","MLSP","#9a9a9a"),("rapg_cal_dc","SCPG",C["R"]))
+    c.set_ylim(-.6,2.6); c.set_yticks(range(3)); c.set_yticklabels([r[1] for r in rows])
+    c.invert_yaxis(); c.tick_params(axis="y",length=0,pad=3); c.tick_params(axis="x",pad=2)
+    for sp in ("top","right","left"): c.spines[sp].set_visible(False)
+    for i,(k,lab,col) in enumerate(rows):
+        for step in (schedules or {}).get(k,{}).get("steps") or []:
+            c.add_patch(Rectangle(((step+.5)/STEPS,i-.28),1/STEPS,.56,color=col,lw=0))
+    c.set_xlim(0,1); c.set_xticks([0,.2,.4,.6,.8,1]); c.set_xlabel("denoising progress $s$",labelpad=2)
+    for ax in (a,b): ax.tick_params(axis="x",labelbottom=False); ax.tick_params(axis="y",pad=2)
     fig.canvas.draw()
-    W, H = fig.get_size_inches() * fig.dpi
-    for ax in fig.get_axes():
-        for lab in (ax.xaxis.label, ax.yaxis.label, ax.title):
-            bb = lab.get_window_extent()
-            if lab.get_text() and (bb.x0 < 0 or bb.y0 < 0 or bb.x1 > W or bb.y1 > H):
-                print(f"WARNING clipped label {lab.get_text()!r} in {name}: {bb}")
-    fig.savefig(out / name); plt.close(fig)
+    from matplotlib.text import Text
+    W,H=fig.get_size_inches()*fig.dpi
+    for lab in fig.findobj(Text):
+        if not lab.get_visible() or not lab.get_text(): continue
+        bb=lab.get_window_extent()
+        if bb.x0 < -.5 or bb.y0 < -.5 or bb.x1 > W+.5 or bb.y1 > H+.5:
+            print(f"WARNING clipped text {lab.get_text()!r} in {name}: {bb}")
+    fig.savefig(out/name); plt.close(fig)
 
 
 def fig_pareto(expB: Path, out: Path):
@@ -135,9 +125,8 @@ def fig_budget(expD: Path, out: Path, expB: Path | None = None):
     df = pd.read_csv(expD / "per_run.csv")
     rng = np.random.default_rng(0)
     LAB = {"uniform": "Uniform", "topk_dc": "SCPG", "late": "Late", "rapg_cal_dc": "SCPG + $R$-scaling"}
-    STY = {"uniform": ("o", "-"), "topk_dc": ("s", "--"), "late": ("^", ":"), "rapg_cal_dc": ("D", "-.")}
     COL = {"uniform": C["raw"], "topk_dc": C["R"], "late": "#8c8c8c", "rapg_cal_dc": C["R"]}
-    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.55))
+    fig, (a, b) = plt.subplots(1, 2, figsize=(86/25.4, 1.65))
     recs = {}
     for m in [m for m in ["uniform", "topk_dc", "late", "rapg_cal_dc"] if m in set(df.method)]:
         g = df[df.method == m].groupby("K")
@@ -154,18 +143,19 @@ def fig_budget(expD: Path, out: Path, expB: Path | None = None):
                 short = "coh" if key == "coherence_mlsp" else "clap"
                 rec.update({short: x.mean(), short + "_lo": lo[-1], short + "_hi": hi[-1]})
             ax.fill_between(Ks, lo, hi, color=COL[m], alpha=.15, lw=0)
-            ax.plot(Ks, mu, marker=STY[m][0], ls=STY[m][1], ms=3, lw=1, color=COL[m], label=LAB[m])
+            ax.plot(Ks, mu, "o-" if m == "uniform" else "s--", ms=3, lw=1, color=COL[m], label=LAB[m])
     if expB is not None and (expB / "per_run.csv").exists():   # unguided reference on the same trials
         ref = pd.read_csv(expB / "per_run.csv"); ref = ref[(ref.method == "sao") & ref.trial.isin(set(df.trial))]
         for ax, key in ((a, "coherence_mlsp"), (b, "clap")):
             ax.axhline(ref[key].mean(), color="#888", lw=.8, ls=":", zorder=1)
-        a.text(max(df.K), ref.coherence_mlsp.mean(), " unguided", fontsize=6.2, color="#666", va="bottom", ha="right")
+
     a.set_ylabel("coherence $\\uparrow$"); b.set_ylabel("CLAP $\\uparrow$")
     for ax in (a, b):
         ax.set_xlabel("updates $K$"); ax.set_xticks(sorted(set(df.K)))
-    h, l = a.get_legend_handles_labels()
-    fig.legend(h, l, loc="upper center", ncol=len(l), frameon=False, fontsize=6.8, handlelength=2.0, columnspacing=2.0, bbox_to_anchor=(0.55, 1.02))
-    fig.tight_layout(w_pad=1.2, rect=(0, 0, 1, 0.88)); fig.savefig(out / "fig_budget.pdf"); plt.close(fig)
+    h,l=a.get_legend_handles_labels()
+    fig.legend(h,l,ncol=2,loc="upper center",bbox_to_anchor=(.53,1.0),frameon=False,handlelength=1.5,borderaxespad=0.2)
+    fig.subplots_adjust(left=.14,right=.98,bottom=.28,top=.77,wspace=.72)
+    fig.savefig(out / "fig_budget.pdf"); plt.close(fig)
     tab = pd.DataFrame(list(recs.values())); tab.to_csv(out / "budget_summary.csv", index=False)
     # numbers for the text: the K at which Top-K(dC) matches the best uniform, and gain at K=15 / K=5
     nums = {}
@@ -191,8 +181,8 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
     s = pd.read_csv(expA / "summary.csv"); raw = s[s.variant == "raw"].sort_values("row")
     bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
     sched3 = json.load(open(expB / "schedules.json")) if expB is not None and (expB / "schedules.json").exists() else None
-    fig_trajectory(expA, expC, sched3, out, figsize=(3.45, 3.1), name="fig_sa3.pdf", model="SA3", noise="sigma",
-                   noise_ticks=sigma_ticks, show_proxy=False, dclap_ylim=(-0.03, 0.06), margins=(0.16, 0.80, 0.79, 0.15))
+    fig_trajectory(expA, expC, sched3, out, figsize=(86/25.4, 3.35), name="fig_sa3.pdf", model="SA3", noise="sigma",
+                   noise_ticks=sigma_ticks, show_proxy=False, dclap_ylim=(-0.03, 0.06))
     sig = raw.set_index("row").sigma
     f1 = raw.f1.values; sat = int(np.argmax(f1 >= 0.95 * f1.max()))
     corr = json.load(open(expA / "corr.json"))["corr"]
@@ -227,7 +217,7 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
 def table_and_numbers(expA: Path, expC: Path, expB: Path, out: Path, order=("sao", "early", "mid", "late", "uniform", "mlsp",
                                                                         "rapg_cal_f1", "rapg_on", "topk_dc_const", "rapg_cal_dc")):
     tab = pd.read_csv(expB / "table.csv").set_index("method")
-    lines = ["\\setlength{\\tabcolsep}{3.5pt}", "\\begin{tabular}{lccccc}", "\\toprule",
+    lines = ["\\setlength{\\tabcolsep}{2.5pt}", "\\begin{tabular}{@{}lccccc@{}}", "\\toprule",
              "Method & Coh.\\ $\\uparrow$ & Chroma $\\uparrow$ & CLAP $\\uparrow$ & FAD $\\downarrow$ & \\#u.\\\\", "\\midrule"]
     def cell(r, k, nd=3):  # value with a small CI underneath-in-brackets
         return f"{r[k]:.{nd}f}\\,{{\\scriptsize[{r[k+'_lo']:.{nd}f},{r[k+'_hi']:.{nd}f}]}}"

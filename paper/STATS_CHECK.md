@@ -17,7 +17,7 @@
 | §4.2 | burst in the first 20% changes coherence by < 1/10 of the peak | `004/per_run.csv` | per-run | max early dC=0.0036 vs peak/10=0.0104 | ok |
 | §4.2 | s=0.94 vs s=0.54: BCE change -0.14 vs -0.11; log-mel 0.21 vs 0.53 | `004/by_position.csv` | summary | -0.138 vs -0.109; 0.211 vs 0.532 | ok |
 | §4.2 | mean dCLAP between -0.012 and -0.005 at every position (all negative) | `004/per_run.csv` | per-run | -0.0118 .. -0.0050 | ok |
-| §4.2 | bootstrap argmax at s=0.54 in 92% of 5000 resamples, within 0.46-0.62 in all (re-drawn, seed 0) | `004/per_run.csv` | per-run | 91.8%; positions [np.int64(22), np.int64(26), np.int64(30)] | ok |
+| §4.2 | bootstrap argmax at s=0.54 in 92% of 5000 resamples, within 0.46-0.62 in all (re-drawn, seed 0) | `004/per_run.csv` | per-run | 91.8%; positions [22, 26, 30] | ok |
 | §4.2 | the quoted 92% (stability.json) agrees with the re-drawn bootstrap | `004/stability.json` | summary | 92% vs 91.8% | ok |
 | §4.2 | leave-one-prompt-out peaks between s=0.54 and 0.62 | `004/per_run.csv` | per-run | positions [26, 30] | ok |
 | §4.2 | mid beats early in 88% of trials, p<1e-7 (mid > early) | `004/per_run.csv` | per-run | 88%, mean diff +0.084, p=1.6e-08 | ok |

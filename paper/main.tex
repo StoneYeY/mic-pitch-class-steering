@@ -1,9 +1,11 @@
 % ICASSP 2027 submission — "When to Steer"
 % Build: pdflatex main && bibtex main && pdflatex main && pdflatex main   (needs spconf.sty + IEEEbib.bst from the ICASSP 2027 paper kit)
 \documentclass{article}
-\usepackage{spconf,amsmath,amssymb,graphicx,booktabs,multirow,xcolor,url}
+\usepackage{spconf,amsmath,amssymb,graphicx,booktabs,xcolor,url}
 \usepackage[hidelinks,pdftitle={When to Steer: Sensitivity-Calibrated Probe Guidance for Controllable Music Diffusion},pdfauthor={Yushi Ye}]{hyperref}
 \urlstyle{same}
+\renewcommand{\ttdefault}{cmtt}
+\renewcommand{\footnotesize}{\fontsize{9}{10.45}\selectfont}
 \input{numbers}   % auto-generated from results/ by w2s/scripts/make_figures.py
 \input{numbers_budget}
 \input{numbers_sa3}
@@ -16,7 +18,7 @@
 
 \title{When to Steer: Sensitivity-Calibrated Probe Guidance\\for Controllable Music Diffusion}
 \name{Yushi Ye}
-\address{Carnegie Mellon University, Pittsburgh, PA, USA\\yushiye@andrew.cmu.edu\\ORCID: 0009-0003-2761-5574}
+\address{Carnegie Mellon University, Pittsburgh, PA, USA\\yushiye@andrew.cmu.edu}
 
 \begin{document}
 \ninept
@@ -102,7 +104,7 @@ The peak is stable. Over 5000 bootstrap resamples of the 50 trials the argmax li
 
 \begin{table}[t]
 \centering\footnotesize
-\caption{Test-set means; guided methods use $K{=}15$; $n{=}225$ except 224 valid MLSP-fixed coherence values (225 CLAP values; complete pairs for paired tests). Bootstrap 95\% CI half-widths $\leq 0.035$ (coherence), $\leq 0.017$ (CLAP). $^{+}$/$^{-}$: higher/lower coherence than MLSP-fixed (paired Wilcoxon, Holm $p<0.05$). MLSP-fixed: every second step from 20 to 48. FAD uses CLAP embeddings; \#u.: probe updates.}
+\caption{Test-set means; guided methods use $K{=}15$; $n{=}225$ except 224 valid MLSP-fixed coherence values (225 CLAP values; complete pairs for paired tests). Bootstrap 95\% CI half-widths $\leq0.035$ (coherence), $\leq0.017$ (CLAP). $^{+}$/$^{-}$: higher/lower coherence than MLSP-fixed (paired Wilcoxon, Holm $p<0.05$). MLSP-fixed: every second step from 20 to 48. FAD uses CLAP embeddings; \#u.: probe updates.}
 \label{tab:main}
 \input{table_main}
 \end{table}
@@ -146,9 +148,11 @@ Calibration selects steps \saThreeRAPGsteps; the budget-matched early schedule (
 Across the two evaluated models, the guidance positions with the largest coherence gains occur before probe decodability saturates. Image diffusion shows a related pattern: coarse content is decided at high noise~\cite{choi2022p2} and intermediate latents are the most editable~\cite{kwon2023hspace}. A development-set burst sweep identifies effective positions for allocating a fixed guidance budget. On SAO, this allocation improves coherence over the corrected prior schedule with similar CLAP and FAD; on SA3, the coherence gain is accompanied by lower CLAP. Reliability scaling adds a smaller gain confounded by higher mean guidance strength on the test set; the online threshold does not improve on the prior schedule. These findings apply to latent pitch-class guidance under the tested 50-step configurations. CLAP and FAD are automatic proxies; perceived quality requires listening tests.
 
 \section{Acknowledgments}
-OpenAI Codex was used to edit and rephrase author-written manu\-script text, including the abstract, introduction, and conclusions. Anthropic Claude was used to generate the companion project website and automate the publication of author-provided code and audio demos. The research design, methods, experiments, and results are the author's own. The author reviewed and verified all AI-assisted manuscript text and project website content and takes full responsibility for the final manuscript and accompanying materials. OpenAI Codex also assisted with typesetting and formatting Figs.~\ref{fig:traj}--\ref{fig:sa3} and Table~\ref{tab:main}.
+\begin{sloppypar}
+OpenAI Codex was used to edit and rephrase author-written manuscript text, including the abstract, introduction, and conclusions. Anthropic Claude was used to generate the companion project website and automate the publication of author-provided code and audio demos. The research design, methods, experiments, and results are the author’s own. The author reviewed and verified all AI-assisted manuscript text and project website content and takes full responsibility for the final manuscript and accompanying materials. OpenAI Codex also assisted with typesetting and formatting Figs.~1--3 and Table~1.
+\end{sloppypar}
 
-\vfill\pagebreak
+\clearpage
 \bibliographystyle{IEEEbib}
 \bibliography{refs}
 
