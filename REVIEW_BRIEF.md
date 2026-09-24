@@ -1,6 +1,6 @@
 # "When to Steer" — 评审简报（供 code-review / paper-review agent 使用）
 
-**日期：** 2026-09-09（首版）→ 2026-09-23（v7 定稿，见 §10–§15）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
+**日期：** 2026-09-09（首版）→ 2026-09-23（v8，见 §10–§16）  **投稿：** ICASSP 2027（官方截止 **2026-09-23 23:59:59 AoE**；4 页正文 + 第 5 页只放参考文献/伦理声明；非双盲；每位作者需 ORCiD；任何章节不得完全由 LLM 生成）
 **仓库：** https://github.com/StoneYeY/mic-pitch-class-steering ，分支 **`icassp`**（`main` 是 MLSP 2026 原始代码，不要评那个）
 **论文：** `paper/main.tex`（编译：`cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main`；最终 PDF `paper/When_to_Steer_ICASSP2027_final.pdf`，5 页 = 正文 4 + 参考文献/伦理 1）
 **Demo：** https://stoneyey.github.io/mic-pitch-class-steering/ （结果 + 带标签音频；`docs/index.html` 自包含），生成脚本 `demo/build_demo.py` + `demo/template.html`
@@ -293,3 +293,4 @@ cd paper && latexmk -pdf main.tex
 4. **两句过强总结**：删除 "so late guidance changes what the probe reads … more than it changes the audio"；"at matched update norm" 改为 "under the common update rule and nominal guidance strength"。
 5. **SA3 平台**：正文改为 ΔC≈0.08（前 40% 五个位置均值 0.081，前三个位置宏 0.079）。
 6. **图 1 边距**：右边距 0.845→0.82、下边距 0.125→0.14；`make_figures.py` 加入标题/轴标签越界守卫（越界即打印 WARNING），并用 `pdftotext -bbox-layout` 复核：图 1 字形最右 245.1 pt / 页宽 248.4 pt，图 3 239.3 pt，无越界。
+

@@ -27,13 +27,15 @@ NAMES = {"sao": "SAO (unguided)", "early": "Early (0--14)", "mid": "Mid (18--32)
          "rapg_cal_dc": "SCPG + $R$-scaling", "rapg_on": "$R$-threshold (online)", "topk_dc_const": "SCPG: Top-$K$($\\Delta C$)"}
 
 
-def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, figsize=(3.45, 3.05), *, name="fig_trajectory.pdf",
-                   model="SAO", noise="rms", noise_ticks=(0.99, 0.95, 0.75, 0.5), show_proxy=True, dclap_ylim=(-0.03, 0.03)):
+def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, figsize=(3.45, 2.8), *, name="fig_trajectory.pdf",
+                   model="SAO", noise="rms", noise_ticks=(0.99, 0.95, 0.75, 0.5), show_proxy=True, dclap_ylim=(-0.03, 0.03),
+                   margins=(0.15, 0.82, 0.845, 0.155)):
     """Figs. 1 and 3: (a) decodability / reliability along real trajectories, (b) burst steering sensitivity,
     (c) a labelled strip of the guided steps of three schedules.  noise="rms": noise level from the stored latent rms
     (SAO, EDM latents); noise="sigma": the sampler's own flow time from the per-step sigma column (SA3)."""
+    k = 3.05 / figsize[1]   # keep the gaps and the strip legible when the figure is made shorter
     fig, (a, b, c) = plt.subplots(3, 1, figsize=figsize, sharex=True,
-                                  gridspec_kw=dict(height_ratios=[1.0, 1.0, 0.28], hspace=0.42))
+                                  gridspec_kw=dict(height_ratios=[1.0, 1.0, 0.28 * k], hspace=0.42 * k))
     s = pd.read_csv(expA / "summary.csv")
     raw, prox = s[s.variant == "raw"].sort_values("row"), s[s.variant == "gauss_proxy"].sort_values("row")
     a.plot(raw.progress, raw.f1, color=C["raw"], lw=1.4, label="probe $F_1$ (real trajectory)")
@@ -74,7 +76,7 @@ def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, fi
         b2.set_ylim(*dclap_ylim)
     b.set_ylim(top=float(bp.d_coherence_mlsp_hi.max()) * 1.4)
     b.set_ylabel("$\\Delta$ coherence")
-    b.set_title("(b) steering sensitivity of a 3-step burst at $s$", loc="left")
+    b.set_title("(b) steering sensitivity of a 3-step burst at $s$", loc="left", pad=3)
     if has_clap:
         h1, l1 = b.get_legend_handles_labels(); h2, l2 = b2.get_legend_handles_labels()
         b.legend(h1 + h2, l1 + l2, loc="upper right", frameon=False, fontsize=6.2, handlelength=1.6)
@@ -91,7 +93,7 @@ def fig_trajectory(expA: Path, expC: Path, schedules: dict | None, out: Path, fi
         for st_i in st:
             c.add_patch(Rectangle(((st_i + 0.5) / STEPS, i - 0.32), 1.0 / STEPS, 0.64, color=col, lw=0))
     c.set_xlim(0, 1.0); c.set_xlabel("denoising progress $s$")
-    fig.subplots_adjust(left=0.15, right=0.82, top=0.855, bottom=0.14)
+    fig.subplots_adjust(left=margins[0], right=margins[1], top=margins[2], bottom=margins[3])
     # guard against clipped axis titles: every label must lie inside the figure canvas
     fig.canvas.draw()
     W, H = fig.get_size_inches() * fig.dpi
@@ -133,7 +135,7 @@ def fig_budget(expD: Path, out: Path, expB: Path | None = None):
     rng = np.random.default_rng(0)
     LAB = {"uniform": "Uniform", "topk_dc": "SCPG (Top-$K$($\\Delta C$))", "late": "Late", "rapg_cal_dc": "SCPG + $R$-scaling"}
     COL = {"uniform": C["raw"], "topk_dc": C["R"], "late": "#8c8c8c", "rapg_cal_dc": C["R"]}
-    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.6))
+    fig, (a, b) = plt.subplots(1, 2, figsize=(3.45, 1.45))
     recs = {}
     for m in [m for m in ["uniform", "topk_dc", "late", "rapg_cal_dc"] if m in set(df.method)]:
         g = df[df.method == m].groupby("K")
@@ -186,8 +188,8 @@ def fig_sa3(expA: Path, expC: Path, out: Path, expB: Path | None = None, sigma_t
     s = pd.read_csv(expA / "summary.csv"); raw = s[s.variant == "raw"].sort_values("row")
     bp = pd.read_csv(expC / "by_position.csv").sort_values("position")
     sched3 = json.load(open(expB / "schedules.json")) if expB is not None and (expB / "schedules.json").exists() else None
-    fig_trajectory(expA, expC, sched3, out, figsize=(3.45, 3.05), name="fig_sa3.pdf", model="SA3", noise="sigma",
-                   noise_ticks=sigma_ticks, show_proxy=False, dclap_ylim=(-0.03, 0.06))
+    fig_trajectory(expA, expC, sched3, out, figsize=(3.45, 2.5), name="fig_sa3.pdf", model="SA3", noise="sigma",
+                   noise_ticks=sigma_ticks, show_proxy=False, dclap_ylim=(-0.03, 0.06), margins=(0.15, 0.82, 0.83, 0.17))
     sig = raw.set_index("row").sigma
     f1 = raw.f1.values; sat = int(np.argmax(f1 >= 0.95 * f1.max()))
     corr = json.load(open(expA / "corr.json"))["corr"]
