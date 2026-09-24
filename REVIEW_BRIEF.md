@@ -296,6 +296,6 @@ cd paper && latexmk -pdf main.tex
 
 ## 16. 最终投稿版同步（2026-09-23 深夜）
 
-最终稿以作者确认的单作者版本为基础。按作者后续要求，摘要在其提供的 `When_to_Steer_ICASSP2027_final_7.pdf` 版本上精简为144词：保留54%/88%的时序发现、固定15次更新下的两组结果、明确的比较对象及SA3的CLAP代价；将结论范围限定为测试过的配置。其余论文源码不变。作者为 Yushi Ye，Carnegie Mellon University，yushiye@andrew.cmu.edu；按作者要求，PDF不显示 ORCID。保留作者确认的 AI 使用致谢，以及图1–3普通文字9.2点、表格和脚注9点的排版。
+最终稿以作者确认的单作者版本为基础。按作者最终确认，摘要采用182词版本：保留固定引导区间缺少消融的研究动机，解释decodability与steering sensitivity，报告54%/88%的时序发现、15次更新下的两组结果和SA3的CLAP代价，明确比较对象，并将结论范围限定为测试过的配置。其余论文源码不变。作者为 Yushi Ye，Carnegie Mellon University，yushiye@andrew.cmu.edu；按作者要求，PDF不显示 ORCID。保留作者确认的 AI 使用致谢，以及图1–3普通文字9.2点、表格和脚注9点的排版。
 
 `paper/main.tex` 与 `paper/When_to_Steer_ICASSP2027_final.pdf` 对应，demo 的 Paper (PDF) 链接指向仓库中的该文件。最终PDF共5页：正文、图表与致谢在第1–4页，参考文献和伦理说明在第5页；编译无 overfull 或未解析引用。`check_paper_numbers.py` 47项通过。
